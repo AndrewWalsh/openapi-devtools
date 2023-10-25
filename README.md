@@ -42,7 +42,7 @@ OpenAPI DevTools is a Chrome extension that generates OpenAPI specifications in 
     <img width="80%" src="resources/demo-img.png">
 </p>
 
-- [Download and extract the zip](https://github.com/AndrewWalsh/openapi-devtools/blob/main/resources/dist.zip)
+- [Download and extract the zip](https://github.com/AndrewWalsh/openapi-devtools/raw/main/resources/dist.zip)
 - In Chrome, navigate to `chrome://extensions`
 - In the top right enable the `Developer mode` toggle
 - In the top left click `Load unpacked` and select the extracted `dist` directory
