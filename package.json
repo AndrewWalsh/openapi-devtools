@@ -1,0 +1,56 @@
+{
+  "name": "openapi-devtools",
+  "description": "Effortlessly discover API behaviour with a Chrome extension that automatically generates OpenAPI specifications in real time for any app or website.",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "dev": "vite",
+    "build": "rimraf dist && tsc && vite build",
+    "zip": "rimraf resources/dist.zip && zip -r resources/dist.zip dist",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "decode-uri-component": "^0.4.1",
+    "framer-motion": "^10.16.4",
+    "fuse.js": "^6.6.2",
+    "genson-js": "^0.0.8",
+    "lodash": "^4.17.21",
+    "openapi3-ts": "^4.1.2",
+    "radix3": "^1.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-select": "^5.7.7",
+    "react-virtualized-auto-sizer": "^1.0.20",
+    "react-window": "^1.8.9",
+    "redoc": "^2.1.2",
+    "store2": "^2.14.2"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.19",
+    "@seriousme/openapi-schema-validator": "^2.1.2",
+    "@types/chrome": "^0.0.246",
+    "@types/lodash": "^4.14.199",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
+    "@types/react-window": "^1.8.7",
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "eslint": "^8.51.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11",
+    "vitest": "^0.34.6"
+  },
+  "overrides": {
+    "@apidevtools/json-schema-ref-parser": "^11.1.0"
+  }
+}

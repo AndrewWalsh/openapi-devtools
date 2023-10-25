@@ -1,0 +1,33 @@
+/** See https://chakra-ui.com/docs/styled-system/theme */
+.static {
+  &:hover {
+    color: #319795;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.wrapper {
+  height: 60%;
+  width: 100%;
+}
+
+.autosizer {
+  height: 100%;
+  width: 100%;
+}
+
+.autosizerchild {
+  height: 100%;
+  width: 100%;
+}
+
+.listchild {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+
+.search {
+  margin-bottom: 1em;
+}

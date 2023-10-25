@@ -1,0 +1,2 @@
+const DEFAULT_PARAM_PREFIX = ':'
+export const DEFAULT_PARAM_NAME = `${DEFAULT_PARAM_PREFIX}param`;

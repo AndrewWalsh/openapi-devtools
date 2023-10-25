@@ -1,0 +1,3254 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`flattens data into endpoints 1`] = `
+[
+  {
+    "fullPath": "/1/2/3",
+    "host": "www.example.com",
+    "leaf": {
+      "methods": {
+        "POST": {
+          "200": {
+            "queryParameters": {
+              "properties": {
+                "alt": {
+                  "type": "string",
+                },
+                "key": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "alt",
+                "key",
+              ],
+              "type": "object",
+            },
+            "requestBody": {
+              "properties": {
+                "anonymousId": {
+                  "type": "string",
+                },
+                "channel": {
+                  "type": "string",
+                },
+                "context": {
+                  "properties": {
+                    "app": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "namespace": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "namespace",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "campaign": {
+                      "type": "object",
+                    },
+                    "library": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "os": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "page": {
+                      "properties": {
+                        "initial_referrer": {
+                          "type": "string",
+                        },
+                        "initial_referring_domain": {
+                          "type": "string",
+                        },
+                        "path": {
+                          "type": "string",
+                        },
+                        "referrer": {
+                          "type": "string",
+                        },
+                        "referring_domain": {
+                          "type": "string",
+                        },
+                        "search": {
+                          "type": "string",
+                        },
+                        "tab_url": {
+                          "type": "string",
+                        },
+                        "title": {
+                          "type": "string",
+                        },
+                        "url": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "path",
+                        "referrer",
+                        "referring_domain",
+                        "search",
+                        "title",
+                        "url",
+                        "tab_url",
+                        "initial_referrer",
+                        "initial_referring_domain",
+                      ],
+                      "type": "object",
+                    },
+                    "screen": {
+                      "properties": {
+                        "density": {
+                          "type": "integer",
+                        },
+                        "height": {
+                          "type": "integer",
+                        },
+                        "innerHeight": {
+                          "type": "integer",
+                        },
+                        "innerWidth": {
+                          "type": "integer",
+                        },
+                        "width": {
+                          "type": "integer",
+                        },
+                      },
+                      "required": [
+                        "density",
+                        "width",
+                        "height",
+                        "innerWidth",
+                        "innerHeight",
+                      ],
+                      "type": "object",
+                    },
+                    "sessionId": {
+                      "type": "integer",
+                    },
+                    "traits": {
+                      "type": "object",
+                    },
+                    "userAgent": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "app",
+                    "traits",
+                    "library",
+                    "userAgent",
+                    "os",
+                    "locale",
+                    "screen",
+                    "sessionId",
+                    "campaign",
+                    "page",
+                  ],
+                  "type": "object",
+                },
+                "event": {
+                  "type": "string",
+                },
+                "integrations": {
+                  "properties": {
+                    "All": {
+                      "type": "boolean",
+                    },
+                  },
+                  "required": [
+                    "All",
+                  ],
+                  "type": "object",
+                },
+                "messageId": {
+                  "type": "string",
+                },
+                "originalTimestamp": {
+                  "type": "string",
+                },
+                "properties": {
+                  "properties": {
+                    "abstract url": {
+                      "type": "string",
+                    },
+                    "asid - clean": {
+                      "type": "string",
+                    },
+                    "asid - gdGlobals": {
+                      "type": "string",
+                    },
+                    "asid - raw": {
+                      "type": "string",
+                    },
+                    "device type id": {
+                      "type": "integer",
+                    },
+                    "document referrer": {
+                      "type": "string",
+                    },
+                    "domain id": {
+                      "type": "integer",
+                    },
+                    "dos2 a/b test id list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "dos2 a/b test treatment list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "engaged employer status": {
+                      "type": "string",
+                    },
+                    "event origin": {
+                      "type": "string",
+                    },
+                    "full page url": {
+                      "type": "string",
+                    },
+                    "gtm container id": {
+                      "type": "string",
+                    },
+                    "gtm container version": {
+                      "type": "string",
+                    },
+                    "guid - event": {
+                      "type": "string",
+                    },
+                    "history length": {
+                      "type": "integer",
+                    },
+                    "hostname": {
+                      "type": "string",
+                    },
+                    "ip location id": {
+                      "type": "string",
+                    },
+                    "ip location type": {
+                      "type": "string",
+                    },
+                    "java enabled": {
+                      "type": "string",
+                    },
+                    "lashed employer": {
+                      "type": "string",
+                    },
+                    "lashed employer id": {
+                      "type": "integer",
+                    },
+                    "lashed industry": {
+                      "type": "string",
+                    },
+                    "lashed industry id": {
+                      "type": "integer",
+                    },
+                    "lashed location": {
+                      "type": "string",
+                    },
+                    "lashed sector": {
+                      "type": "string",
+                    },
+                    "lashed sector id": {
+                      "type": "integer",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "locked state": {
+                      "type": "string",
+                    },
+                    "module type": {
+                      "type": "string",
+                    },
+                    "onetrust groups": {
+                      "type": "string",
+                    },
+                    "page content type": {
+                      "type": "string",
+                    },
+                    "page group": {
+                      "type": "string",
+                    },
+                    "page title": {
+                      "type": "string",
+                    },
+                    "page url minus query": {
+                      "type": "string",
+                    },
+                    "platform type id": {
+                      "type": "integer",
+                    },
+                    "profile id": {
+                      "type": "integer",
+                    },
+                    "referrer data": {
+                      "properties": {
+                        "currentPageAbstract": {
+                          "type": "string",
+                        },
+                        "currentPageFull": {
+                          "type": "string",
+                        },
+                        "currentPageRollup": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "currentPageRollup",
+                        "currentPageAbstract",
+                        "currentPageFull",
+                      ],
+                      "type": "object",
+                    },
+                    "responsive design breakpoint": {
+                      "type": "string",
+                    },
+                    "rollup url": {
+                      "type": "string",
+                    },
+                    "untranslated url": {
+                      "type": "string",
+                    },
+                    "user agent string": {
+                      "type": "string",
+                    },
+                    "view type id": {
+                      "type": "integer",
+                    },
+                  },
+                  "required": [
+                    "module type",
+                    "hostname",
+                    "rollup url",
+                    "abstract url",
+                    "full page url",
+                    "event origin",
+                    "gtm container id",
+                    "gtm container version",
+                    "page url minus query",
+                    "lashed employer",
+                    "lashed employer id",
+                    "lashed location",
+                    "lashed industry",
+                    "lashed industry id",
+                    "lashed sector",
+                    "lashed sector id",
+                    "locale",
+                    "user agent string",
+                    "asid - raw",
+                    "asid - clean",
+                    "asid - gdGlobals",
+                    "dos2 a/b test id list",
+                    "dos2 a/b test treatment list",
+                    "responsive design breakpoint",
+                    "locked state",
+                    "document referrer",
+                    "domain id",
+                    "engaged employer status",
+                    "untranslated url",
+                    "guid - event",
+                    "page group",
+                    "page title",
+                    "page content type",
+                    "history length",
+                    "ip location id",
+                    "ip location type",
+                    "onetrust groups",
+                    "platform type id",
+                    "device type id",
+                    "view type id",
+                    "referrer data",
+                    "java enabled",
+                    "profile id",
+                  ],
+                  "type": "object",
+                },
+                "sentAt": {
+                  "type": "string",
+                },
+                "type": {
+                  "type": "string",
+                },
+                "userId": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "channel",
+                "context",
+                "type",
+                "messageId",
+                "originalTimestamp",
+                "anonymousId",
+                "userId",
+                "event",
+                "properties",
+                "integrations",
+                "sentAt",
+              ],
+              "type": "object",
+            },
+            "requestHeaders": {
+              "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
+                "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
+              ],
+              "type": "object",
+            },
+            "responseBody": {
+              "properties": {
+                "foo": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "foo",
+              ],
+              "type": "object",
+            },
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
+          },
+        },
+      },
+      "pathname": "/v1/track",
+    },
+    "parts": [
+      {
+        "part": "1",
+        "type": 0,
+      },
+      {
+        "part": "2",
+        "type": 0,
+      },
+      {
+        "part": "3",
+        "type": 0,
+      },
+    ],
+  },
+  {
+    "fullPath": "/1/:param1/3",
+    "host": "www.example.com",
+    "leaf": {
+      "methods": {
+        "POST": {
+          "200": {
+            "queryParameters": {
+              "properties": {
+                "alt": {
+                  "type": "string",
+                },
+                "key": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "alt",
+                "key",
+              ],
+              "type": "object",
+            },
+            "requestBody": {
+              "properties": {
+                "anonymousId": {
+                  "type": "string",
+                },
+                "channel": {
+                  "type": "string",
+                },
+                "context": {
+                  "properties": {
+                    "app": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "namespace": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "namespace",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "campaign": {
+                      "type": "object",
+                    },
+                    "library": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "os": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "page": {
+                      "properties": {
+                        "initial_referrer": {
+                          "type": "string",
+                        },
+                        "initial_referring_domain": {
+                          "type": "string",
+                        },
+                        "path": {
+                          "type": "string",
+                        },
+                        "referrer": {
+                          "type": "string",
+                        },
+                        "referring_domain": {
+                          "type": "string",
+                        },
+                        "search": {
+                          "type": "string",
+                        },
+                        "tab_url": {
+                          "type": "string",
+                        },
+                        "title": {
+                          "type": "string",
+                        },
+                        "url": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "path",
+                        "referrer",
+                        "referring_domain",
+                        "search",
+                        "title",
+                        "url",
+                        "tab_url",
+                        "initial_referrer",
+                        "initial_referring_domain",
+                      ],
+                      "type": "object",
+                    },
+                    "screen": {
+                      "properties": {
+                        "density": {
+                          "type": "integer",
+                        },
+                        "height": {
+                          "type": "integer",
+                        },
+                        "innerHeight": {
+                          "type": "integer",
+                        },
+                        "innerWidth": {
+                          "type": "integer",
+                        },
+                        "width": {
+                          "type": "integer",
+                        },
+                      },
+                      "required": [
+                        "density",
+                        "width",
+                        "height",
+                        "innerWidth",
+                        "innerHeight",
+                      ],
+                      "type": "object",
+                    },
+                    "sessionId": {
+                      "type": "integer",
+                    },
+                    "traits": {
+                      "type": "object",
+                    },
+                    "userAgent": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "app",
+                    "traits",
+                    "library",
+                    "userAgent",
+                    "os",
+                    "locale",
+                    "screen",
+                    "sessionId",
+                    "campaign",
+                    "page",
+                  ],
+                  "type": "object",
+                },
+                "event": {
+                  "type": "string",
+                },
+                "integrations": {
+                  "properties": {
+                    "All": {
+                      "type": "boolean",
+                    },
+                  },
+                  "required": [
+                    "All",
+                  ],
+                  "type": "object",
+                },
+                "messageId": {
+                  "type": "string",
+                },
+                "originalTimestamp": {
+                  "type": "string",
+                },
+                "properties": {
+                  "properties": {
+                    "abstract url": {
+                      "type": "string",
+                    },
+                    "asid - clean": {
+                      "type": "string",
+                    },
+                    "asid - gdGlobals": {
+                      "type": "string",
+                    },
+                    "asid - raw": {
+                      "type": "string",
+                    },
+                    "device type id": {
+                      "type": "integer",
+                    },
+                    "document referrer": {
+                      "type": "string",
+                    },
+                    "domain id": {
+                      "type": "integer",
+                    },
+                    "dos2 a/b test id list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "dos2 a/b test treatment list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "engaged employer status": {
+                      "type": "string",
+                    },
+                    "event origin": {
+                      "type": "string",
+                    },
+                    "full page url": {
+                      "type": "string",
+                    },
+                    "gtm container id": {
+                      "type": "string",
+                    },
+                    "gtm container version": {
+                      "type": "string",
+                    },
+                    "guid - event": {
+                      "type": "string",
+                    },
+                    "history length": {
+                      "type": "integer",
+                    },
+                    "hostname": {
+                      "type": "string",
+                    },
+                    "ip location id": {
+                      "type": "string",
+                    },
+                    "ip location type": {
+                      "type": "string",
+                    },
+                    "java enabled": {
+                      "type": "string",
+                    },
+                    "lashed employer": {
+                      "type": "string",
+                    },
+                    "lashed employer id": {
+                      "type": "integer",
+                    },
+                    "lashed industry": {
+                      "type": "string",
+                    },
+                    "lashed industry id": {
+                      "type": "integer",
+                    },
+                    "lashed location": {
+                      "type": "string",
+                    },
+                    "lashed sector": {
+                      "type": "string",
+                    },
+                    "lashed sector id": {
+                      "type": "integer",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "locked state": {
+                      "type": "string",
+                    },
+                    "module type": {
+                      "type": "string",
+                    },
+                    "onetrust groups": {
+                      "type": "string",
+                    },
+                    "page content type": {
+                      "type": "string",
+                    },
+                    "page group": {
+                      "type": "string",
+                    },
+                    "page title": {
+                      "type": "string",
+                    },
+                    "page url minus query": {
+                      "type": "string",
+                    },
+                    "platform type id": {
+                      "type": "integer",
+                    },
+                    "profile id": {
+                      "type": "integer",
+                    },
+                    "referrer data": {
+                      "properties": {
+                        "currentPageAbstract": {
+                          "type": "string",
+                        },
+                        "currentPageFull": {
+                          "type": "string",
+                        },
+                        "currentPageRollup": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "currentPageRollup",
+                        "currentPageAbstract",
+                        "currentPageFull",
+                      ],
+                      "type": "object",
+                    },
+                    "responsive design breakpoint": {
+                      "type": "string",
+                    },
+                    "rollup url": {
+                      "type": "string",
+                    },
+                    "untranslated url": {
+                      "type": "string",
+                    },
+                    "user agent string": {
+                      "type": "string",
+                    },
+                    "view type id": {
+                      "type": "integer",
+                    },
+                  },
+                  "required": [
+                    "module type",
+                    "hostname",
+                    "rollup url",
+                    "abstract url",
+                    "full page url",
+                    "event origin",
+                    "gtm container id",
+                    "gtm container version",
+                    "page url minus query",
+                    "lashed employer",
+                    "lashed employer id",
+                    "lashed location",
+                    "lashed industry",
+                    "lashed industry id",
+                    "lashed sector",
+                    "lashed sector id",
+                    "locale",
+                    "user agent string",
+                    "asid - raw",
+                    "asid - clean",
+                    "asid - gdGlobals",
+                    "dos2 a/b test id list",
+                    "dos2 a/b test treatment list",
+                    "responsive design breakpoint",
+                    "locked state",
+                    "document referrer",
+                    "domain id",
+                    "engaged employer status",
+                    "untranslated url",
+                    "guid - event",
+                    "page group",
+                    "page title",
+                    "page content type",
+                    "history length",
+                    "ip location id",
+                    "ip location type",
+                    "onetrust groups",
+                    "platform type id",
+                    "device type id",
+                    "view type id",
+                    "referrer data",
+                    "java enabled",
+                    "profile id",
+                  ],
+                  "type": "object",
+                },
+                "sentAt": {
+                  "type": "string",
+                },
+                "type": {
+                  "type": "string",
+                },
+                "userId": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "channel",
+                "context",
+                "type",
+                "messageId",
+                "originalTimestamp",
+                "anonymousId",
+                "userId",
+                "event",
+                "properties",
+                "integrations",
+                "sentAt",
+              ],
+              "type": "object",
+            },
+            "requestHeaders": {
+              "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
+                "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
+              ],
+              "type": "object",
+            },
+            "responseBody": {
+              "properties": {
+                "foo": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "foo",
+              ],
+              "type": "object",
+            },
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
+          },
+        },
+      },
+      "pathname": "/v1/track",
+    },
+    "parts": [
+      {
+        "part": "1",
+        "type": 0,
+      },
+      {
+        "part": ":param1",
+        "type": 1,
+      },
+      {
+        "part": "3",
+        "type": 0,
+      },
+    ],
+  },
+  {
+    "fullPath": "/1/2/3/4",
+    "host": "www.example.com",
+    "leaf": {
+      "methods": {
+        "POST": {
+          "200": {
+            "queryParameters": {
+              "properties": {
+                "alt": {
+                  "type": "string",
+                },
+                "key": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "alt",
+                "key",
+              ],
+              "type": "object",
+            },
+            "requestBody": {
+              "properties": {
+                "anonymousId": {
+                  "type": "string",
+                },
+                "channel": {
+                  "type": "string",
+                },
+                "context": {
+                  "properties": {
+                    "app": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "namespace": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "namespace",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "campaign": {
+                      "type": "object",
+                    },
+                    "library": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "os": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "page": {
+                      "properties": {
+                        "initial_referrer": {
+                          "type": "string",
+                        },
+                        "initial_referring_domain": {
+                          "type": "string",
+                        },
+                        "path": {
+                          "type": "string",
+                        },
+                        "referrer": {
+                          "type": "string",
+                        },
+                        "referring_domain": {
+                          "type": "string",
+                        },
+                        "search": {
+                          "type": "string",
+                        },
+                        "tab_url": {
+                          "type": "string",
+                        },
+                        "title": {
+                          "type": "string",
+                        },
+                        "url": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "path",
+                        "referrer",
+                        "referring_domain",
+                        "search",
+                        "title",
+                        "url",
+                        "tab_url",
+                        "initial_referrer",
+                        "initial_referring_domain",
+                      ],
+                      "type": "object",
+                    },
+                    "screen": {
+                      "properties": {
+                        "density": {
+                          "type": "integer",
+                        },
+                        "height": {
+                          "type": "integer",
+                        },
+                        "innerHeight": {
+                          "type": "integer",
+                        },
+                        "innerWidth": {
+                          "type": "integer",
+                        },
+                        "width": {
+                          "type": "integer",
+                        },
+                      },
+                      "required": [
+                        "density",
+                        "width",
+                        "height",
+                        "innerWidth",
+                        "innerHeight",
+                      ],
+                      "type": "object",
+                    },
+                    "sessionId": {
+                      "type": "integer",
+                    },
+                    "traits": {
+                      "type": "object",
+                    },
+                    "userAgent": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "app",
+                    "traits",
+                    "library",
+                    "userAgent",
+                    "os",
+                    "locale",
+                    "screen",
+                    "sessionId",
+                    "campaign",
+                    "page",
+                  ],
+                  "type": "object",
+                },
+                "event": {
+                  "type": "string",
+                },
+                "integrations": {
+                  "properties": {
+                    "All": {
+                      "type": "boolean",
+                    },
+                  },
+                  "required": [
+                    "All",
+                  ],
+                  "type": "object",
+                },
+                "messageId": {
+                  "type": "string",
+                },
+                "originalTimestamp": {
+                  "type": "string",
+                },
+                "properties": {
+                  "properties": {
+                    "abstract url": {
+                      "type": "string",
+                    },
+                    "asid - clean": {
+                      "type": "string",
+                    },
+                    "asid - gdGlobals": {
+                      "type": "string",
+                    },
+                    "asid - raw": {
+                      "type": "string",
+                    },
+                    "device type id": {
+                      "type": "integer",
+                    },
+                    "document referrer": {
+                      "type": "string",
+                    },
+                    "domain id": {
+                      "type": "integer",
+                    },
+                    "dos2 a/b test id list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "dos2 a/b test treatment list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "engaged employer status": {
+                      "type": "string",
+                    },
+                    "event origin": {
+                      "type": "string",
+                    },
+                    "full page url": {
+                      "type": "string",
+                    },
+                    "gtm container id": {
+                      "type": "string",
+                    },
+                    "gtm container version": {
+                      "type": "string",
+                    },
+                    "guid - event": {
+                      "type": "string",
+                    },
+                    "history length": {
+                      "type": "integer",
+                    },
+                    "hostname": {
+                      "type": "string",
+                    },
+                    "ip location id": {
+                      "type": "string",
+                    },
+                    "ip location type": {
+                      "type": "string",
+                    },
+                    "java enabled": {
+                      "type": "string",
+                    },
+                    "lashed employer": {
+                      "type": "string",
+                    },
+                    "lashed employer id": {
+                      "type": "integer",
+                    },
+                    "lashed industry": {
+                      "type": "string",
+                    },
+                    "lashed industry id": {
+                      "type": "integer",
+                    },
+                    "lashed location": {
+                      "type": "string",
+                    },
+                    "lashed sector": {
+                      "type": "string",
+                    },
+                    "lashed sector id": {
+                      "type": "integer",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "locked state": {
+                      "type": "string",
+                    },
+                    "module type": {
+                      "type": "string",
+                    },
+                    "onetrust groups": {
+                      "type": "string",
+                    },
+                    "page content type": {
+                      "type": "string",
+                    },
+                    "page group": {
+                      "type": "string",
+                    },
+                    "page title": {
+                      "type": "string",
+                    },
+                    "page url minus query": {
+                      "type": "string",
+                    },
+                    "platform type id": {
+                      "type": "integer",
+                    },
+                    "profile id": {
+                      "type": "integer",
+                    },
+                    "referrer data": {
+                      "properties": {
+                        "currentPageAbstract": {
+                          "type": "string",
+                        },
+                        "currentPageFull": {
+                          "type": "string",
+                        },
+                        "currentPageRollup": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "currentPageRollup",
+                        "currentPageAbstract",
+                        "currentPageFull",
+                      ],
+                      "type": "object",
+                    },
+                    "responsive design breakpoint": {
+                      "type": "string",
+                    },
+                    "rollup url": {
+                      "type": "string",
+                    },
+                    "untranslated url": {
+                      "type": "string",
+                    },
+                    "user agent string": {
+                      "type": "string",
+                    },
+                    "view type id": {
+                      "type": "integer",
+                    },
+                  },
+                  "required": [
+                    "module type",
+                    "hostname",
+                    "rollup url",
+                    "abstract url",
+                    "full page url",
+                    "event origin",
+                    "gtm container id",
+                    "gtm container version",
+                    "page url minus query",
+                    "lashed employer",
+                    "lashed employer id",
+                    "lashed location",
+                    "lashed industry",
+                    "lashed industry id",
+                    "lashed sector",
+                    "lashed sector id",
+                    "locale",
+                    "user agent string",
+                    "asid - raw",
+                    "asid - clean",
+                    "asid - gdGlobals",
+                    "dos2 a/b test id list",
+                    "dos2 a/b test treatment list",
+                    "responsive design breakpoint",
+                    "locked state",
+                    "document referrer",
+                    "domain id",
+                    "engaged employer status",
+                    "untranslated url",
+                    "guid - event",
+                    "page group",
+                    "page title",
+                    "page content type",
+                    "history length",
+                    "ip location id",
+                    "ip location type",
+                    "onetrust groups",
+                    "platform type id",
+                    "device type id",
+                    "view type id",
+                    "referrer data",
+                    "java enabled",
+                    "profile id",
+                  ],
+                  "type": "object",
+                },
+                "sentAt": {
+                  "type": "string",
+                },
+                "type": {
+                  "type": "string",
+                },
+                "userId": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "channel",
+                "context",
+                "type",
+                "messageId",
+                "originalTimestamp",
+                "anonymousId",
+                "userId",
+                "event",
+                "properties",
+                "integrations",
+                "sentAt",
+              ],
+              "type": "object",
+            },
+            "requestHeaders": {
+              "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
+                "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
+              ],
+              "type": "object",
+            },
+            "responseBody": {
+              "properties": {
+                "foo": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "foo",
+              ],
+              "type": "object",
+            },
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
+          },
+        },
+      },
+      "pathname": "/v1/track",
+    },
+    "parts": [
+      {
+        "part": "1",
+        "type": 0,
+      },
+      {
+        "part": "2",
+        "type": 0,
+      },
+      {
+        "part": "3",
+        "type": 0,
+      },
+      {
+        "part": "4",
+        "type": 0,
+      },
+    ],
+  },
+  {
+    "fullPath": "/1/2/3/4a",
+    "host": "www.example.com",
+    "leaf": {
+      "methods": {
+        "POST": {
+          "200": {
+            "queryParameters": {
+              "properties": {
+                "alt": {
+                  "type": "string",
+                },
+                "key": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "alt",
+                "key",
+              ],
+              "type": "object",
+            },
+            "requestBody": {
+              "properties": {
+                "anonymousId": {
+                  "type": "string",
+                },
+                "channel": {
+                  "type": "string",
+                },
+                "context": {
+                  "properties": {
+                    "app": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "namespace": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "namespace",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "campaign": {
+                      "type": "object",
+                    },
+                    "library": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "os": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "page": {
+                      "properties": {
+                        "initial_referrer": {
+                          "type": "string",
+                        },
+                        "initial_referring_domain": {
+                          "type": "string",
+                        },
+                        "path": {
+                          "type": "string",
+                        },
+                        "referrer": {
+                          "type": "string",
+                        },
+                        "referring_domain": {
+                          "type": "string",
+                        },
+                        "search": {
+                          "type": "string",
+                        },
+                        "tab_url": {
+                          "type": "string",
+                        },
+                        "title": {
+                          "type": "string",
+                        },
+                        "url": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "path",
+                        "referrer",
+                        "referring_domain",
+                        "search",
+                        "title",
+                        "url",
+                        "tab_url",
+                        "initial_referrer",
+                        "initial_referring_domain",
+                      ],
+                      "type": "object",
+                    },
+                    "screen": {
+                      "properties": {
+                        "density": {
+                          "type": "integer",
+                        },
+                        "height": {
+                          "type": "integer",
+                        },
+                        "innerHeight": {
+                          "type": "integer",
+                        },
+                        "innerWidth": {
+                          "type": "integer",
+                        },
+                        "width": {
+                          "type": "integer",
+                        },
+                      },
+                      "required": [
+                        "density",
+                        "width",
+                        "height",
+                        "innerWidth",
+                        "innerHeight",
+                      ],
+                      "type": "object",
+                    },
+                    "sessionId": {
+                      "type": "integer",
+                    },
+                    "traits": {
+                      "type": "object",
+                    },
+                    "userAgent": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "app",
+                    "traits",
+                    "library",
+                    "userAgent",
+                    "os",
+                    "locale",
+                    "screen",
+                    "sessionId",
+                    "campaign",
+                    "page",
+                  ],
+                  "type": "object",
+                },
+                "event": {
+                  "type": "string",
+                },
+                "integrations": {
+                  "properties": {
+                    "All": {
+                      "type": "boolean",
+                    },
+                  },
+                  "required": [
+                    "All",
+                  ],
+                  "type": "object",
+                },
+                "messageId": {
+                  "type": "string",
+                },
+                "originalTimestamp": {
+                  "type": "string",
+                },
+                "properties": {
+                  "properties": {
+                    "abstract url": {
+                      "type": "string",
+                    },
+                    "asid - clean": {
+                      "type": "string",
+                    },
+                    "asid - gdGlobals": {
+                      "type": "string",
+                    },
+                    "asid - raw": {
+                      "type": "string",
+                    },
+                    "device type id": {
+                      "type": "integer",
+                    },
+                    "document referrer": {
+                      "type": "string",
+                    },
+                    "domain id": {
+                      "type": "integer",
+                    },
+                    "dos2 a/b test id list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "dos2 a/b test treatment list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "engaged employer status": {
+                      "type": "string",
+                    },
+                    "event origin": {
+                      "type": "string",
+                    },
+                    "full page url": {
+                      "type": "string",
+                    },
+                    "gtm container id": {
+                      "type": "string",
+                    },
+                    "gtm container version": {
+                      "type": "string",
+                    },
+                    "guid - event": {
+                      "type": "string",
+                    },
+                    "history length": {
+                      "type": "integer",
+                    },
+                    "hostname": {
+                      "type": "string",
+                    },
+                    "ip location id": {
+                      "type": "string",
+                    },
+                    "ip location type": {
+                      "type": "string",
+                    },
+                    "java enabled": {
+                      "type": "string",
+                    },
+                    "lashed employer": {
+                      "type": "string",
+                    },
+                    "lashed employer id": {
+                      "type": "integer",
+                    },
+                    "lashed industry": {
+                      "type": "string",
+                    },
+                    "lashed industry id": {
+                      "type": "integer",
+                    },
+                    "lashed location": {
+                      "type": "string",
+                    },
+                    "lashed sector": {
+                      "type": "string",
+                    },
+                    "lashed sector id": {
+                      "type": "integer",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "locked state": {
+                      "type": "string",
+                    },
+                    "module type": {
+                      "type": "string",
+                    },
+                    "onetrust groups": {
+                      "type": "string",
+                    },
+                    "page content type": {
+                      "type": "string",
+                    },
+                    "page group": {
+                      "type": "string",
+                    },
+                    "page title": {
+                      "type": "string",
+                    },
+                    "page url minus query": {
+                      "type": "string",
+                    },
+                    "platform type id": {
+                      "type": "integer",
+                    },
+                    "profile id": {
+                      "type": "integer",
+                    },
+                    "referrer data": {
+                      "properties": {
+                        "currentPageAbstract": {
+                          "type": "string",
+                        },
+                        "currentPageFull": {
+                          "type": "string",
+                        },
+                        "currentPageRollup": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "currentPageRollup",
+                        "currentPageAbstract",
+                        "currentPageFull",
+                      ],
+                      "type": "object",
+                    },
+                    "responsive design breakpoint": {
+                      "type": "string",
+                    },
+                    "rollup url": {
+                      "type": "string",
+                    },
+                    "untranslated url": {
+                      "type": "string",
+                    },
+                    "user agent string": {
+                      "type": "string",
+                    },
+                    "view type id": {
+                      "type": "integer",
+                    },
+                  },
+                  "required": [
+                    "module type",
+                    "hostname",
+                    "rollup url",
+                    "abstract url",
+                    "full page url",
+                    "event origin",
+                    "gtm container id",
+                    "gtm container version",
+                    "page url minus query",
+                    "lashed employer",
+                    "lashed employer id",
+                    "lashed location",
+                    "lashed industry",
+                    "lashed industry id",
+                    "lashed sector",
+                    "lashed sector id",
+                    "locale",
+                    "user agent string",
+                    "asid - raw",
+                    "asid - clean",
+                    "asid - gdGlobals",
+                    "dos2 a/b test id list",
+                    "dos2 a/b test treatment list",
+                    "responsive design breakpoint",
+                    "locked state",
+                    "document referrer",
+                    "domain id",
+                    "engaged employer status",
+                    "untranslated url",
+                    "guid - event",
+                    "page group",
+                    "page title",
+                    "page content type",
+                    "history length",
+                    "ip location id",
+                    "ip location type",
+                    "onetrust groups",
+                    "platform type id",
+                    "device type id",
+                    "view type id",
+                    "referrer data",
+                    "java enabled",
+                    "profile id",
+                  ],
+                  "type": "object",
+                },
+                "sentAt": {
+                  "type": "string",
+                },
+                "type": {
+                  "type": "string",
+                },
+                "userId": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "channel",
+                "context",
+                "type",
+                "messageId",
+                "originalTimestamp",
+                "anonymousId",
+                "userId",
+                "event",
+                "properties",
+                "integrations",
+                "sentAt",
+              ],
+              "type": "object",
+            },
+            "requestHeaders": {
+              "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
+                "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
+              ],
+              "type": "object",
+            },
+            "responseBody": {
+              "properties": {
+                "foo": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "foo",
+              ],
+              "type": "object",
+            },
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
+          },
+        },
+      },
+      "pathname": "/v1/track",
+    },
+    "parts": [
+      {
+        "part": "1",
+        "type": 0,
+      },
+      {
+        "part": "2",
+        "type": 0,
+      },
+      {
+        "part": "3",
+        "type": 0,
+      },
+      {
+        "part": "4a",
+        "type": 0,
+      },
+    ],
+  },
+  {
+    "fullPath": "/1/2/3/",
+    "host": "www.example.com",
+    "leaf": {
+      "methods": {
+        "POST": {
+          "200": {
+            "queryParameters": {
+              "properties": {
+                "alt": {
+                  "type": "string",
+                },
+                "key": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "alt",
+                "key",
+              ],
+              "type": "object",
+            },
+            "requestBody": {
+              "properties": {
+                "anonymousId": {
+                  "type": "string",
+                },
+                "channel": {
+                  "type": "string",
+                },
+                "context": {
+                  "properties": {
+                    "app": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "namespace": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "namespace",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "campaign": {
+                      "type": "object",
+                    },
+                    "library": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "os": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "page": {
+                      "properties": {
+                        "initial_referrer": {
+                          "type": "string",
+                        },
+                        "initial_referring_domain": {
+                          "type": "string",
+                        },
+                        "path": {
+                          "type": "string",
+                        },
+                        "referrer": {
+                          "type": "string",
+                        },
+                        "referring_domain": {
+                          "type": "string",
+                        },
+                        "search": {
+                          "type": "string",
+                        },
+                        "tab_url": {
+                          "type": "string",
+                        },
+                        "title": {
+                          "type": "string",
+                        },
+                        "url": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "path",
+                        "referrer",
+                        "referring_domain",
+                        "search",
+                        "title",
+                        "url",
+                        "tab_url",
+                        "initial_referrer",
+                        "initial_referring_domain",
+                      ],
+                      "type": "object",
+                    },
+                    "screen": {
+                      "properties": {
+                        "density": {
+                          "type": "integer",
+                        },
+                        "height": {
+                          "type": "integer",
+                        },
+                        "innerHeight": {
+                          "type": "integer",
+                        },
+                        "innerWidth": {
+                          "type": "integer",
+                        },
+                        "width": {
+                          "type": "integer",
+                        },
+                      },
+                      "required": [
+                        "density",
+                        "width",
+                        "height",
+                        "innerWidth",
+                        "innerHeight",
+                      ],
+                      "type": "object",
+                    },
+                    "sessionId": {
+                      "type": "integer",
+                    },
+                    "traits": {
+                      "type": "object",
+                    },
+                    "userAgent": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "app",
+                    "traits",
+                    "library",
+                    "userAgent",
+                    "os",
+                    "locale",
+                    "screen",
+                    "sessionId",
+                    "campaign",
+                    "page",
+                  ],
+                  "type": "object",
+                },
+                "event": {
+                  "type": "string",
+                },
+                "integrations": {
+                  "properties": {
+                    "All": {
+                      "type": "boolean",
+                    },
+                  },
+                  "required": [
+                    "All",
+                  ],
+                  "type": "object",
+                },
+                "messageId": {
+                  "type": "string",
+                },
+                "originalTimestamp": {
+                  "type": "string",
+                },
+                "properties": {
+                  "properties": {
+                    "abstract url": {
+                      "type": "string",
+                    },
+                    "asid - clean": {
+                      "type": "string",
+                    },
+                    "asid - gdGlobals": {
+                      "type": "string",
+                    },
+                    "asid - raw": {
+                      "type": "string",
+                    },
+                    "device type id": {
+                      "type": "integer",
+                    },
+                    "document referrer": {
+                      "type": "string",
+                    },
+                    "domain id": {
+                      "type": "integer",
+                    },
+                    "dos2 a/b test id list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "dos2 a/b test treatment list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "engaged employer status": {
+                      "type": "string",
+                    },
+                    "event origin": {
+                      "type": "string",
+                    },
+                    "full page url": {
+                      "type": "string",
+                    },
+                    "gtm container id": {
+                      "type": "string",
+                    },
+                    "gtm container version": {
+                      "type": "string",
+                    },
+                    "guid - event": {
+                      "type": "string",
+                    },
+                    "history length": {
+                      "type": "integer",
+                    },
+                    "hostname": {
+                      "type": "string",
+                    },
+                    "ip location id": {
+                      "type": "string",
+                    },
+                    "ip location type": {
+                      "type": "string",
+                    },
+                    "java enabled": {
+                      "type": "string",
+                    },
+                    "lashed employer": {
+                      "type": "string",
+                    },
+                    "lashed employer id": {
+                      "type": "integer",
+                    },
+                    "lashed industry": {
+                      "type": "string",
+                    },
+                    "lashed industry id": {
+                      "type": "integer",
+                    },
+                    "lashed location": {
+                      "type": "string",
+                    },
+                    "lashed sector": {
+                      "type": "string",
+                    },
+                    "lashed sector id": {
+                      "type": "integer",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "locked state": {
+                      "type": "string",
+                    },
+                    "module type": {
+                      "type": "string",
+                    },
+                    "onetrust groups": {
+                      "type": "string",
+                    },
+                    "page content type": {
+                      "type": "string",
+                    },
+                    "page group": {
+                      "type": "string",
+                    },
+                    "page title": {
+                      "type": "string",
+                    },
+                    "page url minus query": {
+                      "type": "string",
+                    },
+                    "platform type id": {
+                      "type": "integer",
+                    },
+                    "profile id": {
+                      "type": "integer",
+                    },
+                    "referrer data": {
+                      "properties": {
+                        "currentPageAbstract": {
+                          "type": "string",
+                        },
+                        "currentPageFull": {
+                          "type": "string",
+                        },
+                        "currentPageRollup": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "currentPageRollup",
+                        "currentPageAbstract",
+                        "currentPageFull",
+                      ],
+                      "type": "object",
+                    },
+                    "responsive design breakpoint": {
+                      "type": "string",
+                    },
+                    "rollup url": {
+                      "type": "string",
+                    },
+                    "untranslated url": {
+                      "type": "string",
+                    },
+                    "user agent string": {
+                      "type": "string",
+                    },
+                    "view type id": {
+                      "type": "integer",
+                    },
+                  },
+                  "required": [
+                    "module type",
+                    "hostname",
+                    "rollup url",
+                    "abstract url",
+                    "full page url",
+                    "event origin",
+                    "gtm container id",
+                    "gtm container version",
+                    "page url minus query",
+                    "lashed employer",
+                    "lashed employer id",
+                    "lashed location",
+                    "lashed industry",
+                    "lashed industry id",
+                    "lashed sector",
+                    "lashed sector id",
+                    "locale",
+                    "user agent string",
+                    "asid - raw",
+                    "asid - clean",
+                    "asid - gdGlobals",
+                    "dos2 a/b test id list",
+                    "dos2 a/b test treatment list",
+                    "responsive design breakpoint",
+                    "locked state",
+                    "document referrer",
+                    "domain id",
+                    "engaged employer status",
+                    "untranslated url",
+                    "guid - event",
+                    "page group",
+                    "page title",
+                    "page content type",
+                    "history length",
+                    "ip location id",
+                    "ip location type",
+                    "onetrust groups",
+                    "platform type id",
+                    "device type id",
+                    "view type id",
+                    "referrer data",
+                    "java enabled",
+                    "profile id",
+                  ],
+                  "type": "object",
+                },
+                "sentAt": {
+                  "type": "string",
+                },
+                "type": {
+                  "type": "string",
+                },
+                "userId": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "channel",
+                "context",
+                "type",
+                "messageId",
+                "originalTimestamp",
+                "anonymousId",
+                "userId",
+                "event",
+                "properties",
+                "integrations",
+                "sentAt",
+              ],
+              "type": "object",
+            },
+            "requestHeaders": {
+              "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
+                "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
+              ],
+              "type": "object",
+            },
+            "responseBody": {
+              "properties": {
+                "foo": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "foo",
+              ],
+              "type": "object",
+            },
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
+          },
+        },
+      },
+      "pathname": "/v1/track",
+    },
+    "parts": [
+      {
+        "part": "1",
+        "type": 0,
+      },
+      {
+        "part": "2",
+        "type": 0,
+      },
+      {
+        "part": "3",
+        "type": 0,
+      },
+      {
+        "part": "",
+        "type": 0,
+      },
+    ],
+  },
+  {
+    "fullPath": "/1/2/3/:param4/param5/a/:param7/b",
+    "host": "www.example.com",
+    "leaf": {
+      "methods": {
+        "POST": {
+          "200": {
+            "queryParameters": {
+              "properties": {
+                "alt": {
+                  "type": "string",
+                },
+                "key": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "alt",
+                "key",
+              ],
+              "type": "object",
+            },
+            "requestBody": {
+              "properties": {
+                "anonymousId": {
+                  "type": "string",
+                },
+                "channel": {
+                  "type": "string",
+                },
+                "context": {
+                  "properties": {
+                    "app": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "namespace": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "namespace",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "campaign": {
+                      "type": "object",
+                    },
+                    "library": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "os": {
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                        },
+                        "version": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "name",
+                        "version",
+                      ],
+                      "type": "object",
+                    },
+                    "page": {
+                      "properties": {
+                        "initial_referrer": {
+                          "type": "string",
+                        },
+                        "initial_referring_domain": {
+                          "type": "string",
+                        },
+                        "path": {
+                          "type": "string",
+                        },
+                        "referrer": {
+                          "type": "string",
+                        },
+                        "referring_domain": {
+                          "type": "string",
+                        },
+                        "search": {
+                          "type": "string",
+                        },
+                        "tab_url": {
+                          "type": "string",
+                        },
+                        "title": {
+                          "type": "string",
+                        },
+                        "url": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "path",
+                        "referrer",
+                        "referring_domain",
+                        "search",
+                        "title",
+                        "url",
+                        "tab_url",
+                        "initial_referrer",
+                        "initial_referring_domain",
+                      ],
+                      "type": "object",
+                    },
+                    "screen": {
+                      "properties": {
+                        "density": {
+                          "type": "integer",
+                        },
+                        "height": {
+                          "type": "integer",
+                        },
+                        "innerHeight": {
+                          "type": "integer",
+                        },
+                        "innerWidth": {
+                          "type": "integer",
+                        },
+                        "width": {
+                          "type": "integer",
+                        },
+                      },
+                      "required": [
+                        "density",
+                        "width",
+                        "height",
+                        "innerWidth",
+                        "innerHeight",
+                      ],
+                      "type": "object",
+                    },
+                    "sessionId": {
+                      "type": "integer",
+                    },
+                    "traits": {
+                      "type": "object",
+                    },
+                    "userAgent": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "app",
+                    "traits",
+                    "library",
+                    "userAgent",
+                    "os",
+                    "locale",
+                    "screen",
+                    "sessionId",
+                    "campaign",
+                    "page",
+                  ],
+                  "type": "object",
+                },
+                "event": {
+                  "type": "string",
+                },
+                "integrations": {
+                  "properties": {
+                    "All": {
+                      "type": "boolean",
+                    },
+                  },
+                  "required": [
+                    "All",
+                  ],
+                  "type": "object",
+                },
+                "messageId": {
+                  "type": "string",
+                },
+                "originalTimestamp": {
+                  "type": "string",
+                },
+                "properties": {
+                  "properties": {
+                    "abstract url": {
+                      "type": "string",
+                    },
+                    "asid - clean": {
+                      "type": "string",
+                    },
+                    "asid - gdGlobals": {
+                      "type": "string",
+                    },
+                    "asid - raw": {
+                      "type": "string",
+                    },
+                    "device type id": {
+                      "type": "integer",
+                    },
+                    "document referrer": {
+                      "type": "string",
+                    },
+                    "domain id": {
+                      "type": "integer",
+                    },
+                    "dos2 a/b test id list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "dos2 a/b test treatment list": {
+                      "items": {
+                        "type": "string",
+                      },
+                      "type": "array",
+                    },
+                    "engaged employer status": {
+                      "type": "string",
+                    },
+                    "event origin": {
+                      "type": "string",
+                    },
+                    "full page url": {
+                      "type": "string",
+                    },
+                    "gtm container id": {
+                      "type": "string",
+                    },
+                    "gtm container version": {
+                      "type": "string",
+                    },
+                    "guid - event": {
+                      "type": "string",
+                    },
+                    "history length": {
+                      "type": "integer",
+                    },
+                    "hostname": {
+                      "type": "string",
+                    },
+                    "ip location id": {
+                      "type": "string",
+                    },
+                    "ip location type": {
+                      "type": "string",
+                    },
+                    "java enabled": {
+                      "type": "string",
+                    },
+                    "lashed employer": {
+                      "type": "string",
+                    },
+                    "lashed employer id": {
+                      "type": "integer",
+                    },
+                    "lashed industry": {
+                      "type": "string",
+                    },
+                    "lashed industry id": {
+                      "type": "integer",
+                    },
+                    "lashed location": {
+                      "type": "string",
+                    },
+                    "lashed sector": {
+                      "type": "string",
+                    },
+                    "lashed sector id": {
+                      "type": "integer",
+                    },
+                    "locale": {
+                      "type": "string",
+                    },
+                    "locked state": {
+                      "type": "string",
+                    },
+                    "module type": {
+                      "type": "string",
+                    },
+                    "onetrust groups": {
+                      "type": "string",
+                    },
+                    "page content type": {
+                      "type": "string",
+                    },
+                    "page group": {
+                      "type": "string",
+                    },
+                    "page title": {
+                      "type": "string",
+                    },
+                    "page url minus query": {
+                      "type": "string",
+                    },
+                    "platform type id": {
+                      "type": "integer",
+                    },
+                    "profile id": {
+                      "type": "integer",
+                    },
+                    "referrer data": {
+                      "properties": {
+                        "currentPageAbstract": {
+                          "type": "string",
+                        },
+                        "currentPageFull": {
+                          "type": "string",
+                        },
+                        "currentPageRollup": {
+                          "type": "string",
+                        },
+                      },
+                      "required": [
+                        "currentPageRollup",
+                        "currentPageAbstract",
+                        "currentPageFull",
+                      ],
+                      "type": "object",
+                    },
+                    "responsive design breakpoint": {
+                      "type": "string",
+                    },
+                    "rollup url": {
+                      "type": "string",
+                    },
+                    "untranslated url": {
+                      "type": "string",
+                    },
+                    "user agent string": {
+                      "type": "string",
+                    },
+                    "view type id": {
+                      "type": "integer",
+                    },
+                  },
+                  "required": [
+                    "module type",
+                    "hostname",
+                    "rollup url",
+                    "abstract url",
+                    "full page url",
+                    "event origin",
+                    "gtm container id",
+                    "gtm container version",
+                    "page url minus query",
+                    "lashed employer",
+                    "lashed employer id",
+                    "lashed location",
+                    "lashed industry",
+                    "lashed industry id",
+                    "lashed sector",
+                    "lashed sector id",
+                    "locale",
+                    "user agent string",
+                    "asid - raw",
+                    "asid - clean",
+                    "asid - gdGlobals",
+                    "dos2 a/b test id list",
+                    "dos2 a/b test treatment list",
+                    "responsive design breakpoint",
+                    "locked state",
+                    "document referrer",
+                    "domain id",
+                    "engaged employer status",
+                    "untranslated url",
+                    "guid - event",
+                    "page group",
+                    "page title",
+                    "page content type",
+                    "history length",
+                    "ip location id",
+                    "ip location type",
+                    "onetrust groups",
+                    "platform type id",
+                    "device type id",
+                    "view type id",
+                    "referrer data",
+                    "java enabled",
+                    "profile id",
+                  ],
+                  "type": "object",
+                },
+                "sentAt": {
+                  "type": "string",
+                },
+                "type": {
+                  "type": "string",
+                },
+                "userId": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "channel",
+                "context",
+                "type",
+                "messageId",
+                "originalTimestamp",
+                "anonymousId",
+                "userId",
+                "event",
+                "properties",
+                "integrations",
+                "sentAt",
+              ],
+              "type": "object",
+            },
+            "requestHeaders": {
+              "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
+                "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
+                "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
+              ],
+              "type": "object",
+            },
+            "responseBody": {
+              "properties": {
+                "foo": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "foo",
+              ],
+              "type": "object",
+            },
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
+          },
+        },
+      },
+      "pathname": "/v1/track",
+    },
+    "parts": [
+      {
+        "part": "1",
+        "type": 0,
+      },
+      {
+        "part": "2",
+        "type": 0,
+      },
+      {
+        "part": "3",
+        "type": 0,
+      },
+      {
+        "part": ":param4",
+        "type": 1,
+      },
+      {
+        "part": "param5",
+        "type": 0,
+      },
+      {
+        "part": "a",
+        "type": 0,
+      },
+      {
+        "part": ":param7",
+        "type": 1,
+      },
+      {
+        "part": "b",
+        "type": 0,
+      },
+    ],
+  },
+]
+`;

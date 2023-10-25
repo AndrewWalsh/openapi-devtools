@@ -1,0 +1,19 @@
+.wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 300px;
+  width: 100vw;
+  z-index: 2;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 1em;
+  gap: 1em;
+  pointer-events: none;
+}
+
+.wrapper > * {
+  pointer-events: auto;
+}
