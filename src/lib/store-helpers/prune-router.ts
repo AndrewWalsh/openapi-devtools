@@ -14,9 +14,7 @@ const pruneRouter = (
   const isLast = parts.length === 1;
   const part = parts[0];
   const matchAny = isParameter(part);
-  // Not a wildcard, and no matching children
   if (!matchAny && !node.children.has(part)) return;
-  // Recurse first
   if (!isLast) {
     if (matchAny) {
       for (const child of node.children.values()) {

@@ -65,8 +65,8 @@ export default class RequestStore {
     const result = parameterise({ store: this.store, index, path, host });
     if (!result) return;
     const { removedPaths, insertedPath, insertedLeaf } = result;
-    const unsetPath = (path: string) => unset(this.leafMap[host], path);
-    removedPaths.concat([path]).forEach(unsetPath);
+    const unsetLeafMap = (path: string) => unset(this.leafMap[host], path);
+    removedPaths.concat([path]).forEach(unsetLeafMap);
     insertLeafMap({
       leafMap: this.leafMap,
       host,

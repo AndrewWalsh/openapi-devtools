@@ -2,7 +2,7 @@
   "name": "openapi-devtools",
   "description": "Effortlessly discover API behaviour with a Chrome extension that automatically generates OpenAPI specifications in real time for any app or website.",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "test": "vitest",

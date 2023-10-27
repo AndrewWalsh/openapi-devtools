@@ -94,7 +94,7 @@ const createPathParameterTypes = (
   const parameters: ParameterObject[] = dynamicParts.map(({ part: name }) => ({
     name,
     in: "path",
-    required: false,
+    required: true,
     schema: {
       type: "string",
     },
@@ -178,9 +178,6 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>): OpenApiBuilder => {
     }
   }
 
-  for (const host in uniqueHosts) {
-    builder.addServer({ url: host });
-  }
   return builder;
 };
 

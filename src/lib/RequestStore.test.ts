@@ -120,3 +120,22 @@ it("collapses into a single route when paramaterised", () => {
   expect(store.leafMap).toEqual(expected);
   expect(getResBodyTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "integer", "string"]);
 });
+
+it("can parameterise paths that are subsets of another path", () => {
+  const store = new RequestStore();
+  const req1 = createSimpleRequest(`${base}/1/2/a`);
+  const req2 = createSimpleRequest(`${base}/1/2`);
+  store.insert(req1, { foo: "bar" });
+  store.insert(req2, { foo: 1 });
+  store.parameterise(1, "/1/2", host);
+  const expected = {
+    [host]: {
+      '/1/2/a': expect.any(Object),
+      '/1/:param1': expect.any(Object),
+    }
+  };
+  // @ts-expect-error accessing private property
+  expect(store.leafMap).toEqual(expected);
+  expect(getResBodyTypes(store, host, "/1/2/a")).toBe("string");
+  expect(getResBodyTypes(store, host, "/1/ANY")).toBe("integer");
+});

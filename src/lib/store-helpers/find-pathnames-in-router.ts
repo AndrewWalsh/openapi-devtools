@@ -11,7 +11,7 @@ const formatPathname = (parts: Array<string>) => `/${parts.join("/").slice(1)}`;
 
 /**
  * Walk the tree. Return string[][], each element of which is path
- * E.g. [["api", "v1", "user"], ["api", "v1", "user"]]
+ * E.g. [["api", "v1", "users"], ["api", "v1", "posts"]]
  */
 const recurse = (
   node: RadixNode<RouteData>,
@@ -29,14 +29,12 @@ const recurse = (
     // If it's also the last part, include leaf children
     // Otherwise, recurse on all children
     if (isLast) {
-      for (const [part, child] of node.children.entries()) {
-        if (!child.children.size) {
-          const value = {
-            pathname: formatPathname([...walked, part]),
-            leaf: child.data!.data as Leaf,
-          };
-          pathnames.push(value);
-        }
+      for (const [lastPart, child] of node.children.entries()) {
+        const value = {
+          pathname: formatPathname([...walked, lastPart]),
+          leaf: child.data!.data as Leaf,
+        };
+        pathnames.push(value);
       }
     } else {
       for (const [lastPart, child] of node.children.entries()) {

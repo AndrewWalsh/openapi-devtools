@@ -16,10 +16,8 @@ export const getParameterisedPath = (
 ) => {
   if (!matchedRoute?.params) return path;
   const nextPath = pathToArray(path);
-  // Rely on the face that params are named "something{position}" e.g. param0, param1, ...
   const paramNames = Object.keys(matchedRoute.params);
   for (const paramName of paramNames) {
-    // Must align with constants.DEFAULT_PARAM_NAME
     const position = Number(paramName.replace(paramRe, "$1"));
     nextPath[position] = `:${paramName}`;
   }
