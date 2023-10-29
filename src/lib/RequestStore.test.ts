@@ -85,7 +85,6 @@ it("sets leafMap correctly after many parameterise operations", () => {
   store.insert(req4, { foo: true });
   store.parameterise(4, "/1/2/3/4/a", host);
   store.parameterise(3, "/1/x/y/z/b", host);
-  // Bug is data.data repeating again
   store.parameterise(3, "/1/2/3/4/:param4", host);
   const expected = {
     [host]: {
@@ -137,5 +136,29 @@ it("can parameterise paths that are subsets of another path", () => {
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
   expect(getResBodyTypes(store, host, "/1/2/a")).toBe("string");
+  expect(getResBodyTypes(store, host, "/1/ANY")).toBe("integer");
+});
+
+it("can parameterise paths that exist along the same segment", () => {
+  const store = new RequestStore();
+  const req1 = createSimpleRequest(`${base}/1/2/a`);
+  const req2 = createSimpleRequest(`${base}/1/2`);
+  store.insert(createSimpleRequest(`${base}/1`), { foo: null });
+  store.insert(createSimpleRequest(`${base}/1/2/3/4`), { foo: null });
+  store.insert(req1, { foo: "bar" });
+  store.insert(req2, { foo: 1 });
+  store.parameterise(1, "/1/2/a", host);
+  store.parameterise(1, "/1/2", host);
+  const expected = {
+    [host]: {
+      '/1': expect.any(Object),
+      '/1/2/3/4': expect.any(Object),
+      '/1/:param1/a': expect.any(Object),
+      '/1/:param1': expect.any(Object),
+    }
+  };
+  // @ts-expect-error accessing private property
+  expect(store.leafMap).toEqual(expected);
+  expect(getResBodyTypes(store, host, "/1/ANY/a")).toBe("string");
   expect(getResBodyTypes(store, host, "/1/ANY")).toBe("integer");
 });

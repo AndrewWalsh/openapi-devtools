@@ -20,6 +20,7 @@
     "framer-motion": "^10.16.4",
     "fuse.js": "^6.6.2",
     "genson-js": "^0.0.8",
+    "http-auth-utils": "^5.0.1",
     "lodash": "^4.17.21",
     "openapi3-ts": "^4.1.2",
     "radix3": "^1.1.0",

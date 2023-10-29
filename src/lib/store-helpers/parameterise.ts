@@ -39,8 +39,9 @@ export default function parameterise({
   }
   const mergedLeaf = matchedLeaves.reduce(mergeLeaves);
   mergedLeaf.pathname = nextPath;
-  router.insert(nextPath, { data: mergedLeaf });
   removedPaths.forEach((path) => unset(store[host].ctx.staticRoutesMap, path));
+  unset(store[host].ctx.staticRoutesMap, nextPath);
+  router.insert(nextPath, { data: mergedLeaf });
   return {
     removedPaths,
     insertedPath: nextPath,

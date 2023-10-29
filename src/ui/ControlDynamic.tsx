@@ -45,12 +45,12 @@ const ControlDynamic = () => {
               itemSize={height / 8}
               width={width}
               itemData={filteredEndpoints}
-              itemKey={(index) => filteredEndpoints[index].fullPath}
+              itemKey={(index) => filteredEndpoints[index].pathname}
             >
               {({ index, data, style }) => {
                 const endpoint = data[index];
                 const backgroundColor = index % 2 === 0 ? "#EDF2F7" : undefined;
-                const outerKey = endpoint.host + endpoint.fullPath;
+                const outerKey = endpoint.host + endpoint.pathname;
                 return (
                   <div style={style} className={classes.autosizerchild}>
                     <Wrap
@@ -66,7 +66,7 @@ const ControlDynamic = () => {
                             : () => {
                                 parameterise(
                                   parameterisIdx,
-                                  endpoint.fullPath,
+                                  endpoint.pathname,
                                   endpoint.host
                                 );
                               };

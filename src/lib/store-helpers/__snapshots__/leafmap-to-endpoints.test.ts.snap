@@ -3,7 +3,9 @@
 exports[`flattens data into endpoints 1`] = `
 [
   {
-    "data": {
+    "fullPath": "/1/2/3",
+    "host": "www.example.com",
+    "leaf": {
       "methods": {
         "POST": {
           "200": {
@@ -429,12 +431,48 @@ exports[`flattens data into endpoints 1`] = `
             },
             "requestHeaders": {
               "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
                 "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
                   "type": "string",
                 },
               },
               "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
                 "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
               ],
               "type": "object",
             },
@@ -449,13 +487,42 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseHeaders": undefined,
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
           },
         },
       },
       "pathname": "/v1/track",
     },
-    "host": "www.example.com",
     "parts": [
       {
         "part": "1",
@@ -470,10 +537,11 @@ exports[`flattens data into endpoints 1`] = `
         "type": 0,
       },
     ],
-    "pathname": "/1/2/3",
   },
   {
-    "data": {
+    "fullPath": "/1/:param1/3",
+    "host": "www.example.com",
+    "leaf": {
       "methods": {
         "POST": {
           "200": {
@@ -899,12 +967,48 @@ exports[`flattens data into endpoints 1`] = `
             },
             "requestHeaders": {
               "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
                 "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
                   "type": "string",
                 },
               },
               "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
                 "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
               ],
               "type": "object",
             },
@@ -919,13 +1023,42 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseHeaders": undefined,
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
           },
         },
       },
       "pathname": "/v1/track",
     },
-    "host": "www.example.com",
     "parts": [
       {
         "part": "1",
@@ -940,10 +1073,11 @@ exports[`flattens data into endpoints 1`] = `
         "type": 0,
       },
     ],
-    "pathname": "/1/:param1/3",
   },
   {
-    "data": {
+    "fullPath": "/1/2/3/4",
+    "host": "www.example.com",
+    "leaf": {
       "methods": {
         "POST": {
           "200": {
@@ -1369,12 +1503,48 @@ exports[`flattens data into endpoints 1`] = `
             },
             "requestHeaders": {
               "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
                 "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
                   "type": "string",
                 },
               },
               "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
                 "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
               ],
               "type": "object",
             },
@@ -1389,13 +1559,42 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseHeaders": undefined,
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
           },
         },
       },
       "pathname": "/v1/track",
     },
-    "host": "www.example.com",
     "parts": [
       {
         "part": "1",
@@ -1414,10 +1613,11 @@ exports[`flattens data into endpoints 1`] = `
         "type": 0,
       },
     ],
-    "pathname": "/1/2/3/4",
   },
   {
-    "data": {
+    "fullPath": "/1/2/3/4a",
+    "host": "www.example.com",
+    "leaf": {
       "methods": {
         "POST": {
           "200": {
@@ -1843,12 +2043,48 @@ exports[`flattens data into endpoints 1`] = `
             },
             "requestHeaders": {
               "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
                 "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
                   "type": "string",
                 },
               },
               "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
                 "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
               ],
               "type": "object",
             },
@@ -1863,13 +2099,42 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseHeaders": undefined,
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
           },
         },
       },
       "pathname": "/v1/track",
     },
-    "host": "www.example.com",
     "parts": [
       {
         "part": "1",
@@ -1888,10 +2153,11 @@ exports[`flattens data into endpoints 1`] = `
         "type": 0,
       },
     ],
-    "pathname": "/1/2/3/4a",
   },
   {
-    "data": {
+    "fullPath": "/1/2/3/",
+    "host": "www.example.com",
+    "leaf": {
       "methods": {
         "POST": {
           "200": {
@@ -2317,12 +2583,48 @@ exports[`flattens data into endpoints 1`] = `
             },
             "requestHeaders": {
               "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
                 "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
                   "type": "string",
                 },
               },
               "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
                 "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
               ],
               "type": "object",
             },
@@ -2337,13 +2639,42 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseHeaders": undefined,
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
           },
         },
       },
       "pathname": "/v1/track",
     },
-    "host": "www.example.com",
     "parts": [
       {
         "part": "1",
@@ -2362,10 +2693,11 @@ exports[`flattens data into endpoints 1`] = `
         "type": 0,
       },
     ],
-    "pathname": "/1/2/3/",
   },
   {
-    "data": {
+    "fullPath": "/1/2/3/:param4/param5/a/:param7/b",
+    "host": "www.example.com",
+    "leaf": {
       "methods": {
         "POST": {
           "200": {
@@ -2791,12 +3123,48 @@ exports[`flattens data into endpoints 1`] = `
             },
             "requestHeaders": {
               "properties": {
+                ":method": {
+                  "type": "string",
+                },
+                ":path": {
+                  "type": "string",
+                },
+                ":scheme": {
+                  "type": "string",
+                },
+                "accept": {
+                  "type": "string",
+                },
+                "accept-encoding": {
+                  "type": "string",
+                },
+                "accept-language": {
+                  "type": "string",
+                },
                 "anonymousid": {
+                  "type": "string",
+                },
+                "authorization": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
                   "type": "string",
                 },
               },
               "required": [
+                ":method",
+                ":path",
+                ":scheme",
+                "accept",
+                "accept-encoding",
+                "accept-language",
                 "anonymousid",
+                "authorization",
+                "content-length",
+                "content-type",
               ],
               "type": "object",
             },
@@ -2811,13 +3179,42 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseHeaders": undefined,
+            "responseHeaders": {
+              "properties": {
+                "access-control-expose-headers": {
+                  "type": "string",
+                },
+                "content-length": {
+                  "type": "string",
+                },
+                "content-type": {
+                  "type": "string",
+                },
+                "date": {
+                  "type": "string",
+                },
+                "server": {
+                  "type": "string",
+                },
+                "vary": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "access-control-expose-headers",
+                "content-length",
+                "content-type",
+                "date",
+                "server",
+                "vary",
+              ],
+              "type": "object",
+            },
           },
         },
       },
       "pathname": "/v1/track",
     },
-    "host": "www.example.com",
     "parts": [
       {
         "part": "1",
@@ -2852,7 +3249,6 @@ exports[`flattens data into endpoints 1`] = `
         "type": 0,
       },
     ],
-    "pathname": "/1/2/3/:param4/param5/a/:param7/b",
   },
 ]
 `;

@@ -56,14 +56,6 @@ export const entriesToJSONType = (
   }, {} as { [k: string]: string });
 };
 
-export const isSchema = (schema: JSONType): schema is Schema =>
-  Boolean(
-    typeof schema === "object" &&
-      schema &&
-      !Array.isArray(schema) &&
-      schema.type
-  );
-
 export const parseJSON = (json?: string): JSONType => {
   if (!json) return null;
   try {

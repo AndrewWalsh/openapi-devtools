@@ -10,7 +10,8 @@ type PathnamesLeaves = Array<{
 const formatPathname = (parts: Array<string>) => `/${parts.join("/").slice(1)}`;
 
 /**
- * Walk the tree. Return string[][], each element of which is path
+ * Find matching pathnames for a given path
+ * Walk the tree. Return string[][], each element of which is a path
  * E.g. [["api", "v1", "users"], ["api", "v1", "posts"]]
  */
 const recurse = (
@@ -30,11 +31,13 @@ const recurse = (
     // Otherwise, recurse on all children
     if (isLast) {
       for (const [lastPart, child] of node.children.entries()) {
-        const value = {
-          pathname: formatPathname([...walked, lastPart]),
-          leaf: child.data!.data as Leaf,
-        };
-        pathnames.push(value);
+        if (child.data) {
+          const value = {
+            pathname: formatPathname([...walked, lastPart]),
+            leaf: child.data.data as Leaf,
+          };
+          pathnames.push(value);
+        }
       }
     } else {
       for (const [lastPart, child] of node.children.entries()) {

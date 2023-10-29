@@ -33,7 +33,7 @@ OpenAPI DevTools is a Chrome extension that generates OpenAPI specifications in 
 - Instantly generate an OpenAPI 3.1 specification for any website or application just by using it
 - Automatically merges new request & response headers, bodies, and query parameters per endpoint
 - Click on a [path parameter](https://www.abstractapi.com/api-glossary/path-parameters) and the app will automatically merge existing and future matching requests
-- View the specification inside the tool using [Redocly](https://www.npmjs.com/package/redoc) and download with a click
+- View the specification inside the tool using [Redoc](https://www.npmjs.com/package/redoc) and download with a click
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -75,7 +75,7 @@ To develop the project:
 - `npm run build`
 - Navigate to `chrome://extensions`
 - In the top right enable the `Developer mode` toggle
-- In the top left click `Load unpacked` and select the extracted `dist` directory
+- In the top left click `Load unpacked` and select the `dist` directory
 - You should now see the tool in Chrome DevTools. You can interact it with like a regular page, including inspection of the React app
 - [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) is suggested to update the tool after running `npm run build` and updating the `dist` directory 
 

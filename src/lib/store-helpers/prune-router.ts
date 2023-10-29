@@ -28,7 +28,9 @@ const pruneRouter = (
     }
   }
 
-  if (node.children.get(part)?.children.size === 0) {
+  const noChildren = node.children.get(part)?.children.size === 0;
+  const noData =  !node.children.get(part)?.data;
+  if (noChildren && noData) {
     node.children.delete(part);
   }
 };

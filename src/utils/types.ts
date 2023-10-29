@@ -1,5 +1,6 @@
 import type { Schema } from "genson-js";
 import type { RadixRouter } from "radix3";
+import { Authentication } from './authentication';
 
 export type JSONType =
   | string
@@ -10,9 +11,11 @@ export type JSONType =
   | Array<JSONType>;
 
 export type Leaf = {
+  // Authentication details for this endpoint. Multiple auth types per endpoint are not supported
+  authentication?: Authentication;
   // The current pathname of this endpoint, which may be static or parameterised
   pathname: string;
-  // Methods such as GET, POST and request values for received status codes
+  // Methods such as GET, POST and schema values for requests
   methods: {
     [method: string]: {
       [statusCode: string]: {
@@ -32,10 +35,14 @@ export enum PartType {
 }
 export type Parts = Array<{ part: string; type: PartType }>;
 export type Endpoint = {
+  // A host e.g. example.com
   host: string;
-  fullPath: string;
+  // The full path including parameters, such as /1/:param1/:param2/4
+  pathname: string;
+  // An array of parts such as 1, 2, and 3 in /1/2/3. Includes their type, static or dynamic (parameter)
   parts: Parts;
-  leaf: Leaf;
+  // Data for this endpoint
+  data: Leaf;
 };
 
 export enum Status {

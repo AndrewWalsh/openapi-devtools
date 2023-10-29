@@ -9,8 +9,8 @@ const leafMapToEndpoints = (leafMap: LeafMap): Array<Endpoint> => {
       const endpoint: Endpoint = {
         host,
         parts: pathToParts(path),
-        fullPath: decodeUriComponent(path),
-        leaf: leaf.data,
+        pathname: decodeUriComponent(path),
+        data: leaf.data,
       };
       endpoints.push(endpoint);
     }

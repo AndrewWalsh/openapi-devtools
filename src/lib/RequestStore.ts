@@ -2,7 +2,6 @@ import { JSONType, RouterMap, LeafMap, Endpoint } from "../utils/types";
 import { parameterise, insertLeafMap, upsert } from "./store-helpers";
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
-import decodeUriComponent from "decode-uri-component";
 
 /**
  * RequestStore handles routing to endpoints
@@ -48,7 +47,6 @@ export default class RequestStore {
     harRequest: chrome.devtools.network.Request,
     responseBody: JSONType
   ) {
-    harRequest.request.url = decodeUriComponent(harRequest.request.url);
     const result = upsert({ harRequest, responseBody, store: this.store });
     if (!result) return;
     const { insertedPath, insertedLeaf, insertedHost } = result;

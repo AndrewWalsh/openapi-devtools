@@ -4,11 +4,18 @@ import {
   parseJSON,
 } from "../../utils/helpers";
 import { JSONType, Leaf } from "../../utils/types";
+import { parseAuthHeader } from "../../utils/authentication";
+import decodeUriComponent from "decode-uri-component";
+import { filterIgnoreHeaders } from '../../utils/headers';
 
 function createLeaf(
   harRequest: chrome.devtools.network.Request,
   responseBody: JSONType
 ): Leaf {
+  const authentication = parseAuthHeader(harRequest.request.headers);
+  harRequest.request.url = decodeUriComponent(harRequest.request.url);
+  harRequest.request.headers = filterIgnoreHeaders(harRequest.request.headers);
+  harRequest.response.headers = filterIgnoreHeaders(harRequest.response.headers);
   const method = harRequest.request.method;
   const statusCode = harRequest.response.status.toString();
   const requestBody = parseJSON(harRequest.request.postData?.text);
@@ -17,6 +24,7 @@ function createLeaf(
   const queryParameters = entriesToJSONType(harRequest.request.queryString);
   const pathname = new URL(harRequest.request.url).pathname;
   const leafPart: Leaf = {
+    ...(authentication && { authentication }),
     pathname,
     methods: {
       [method]: {
