@@ -89,6 +89,9 @@ function Main() {
         );
         break;
       case Status.RECORDING:
+        chrome.devtools.network.onRequestFinished.removeListener(
+          requestFinishedHandler
+        );
         chrome.devtools.network.onRequestFinished.addListener(
           requestFinishedHandler
         );

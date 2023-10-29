@@ -18,6 +18,8 @@
     <a href="https://github.com/AndrewWalsh/openapi-devtools/issues">Report Bug</a>
     ·
     <a href="https://github.com/AndrewWalsh/openapi-devtools/issues">Request Feature</a>
+    ·
+    <a href="https://awalsh.io/posts/openapi-devtools/">Read More</a>
   </p>
 </div>
 
