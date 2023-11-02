@@ -15,7 +15,7 @@ import {
   createResponseTypes,
   createSecuritySchemeTypes,
 } from "./endpoints-to-oai31.helpers";
-import { AuthType } from "../utils/authentication";
+import { AuthType } from "../utils/httpauthentication";
 
 const endpointsToOAI31 = (endpoints: Array<Endpoint>): OpenApiBuilder => {
   const builder = createBuilderAndDocRoot(endpoints);

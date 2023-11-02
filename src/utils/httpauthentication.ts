@@ -63,10 +63,6 @@ export const parseAuthHeader = (
   if (found) {
     const authType = getAuthType(found.value);
     if (authType === "basic") {
-      // type BasicAuthType = ReturnType<
-      //   typeof parseAuthorizationHeader<typeof BASIC>
-      // >;
-      // const authData = authHeader as BasicAuthType;
       const basicAuth: BasicAuthHeader = {
         authType: AuthType.BASIC,
         type: "http",

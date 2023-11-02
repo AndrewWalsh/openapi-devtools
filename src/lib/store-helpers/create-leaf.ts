@@ -4,7 +4,7 @@ import {
   parseJSON,
 } from "../../utils/helpers";
 import { JSONType, Leaf } from "../../utils/types";
-import { parseAuthHeader } from "../../utils/authentication";
+import { parseAuthHeader } from "../../utils/httpauthentication";
 import decodeUriComponent from "decode-uri-component";
 import { filterIgnoreHeaders } from '../../utils/headers';
 

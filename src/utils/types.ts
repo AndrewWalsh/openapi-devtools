@@ -1,6 +1,6 @@
 import type { Schema } from "genson-js";
 import type { RadixRouter } from "radix3";
-import { Authentication } from './authentication';
+import { Authentication } from './httpauthentication';
 
 export type JSONType =
   | string

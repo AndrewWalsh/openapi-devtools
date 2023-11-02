@@ -12,7 +12,7 @@ import {
   ParameterObject,
   SecuritySchemeObject,
 } from "openapi3-ts/oas31";
-import { Authentication, AuthType } from "../utils/authentication";
+import { Authentication, AuthType } from "../utils/httpauthentication";
 
 export const createSecuritySchemeTypes = (auth?: Authentication): SecuritySchemeObject | undefined => {
   if (!auth) return;
