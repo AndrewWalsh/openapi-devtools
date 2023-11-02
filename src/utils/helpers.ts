@@ -14,19 +14,36 @@ const isValidURL = (url: string): boolean => {
     return false;
   }
 };
+const getContent = (entry: chrome.devtools.network.Request): Promise<string> => {
+    return new Promise((resolve) => {
+        entry.getContent((content) => {
+            resolve(content || '');
+        });
+    });
+};
+const isValidJSONString = (content: string): boolean => {
+    try {
+        JSON.parse(content);
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
 const validStatuses = new Set(["GET", "POST", "PUT", "DELETE", "PATCH"]);
 const validResourceTypes = new Set(["xhr", "fetch"]);
 const isValidStatus = (status: string) => validStatuses.has(status);
-export const isValidRequest = (
+export const isValidRequest = async (
   harRequest: chrome.devtools.network.Request
-): boolean => {
+): Promise<boolean> => {
   const isNotAJAXRequest =
     !!harRequest._resourceType &&
     !validResourceTypes.has(harRequest._resourceType);
   if (isNotAJAXRequest) return false;
   const didNotReachServer = !harRequest.serverIPAddress;
   if (didNotReachServer) return false;
-  const isNotJSON = harRequest.response.content.mimeType !== "application/json";
+  const content = await getContent(harRequest);
+  const isNotJSON = harRequest.response.content.mimeType !== "application/json" && !isValidJSONString(content);
   if (isNotJSON) return false;
   const isNotValidStatus = !isValidStatus(harRequest.request.method);
   if (isNotValidStatus) return false;

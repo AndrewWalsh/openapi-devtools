@@ -26,8 +26,8 @@ function Main() {
 
   const requestFinishedHandler = useCallback(
     (harRequest: chrome.devtools.network.Request) => {
-      if (!isValidRequest(harRequest)) return;
       async function getCurrentTab() {
+        if (!await isValidRequest(harRequest)) return;
         try {
           harRequest.getContent((content) => {
             try {
