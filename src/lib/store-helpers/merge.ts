@@ -3,7 +3,7 @@ import type { Leaf } from "../../utils/types";
 
 export const mergeLeaves = (dest: Leaf, src: Leaf): Leaf => {
   dest.pathname = src.pathname;
-  dest.authentication = src.authentication;
+  dest.authentication = src.authentication || dest.authentication;
   for (const [method, statusCodeObj] of Object.entries(src.methods)) {
     if (!dest.methods[method]) {
       dest.methods[method] = statusCodeObj;

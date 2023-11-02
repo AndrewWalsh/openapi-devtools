@@ -16,7 +16,10 @@ import { Authentication, AuthType } from "../utils/authentication";
 
 export const createSecuritySchemeTypes = (auth?: Authentication): SecuritySchemeObject | undefined => {
   if (!auth) return;
-  if (auth.authType === AuthType.BEARER) {
+  const isBearer = auth.authType === AuthType.BEARER;
+  const isBasic = auth.authType === AuthType.BASIC;
+  const isDigest = auth.authType === AuthType.DIGEST;
+  if (isBearer || isBasic || isDigest) {
     const securitySchemeObject: SecuritySchemeObject = {
       type: auth.type,
       in: auth.in,

@@ -36,10 +36,6 @@ const post: chrome.devtools.network.Request = {
         value: "aa",
       },
       {
-        name: "authorization",
-        value: "Basic aa==",
-      },
-      {
         name: "content-length",
         value: "6798",
       },

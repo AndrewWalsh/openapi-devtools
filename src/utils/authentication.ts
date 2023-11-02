@@ -1,8 +1,9 @@
 import { SecuritySchemeType } from "openapi3-ts/oas31";
-import { parseAuthorizationHeader } from "http-auth-utils";
 
 export enum AuthType {
   BEARER = 'Bearer',
+  BASIC = 'Basic',
+  DIGEST = 'Digest',
 }
 
 // Modelled on a Security Scheme Object https://spec.openapis.org/oas/v3.1.0#security-scheme-object
@@ -34,7 +35,23 @@ export interface BearerAuthHeader extends HTTPAuth {
   in: "header";
 }
 
-type ParsedReturnTypes = BearerAuthHeader | undefined;
+export interface BasicAuthHeader extends HTTPAuth {
+  scheme: "Basic";
+  in: "header";
+}
+
+export interface DigestAuthHeader extends HTTPAuth {
+  scheme: "Digest";
+  in: "header";
+}
+
+const getAuthType = (auth: string) => {
+  const split = auth.split(' ');
+  if (!split.length) return '';
+  return split[0].toLowerCase();
+};
+
+type ParsedReturnTypes = DigestAuthHeader | BasicAuthHeader | BearerAuthHeader | undefined;
 
 export const parseAuthHeader = (
   headers: chrome.devtools.network.Request["request"]["headers"]
@@ -44,22 +61,38 @@ export const parseAuthHeader = (
     (head) => head.name.toLowerCase() === AUTHORIZATION
   );
   if (found) {
-    const authHeader = parseAuthorizationHeader(found.value);
-    if (authHeader.type === "Basic") {
+    const authType = getAuthType(found.value);
+    if (authType === "basic") {
       // type BasicAuthType = ReturnType<
       //   typeof parseAuthorizationHeader<typeof BASIC>
       // >;
       // const authData = authHeader as BasicAuthType;
-    } else if (authHeader.type === "Bearer") {
+      const basicAuth: BasicAuthHeader = {
+        authType: AuthType.BASIC,
+        type: "http",
+        in: "header",
+        scheme: "Basic",
+        description: '',
+      };
+      return basicAuth;
+    } else if (authType === "bearer") {
       const bearerAuth: BearerAuthHeader = {
         authType: AuthType.BEARER,
         type: "http",
-        name: `${AUTHORIZATION}-bearer`,
         in: "header",
         scheme: "Bearer",
         description: '',
       };
       return bearerAuth;
+    } else if (authType === "digest") {
+      const digestAuth: DigestAuthHeader = {
+        authType: AuthType.DIGEST,
+        type: "http",
+        in: "header",
+        scheme: "Digest",
+        description: '',
+      };
+      return digestAuth;
     }
   }
 };

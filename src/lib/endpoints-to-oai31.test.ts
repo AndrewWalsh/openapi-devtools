@@ -4,6 +4,8 @@ import RequestStore from "./RequestStore";
 import endpointsToOAI31 from "./endpoints-to-oai31";
 import post from "./__fixtures__/post";
 import bearer from "./__fixtures__/bearer";
+import basic from "./__fixtures__/basic";
+import digest from "./__fixtures__/digest";
 import { cloneDeep } from "lodash";
 import { AuthType } from "../utils/authentication";
 
@@ -36,6 +38,34 @@ it("sets bearer auth security schema when available", () => {
     [AuthType.BEARER]: {
       in: "header",
       scheme: "Bearer",
+      type: "http",
+    },
+  });
+});
+
+it("sets basic auth security schema when available", () => {
+  const store = new RequestStore();
+  store.insert(basic, { test: "string" });
+  const endpoints = store.endpoints();
+  const oai31 = endpointsToOAI31(endpoints);
+  expect(oai31.rootDoc.components?.securitySchemes).toEqual({
+    [AuthType.BASIC]: {
+      in: "header",
+      scheme: "Basic",
+      type: "http",
+    },
+  });
+});
+
+it("sets digest auth security schema when available", () => {
+  const store = new RequestStore();
+  store.insert(digest, { test: "string" });
+  const endpoints = store.endpoints();
+  const oai31 = endpointsToOAI31(endpoints);
+  expect(oai31.rootDoc.components?.securitySchemes).toEqual({
+    [AuthType.DIGEST]: {
+      in: "header",
+      scheme: "Digest",
       type: "http",
     },
   });
