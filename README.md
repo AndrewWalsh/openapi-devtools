@@ -62,6 +62,8 @@ The specification will automatically populate based on JSON requests that fire a
 
 When the same endpoint responds with different data, such as a value that is sometimes a string and sometimes null, the specification for that value will be *either* string or null. All information is accounted for in the final specification. If you see something missing from a request, trigger a request that contains the missing information.
 
+The settings menu contains several options. Here you can enable real examples in the specification. You can also export the current state of the app as a string, share or store it, and import it later.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## What is OpenAPI?
