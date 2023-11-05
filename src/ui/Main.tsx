@@ -145,6 +145,7 @@ function Main() {
         endpoints,
         export: requestStore.export,
         import: importFn,
+        options: requestStore.options,
       }}
     >
       <div className={classes.wrapper}>

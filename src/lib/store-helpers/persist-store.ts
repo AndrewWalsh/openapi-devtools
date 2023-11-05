@@ -1,6 +1,8 @@
-import store from "store2";
+import store2 from "store2";
 
 const namespace = "openapi-devtools";
+
+const store = store2.namespace(namespace);
 
 const get = () => store.get(namespace);
 const set = (value: unknown) => store.set(namespace, value);

@@ -1,30 +1,38 @@
-import { useContext } from "react";
-import { Button, Tooltip, HStack, useToast } from "@chakra-ui/react";
-import copy from 'copy-to-clipboard';
-import Context from './context';
-import ControlConfigImport from './ControlConfigImport';
+import { useState, useContext } from "react";
+import { Tooltip, HStack, FormControl, FormLabel } from "@chakra-ui/react";
+import { Switch } from "@chakra-ui/react";
+import ControlConfigImport from "./ControlConfigImportExport";
+import Context from "./context";
+
+const TOGGLEMOREID = "toggle-more-info";
 
 const ControlConfig = () => {
   const ctx = useContext(Context);
-  const toast = useToast();
-  const onExport = () => {
-    const stateStr = ctx.export();
-    copy(stateStr);
-    toast({
-      title: "Copied to clipboard.",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-    });
+  const [moreInfoEnabled, setMoreInfoEnabled] = useState(
+    ctx.options().enableMoreInfo
+  );
+  const onToggleMoreInfo = () => {
+    const enableMoreInfo = !ctx.options().enableMoreInfo;
+    ctx.options({ enableMoreInfo });
+    setMoreInfoEnabled(enableMoreInfo);
   };
   return (
-    <HStack>
-      <ControlConfigImport />
-      <Tooltip label="Export will copy a state string to your clipboard. Save this somewhere on your computer. You can load it by clicking import and pasting the string.">
-        <Button size="md" onClick={onExport} colorScheme="teal">
-          Export
-        </Button>
-      </Tooltip>
+    <HStack justifyContent="space-between">
+      <FormControl display="flex" alignItems="center">
+        <Tooltip label="Include response examples in the specification. This could include private information. Your choice will persist across sessions.">
+          <FormLabel htmlFor={TOGGLEMOREID} mb="0">
+            More info
+          </FormLabel>
+        </Tooltip>
+        <Switch
+          id={TOGGLEMOREID}
+          onChange={onToggleMoreInfo}
+          isChecked={moreInfoEnabled}
+        />
+      </FormControl>
+      <HStack>
+        <ControlConfigImport />
+      </HStack>
     </HStack>
   );
 };

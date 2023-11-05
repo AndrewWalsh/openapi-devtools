@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import RequestStore from "../lib/RequestStore";
 import { Endpoint, EndpointsByHost } from "../utils/types";
+import { defaultOptions } from "../lib/store-helpers/persist-options";
 
 type ContextType = {
   endpoints: Endpoint[];
@@ -13,6 +14,7 @@ type ContextType = {
   parameterise: typeof RequestStore.prototype.parameterise;
   import: typeof RequestStore.prototype.import;
   export: typeof RequestStore.prototype.export;
+  options: typeof RequestStore.prototype.options;
 };
 
 const defaultContextValue: ContextType = {
@@ -26,6 +28,7 @@ const defaultContextValue: ContextType = {
   parameterise: () => {},
   import: () => false,
   export: () => '',
+  options: () => defaultOptions,
 };
 
 const Context = createContext<ContextType>(defaultContextValue);

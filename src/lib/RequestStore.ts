@@ -1,8 +1,13 @@
 import { JSONType, RouterMap, LeafMap, Endpoint } from "../utils/types";
-import { parameterise, insertLeafMap, upsert } from "./store-helpers";
+import { parameterise, insertLeafMap, upsert, persistOptions } from "./store-helpers";
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
 import stringify from "json-stable-stringify";
+
+export type Options = {
+  // Includes additional data such as response samples
+  enableMoreInfo: boolean;
+}
 
 /**
  * RequestStore handles routing to endpoints
@@ -12,11 +17,20 @@ export default class RequestStore {
   private store: RouterMap;
   private leafMap: LeafMap;
   private disabledHosts: Set<string>;
+  private storeOptions: Options;
 
   constructor() {
     this.leafMap = {}; // persist.get() || {};
     this.store = {}; // leafMapToRouterMap(this.leafMap);
     this.disabledHosts = new Set();
+    this.storeOptions = persistOptions.get();
+  }
+
+  public options = (options?: Partial<Options>): Readonly<Options> => {
+    if (!options) return this.storeOptions;
+    this.storeOptions = { ...this.storeOptions, ...options };
+    persistOptions.set(this.storeOptions);
+    return this.storeOptions;
   }
 
   public import(json: string): boolean {
