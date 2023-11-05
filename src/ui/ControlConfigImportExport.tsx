@@ -23,6 +23,11 @@ function ControlConfigImport() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState("");
 
+  const onCloseModal = () => {
+    onClose();
+    setValue("");
+  };
+
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
@@ -76,7 +81,7 @@ function ControlConfigImport() {
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={onCloseModal}
       >
         <ModalOverlay />
         <ModalContent>
@@ -97,7 +102,7 @@ function ControlConfigImport() {
             <Button onClick={onImport} colorScheme="blue" mr={3}>
               Import
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onCloseModal}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

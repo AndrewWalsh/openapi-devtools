@@ -53,7 +53,6 @@ export default class RequestStore {
 
   public export = (): string => {
     return stringify({
-      store: this.store,
       leafMap: this.leafMap,
       disabledHosts: Array.from(this.disabledHosts),
     });
