@@ -4,6 +4,7 @@ import {
   insertLeafMap,
   upsert,
   persistOptions,
+  leafMapToRouterMap,
 } from "./store-helpers";
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
@@ -40,9 +41,9 @@ export default class RequestStore {
 
   public import(json: string): boolean {
     try {
-      const { store, leafMap, disabledHosts } = JSON.parse(json);
+      const { leafMap, disabledHosts } = JSON.parse(json);
       this.disabledHosts = new Set(disabledHosts);
-      this.store = store;
+      this.store = leafMapToRouterMap(leafMap);
       this.leafMap = leafMap;
       return true;
     } catch {
