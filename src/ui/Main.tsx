@@ -64,7 +64,7 @@ function Main() {
 
   const setSpecEndpoints = useCallback(async () => {
     const nextEndpoints = requestStore.endpoints();
-    setSpec(endpointsToOAI31(nextEndpoints).getSpec());
+    setSpec(endpointsToOAI31(nextEndpoints, requestStore.options()).getSpec());
     setEndpoints(sortEndpoints(nextEndpoints));
     // setEndpointsByHost(getEndpointsByHost(nextEndpoints));
   }, []);

@@ -16,16 +16,22 @@ import {
   createSecuritySchemeTypes,
 } from "./endpoints-to-oai31.helpers";
 import { AuthType } from "../utils/httpauthentication";
+import { Options } from "./RequestStore";
+import { defaultOptions } from "./store-helpers/persist-options";
 
-const endpointsToOAI31 = (endpoints: Array<Endpoint>): OpenApiBuilder => {
+const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = defaultOptions): OpenApiBuilder => {
+  const { enableMoreInfo } = options;
   const builder = createBuilderAndDocRoot(endpoints);
   const uniqueHosts = new Set<string>();
   const uniqueAuth = new Map<AuthType, SecuritySchemeObject>();
 
   for (const endpoint of endpoints) {
+    const mostRecentRequest = enableMoreInfo ? endpoint.data.mostRecentRequest : null;
+    const mostRecentResponse = enableMoreInfo ? endpoint.data.mostRecentResponse : null;
     const fullPath = `/${endpoint.parts.map((p) => p.part).join("/")}`;
     const pathParameterObjects = createPathParameterTypes(endpoint);
     uniqueHosts.add(endpoint.host);
+
     const auth = endpoint.data.authentication;
     if (auth) {
       const securitySchema = createSecuritySchemeTypes(
@@ -42,11 +48,12 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>): OpenApiBuilder => {
         const queryParameterObjects = createQueryParameterTypes(
           endpoint.data.methods[method][statusCode].queryParameters
         );
-        const requestBody = createRequestTypes(schema.requestBody);
+        const requestBody = createRequestTypes(schema.requestBody, mostRecentRequest);
         const responses = createResponseTypes(
           schema.responseBody,
           schema.responseHeaders,
-          statusCode
+          statusCode,
+          mostRecentResponse,
         );
         const security: SecurityRequirementObject[] | null = endpoint.data
           .authentication

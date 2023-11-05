@@ -1,6 +1,6 @@
 import type { Schema } from "genson-js";
 import type { RadixRouter } from "radix3";
-import { Authentication } from './httpauthentication';
+import { Authentication } from "./httpauthentication";
 
 export type JSONType =
   | string
@@ -13,6 +13,10 @@ export type JSONType =
 export type Leaf = {
   // Authentication details for this endpoint. Multiple auth types per endpoint are not supported
   authentication?: Authentication;
+  // Sample of the most recent request
+  mostRecentRequest?: unknown;
+  // Sample of the most recent response
+  mostRecentResponse?: unknown;
   // The current pathname of this endpoint, which may be static or parameterised
   pathname: string;
   // Methods such as GET, POST and schema values for requests

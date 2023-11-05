@@ -19,7 +19,7 @@ const ControlConfig = () => {
   return (
     <HStack justifyContent="space-between">
       <FormControl display="flex" alignItems="center">
-        <Tooltip label="Include response examples in the specification. This could include private information. Your choice will persist across sessions.">
+        <Tooltip label="Include the most recent request and response as examples in the specification. This could include private information. Your choice will persist across sessions.">
           <FormLabel htmlFor={TOGGLEMOREID} mb="0">
             More info
           </FormLabel>

@@ -1,5 +1,10 @@
 import { JSONType, RouterMap, LeafMap, Endpoint } from "../utils/types";
-import { parameterise, insertLeafMap, upsert, persistOptions } from "./store-helpers";
+import {
+  parameterise,
+  insertLeafMap,
+  upsert,
+  persistOptions,
+} from "./store-helpers";
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
 import stringify from "json-stable-stringify";
@@ -7,7 +12,7 @@ import stringify from "json-stable-stringify";
 export type Options = {
   // Includes additional data such as response samples
   enableMoreInfo: boolean;
-}
+};
 
 /**
  * RequestStore handles routing to endpoints
@@ -19,19 +24,19 @@ export default class RequestStore {
   private disabledHosts: Set<string>;
   private storeOptions: Options;
 
-  constructor() {
+  constructor(storeOptions = persistOptions.get()) {
     this.leafMap = {}; // persist.get() || {};
     this.store = {}; // leafMapToRouterMap(this.leafMap);
     this.disabledHosts = new Set();
-    this.storeOptions = persistOptions.get();
+    this.storeOptions = storeOptions;
   }
 
   public options = (options?: Partial<Options>): Readonly<Options> => {
     if (!options) return this.storeOptions;
     this.storeOptions = { ...this.storeOptions, ...options };
     persistOptions.set(this.storeOptions);
-    return this.storeOptions;
-  }
+    return Object.freeze(this.storeOptions);
+  };
 
   public import(json: string): boolean {
     try {
@@ -82,7 +87,12 @@ export default class RequestStore {
     harRequest: chrome.devtools.network.Request,
     responseBody: JSONType
   ) {
-    const result = upsert({ harRequest, responseBody, store: this.store });
+    const result = upsert({
+      harRequest,
+      responseBody,
+      store: this.store,
+      options: this.storeOptions,
+    });
     if (!result) return;
     const { insertedPath, insertedLeaf, insertedHost } = result;
     insertLeafMap({

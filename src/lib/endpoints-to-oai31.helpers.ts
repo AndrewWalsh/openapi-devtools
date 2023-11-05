@@ -33,9 +33,10 @@ export const shouldIncludeRequestBody = (method: string) => {
   return !new Set(["get", "delete", "head"]).has(method.toLowerCase());
 };
 
-export const createRequestTypes = (body?: Schema) => {
+export const createRequestTypes = (body?: Schema, mostRecentRequest?: unknown) => {
   const mediaTypeObject: MediaTypeObject = {
     schema: body,
+    ...(!!mostRecentRequest && { example: mostRecentRequest }),
   };
   const contentObject: ContentObject = {
     "application/json": mediaTypeObject,
@@ -49,10 +50,12 @@ export const createRequestTypes = (body?: Schema) => {
 export const createResponseTypes = (
   body: Schema | undefined,
   headers: Schema | undefined,
-  statusCode: string
+  statusCode: string,
+  mostRecentResponse?: unknown
 ) => {
   const mediaTypeObject: MediaTypeObject = {
     schema: body,
+    ...(!!mostRecentResponse && { example: mostRecentResponse }),
   };
   const contentObject: ContentObject = {
     "application/json": mediaTypeObject,

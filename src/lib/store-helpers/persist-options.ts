@@ -15,12 +15,16 @@ const get = (): Options => {
   store.set(key, defaultOptions);
   return defaultOptions;
 };
-const set = (value: Partial<Options>) => {
+
+const set = (value: Partial<Options>): void => {
   const options = get();
   const newOptions = { ...options, ...value };
   store.set(key, newOptions);
 };
-const clear = () => store.clear();
+
+const clear = (): void => {
+  store.clear();
+};
 
 export default {
   get,

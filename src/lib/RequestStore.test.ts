@@ -1,8 +1,17 @@
 import { it, expect, vi } from "vitest";
 import { createSimpleRequest } from "./__fixtures__/simple-request";
 import RequestStore from "./RequestStore";
+import { defaultOptions } from "./store-helpers/persist-options";
 
-vi.mock('store2');
+vi.mock('./store-helpers/persist-options', async () => {
+  const actual = await vi.importActual("./store-helpers/persist-options");
+  return {
+    // @ts-expect-error ignored
+    ...actual,
+    get: vi.fn(() => defaultOptions),
+    set: vi.fn(),
+  };
+});
 
 const host = "test.com";
 const base = `https://${host}`;

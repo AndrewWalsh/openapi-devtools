@@ -4,11 +4,13 @@ import { pathToArray } from "../../utils/helpers";
 import { JSONType, Leaf, RouterMap } from "../../utils/types";
 import createLeaf from "./create-leaf";
 import { mergeLeaves } from "./merge";
+import type { Options } from "../RequestStore";
 
 type Params = {
   harRequest: chrome.devtools.network.Request;
   responseBody: JSONType;
   store: RouterMap;
+  options: Options;
 };
 
 type Returns = {
@@ -21,6 +23,7 @@ export default function upsert({
   harRequest,
   responseBody,
   store,
+  options,
 }: Params): Returns | null {
   const url = new URL(harRequest.request.url);
   const { host } = url;
@@ -32,7 +35,7 @@ export default function upsert({
     store[host] = createRouter();
   }
   // Create or update the leaf
-  const insertLeaf = createLeaf(harRequest, responseBody);
+  const insertLeaf = createLeaf({ harRequest, responseBody, options });
   const router = store[host];
   const matchedRoute = router.lookup(pathname);
   const nextLeaf = matchedRoute
