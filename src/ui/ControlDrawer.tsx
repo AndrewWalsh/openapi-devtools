@@ -15,6 +15,7 @@ import { InfoOutlineIcon } from "@chakra-ui/icons";
 import Select, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
 import ControlDynamic from "./ControlDynamic";
+import ControlConfig from "./ControlConfig";
 import Context from "./context";
 
 type Props = {
@@ -44,7 +45,7 @@ const ControlDrawer: FC<Props> = ({ isOpen, onClose }) => {
         title: "Could not apply.",
         description: "You must select at least one host.",
         status: "error",
-        duration: 10000,
+        duration: 5000,
         isClosable: true,
       });
       return;
@@ -66,7 +67,8 @@ const ControlDrawer: FC<Props> = ({ isOpen, onClose }) => {
         <DrawerHeader>Settings</DrawerHeader>
 
         <DrawerBody>
-          <Heading as="h2" size="sm" marginBottom="1em">
+          <ControlConfig />
+          <Heading as="h2" size="sm" marginBottom="1em" marginTop="1em">
             Filter Hosts
           </Heading>
           <Select

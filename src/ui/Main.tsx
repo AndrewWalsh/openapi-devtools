@@ -12,6 +12,7 @@ import classes from "./main.module.css";
 import endpointsToOAI31 from "../lib/endpoints-to-oai31";
 import { sortEndpoints } from './helpers/endpoints-by-host';
 import { isEmpty } from "lodash";
+import decodeUriComponent from "decode-uri-component";
 
 function Main() {
   const [spec, setSpec] = useState<OpenAPIObject | null>(null);
@@ -31,6 +32,7 @@ function Main() {
         try {
           harRequest.getContent((content) => {
             try {
+              harRequest.request.url = decodeUriComponent(harRequest.request.url);
               const responseBody: JSONType = parseJSON(content);
               requestStore.insert(harRequest, responseBody);
               setSpecEndpoints();
@@ -119,7 +121,14 @@ function Main() {
     setStatus(Status.INIT);
   }, []);
 
-  if (status === Status.INIT || spec === null) {
+  const importFn = useCallback((json: string) => {
+    const result = requestStore.import(json);
+    setSpecEndpoints();
+    setAllHosts(new Set(requestStore.hosts()));
+    return result;
+  }, []);
+
+  if (status === Status.INIT) {
     return <Start start={start} />;
   }
 
@@ -134,12 +143,14 @@ function Main() {
         setDisabledHosts,
         parameterise,
         endpoints,
+        export: requestStore.export,
+        import: importFn,
       }}
     >
       <div className={classes.wrapper}>
         <Control start={start} stop={stop} clear={clear} status={status} />
         <RedocStandalone
-          spec={spec}
+          spec={spec || {}}
           options={{
             hideHostname: true,
             sortEnumValuesAlphabetically: true,

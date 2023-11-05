@@ -16,6 +16,7 @@ export type Leaf = {
   // The current pathname of this endpoint, which may be static or parameterised
   pathname: string;
   // Methods such as GET, POST and schema values for requests
+  // mostRecent
   methods: {
     [method: string]: {
       [statusCode: string]: {

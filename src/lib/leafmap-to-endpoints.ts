@@ -1,4 +1,3 @@
-import decodeUriComponent from "decode-uri-component";
 import { Endpoint, LeafMap } from "../utils/types";
 import { pathToParts } from "./store-helpers/helpers";
 
@@ -9,7 +8,7 @@ const leafMapToEndpoints = (leafMap: LeafMap): Array<Endpoint> => {
       const endpoint: Endpoint = {
         host,
         parts: pathToParts(path),
-        pathname: decodeUriComponent(path),
+        pathname: path,
         data: leaf.data,
       };
       endpoints.push(endpoint);

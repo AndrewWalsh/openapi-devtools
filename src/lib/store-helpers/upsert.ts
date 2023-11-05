@@ -23,8 +23,9 @@ export default function upsert({
   store,
 }: Params): Returns | null {
   const url = new URL(harRequest.request.url);
-  const { host, pathname } = url;
-  const parts = pathToArray(decodeUriComponent(pathname));
+  const { host } = url;
+  const pathname = decodeUriComponent(url.pathname);
+  const parts = pathToArray(pathname);
   if (parts.length === 0) return null;
   // Set the host on first visit
   if (!store[host]) {

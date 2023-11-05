@@ -2,6 +2,7 @@ import { JSONType, RouterMap, LeafMap, Endpoint } from "../utils/types";
 import { parameterise, insertLeafMap, upsert } from "./store-helpers";
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
+import stringify from "json-stable-stringify";
 
 /**
  * RequestStore handles routing to endpoints
@@ -17,6 +18,26 @@ export default class RequestStore {
     this.store = {}; // leafMapToRouterMap(this.leafMap);
     this.disabledHosts = new Set();
   }
+
+  public import(json: string): boolean {
+    try {
+      const { store, leafMap, disabledHosts } = JSON.parse(json);
+      this.disabledHosts = new Set(disabledHosts);
+      this.store = store;
+      this.leafMap = leafMap;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  public export = (): string => {
+    return stringify({
+      store: this.store,
+      leafMap: this.leafMap,
+      disabledHosts: Array.from(this.disabledHosts),
+    });
+  };
 
   public clear(): void {
     this.store = {};

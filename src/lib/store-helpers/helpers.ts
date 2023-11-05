@@ -1,7 +1,6 @@
 import { MatchedRoute } from "radix3";
 import { arrayToPath, getParamName, pathToArray } from "../../utils/helpers";
 import { Leaf, LeafMap, PartType, Parts, RouteData } from "../../utils/types";
-import decodeUriComponent from "decode-uri-component";
 
 const paramRe = /:param(\d+)/;
 const paramReExact = /^:param(\d+)$/;
@@ -58,7 +57,7 @@ const getPartType = (part: string): PartType => {
 
 export const pathToParts = (path: string): Parts => {
   return pathToArray(path).map((part) => ({
-    part: decodeUriComponent(part),
+    part,
     type: getPartType(part),
   }));
 };

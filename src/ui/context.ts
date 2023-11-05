@@ -11,6 +11,8 @@ type ContextType = {
   disabledHosts: Set<string>;
   setDisabledHosts: (hosts: Set<string>) => void;
   parameterise: typeof RequestStore.prototype.parameterise;
+  import: typeof RequestStore.prototype.import;
+  export: typeof RequestStore.prototype.export;
 };
 
 const defaultContextValue: ContextType = {
@@ -22,6 +24,8 @@ const defaultContextValue: ContextType = {
   disabledHosts: new Set(),
   setDisabledHosts: () => {},
   parameterise: () => {},
+  import: () => false,
+  export: () => '',
 };
 
 const Context = createContext<ContextType>(defaultContextValue);

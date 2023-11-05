@@ -1,3 +1,4 @@
+import decodeUriComponent from "decode-uri-component";
 import {
   createSchemaElseUndefined,
   entriesToJSONType,
@@ -5,7 +6,6 @@ import {
 } from "../../utils/helpers";
 import { JSONType, Leaf } from "../../utils/types";
 import { parseAuthHeader } from "../../utils/httpauthentication";
-import decodeUriComponent from "decode-uri-component";
 import { filterIgnoreHeaders } from '../../utils/headers';
 
 function createLeaf(
@@ -13,7 +13,6 @@ function createLeaf(
   responseBody: JSONType
 ): Leaf {
   const authentication = parseAuthHeader(harRequest.request.headers);
-  harRequest.request.url = decodeUriComponent(harRequest.request.url);
   harRequest.request.headers = filterIgnoreHeaders(harRequest.request.headers);
   harRequest.response.headers = filterIgnoreHeaders(harRequest.response.headers);
   const method = harRequest.request.method;
@@ -22,7 +21,7 @@ function createLeaf(
   const requestHeaders = entriesToJSONType(harRequest.request.headers);
   const responseHeaders = entriesToJSONType(harRequest.response.headers);
   const queryParameters = entriesToJSONType(harRequest.request.queryString);
-  const pathname = new URL(harRequest.request.url).pathname;
+  const pathname = decodeUriComponent(new URL(harRequest.request.url).pathname);
   const leafPart: Leaf = {
     ...(authentication && { authentication }),
     pathname,
