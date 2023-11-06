@@ -12,13 +12,13 @@ import {
   ParameterObject,
   SecuritySchemeObject,
 } from "openapi3-ts/oas31";
-import { Authentication, AuthType } from "../utils/httpauthentication";
+import { Authentication, AuthType } from "../utils/types";
 
 export const createSecuritySchemeTypes = (auth?: Authentication): SecuritySchemeObject | undefined => {
   if (!auth) return;
-  const isBearer = auth.authType === AuthType.BEARER;
-  const isBasic = auth.authType === AuthType.BASIC;
-  const isDigest = auth.authType === AuthType.DIGEST;
+  const isBearer = auth.id === AuthType.BEARER;
+  const isBasic = auth.id === AuthType.BASIC;
+  const isDigest = auth.id === AuthType.DIGEST;
   if (isBearer || isBasic || isDigest) {
     const securitySchemeObject: SecuritySchemeObject = {
       type: auth.type,

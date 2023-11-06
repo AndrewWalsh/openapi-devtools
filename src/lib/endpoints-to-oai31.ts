@@ -1,4 +1,4 @@
-import { Endpoint } from "../utils/types";
+import { Endpoint, AuthType } from "../utils/types";
 import {
   OpenApiBuilder,
   PathItemObject,
@@ -15,9 +15,9 @@ import {
   createResponseTypes,
   createSecuritySchemeTypes,
 } from "./endpoints-to-oai31.helpers";
-import { AuthType } from "../utils/httpauthentication";
 import { Options } from "./RequestStore";
 import { defaultOptions } from "./store-helpers/persist-options";
+import { isEmpty } from "lodash";
 
 const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = defaultOptions): OpenApiBuilder => {
   const { enableMoreInfo } = options;
@@ -34,12 +34,14 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
 
     const auth = endpoint.data.authentication;
     if (auth) {
-      const securitySchema = createSecuritySchemeTypes(
-        endpoint.data.authentication
-      );
-      if (securitySchema) {
-        uniqueAuth.set(auth.authType, securitySchema);
-      }
+      Object.values(auth).forEach(value => {
+        const securitySchema = createSecuritySchemeTypes(
+          value
+        );
+        if (securitySchema) {
+          uniqueAuth.set(value.id, securitySchema);
+        }
+      });
     }
 
     for (const [method, statusCodes] of Object.entries(endpoint.data.methods)) {
@@ -55,10 +57,12 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
           statusCode,
           mostRecentResponse,
         );
-        const security: SecurityRequirementObject[] | null = endpoint.data
-          .authentication
-          ? [{ [endpoint.data.authentication.authType]: [] }]
-          : null;
+        const security: SecurityRequirementObject[] = [];
+        if (!isEmpty(endpoint.data.authentication)) {
+          Object.values(endpoint.data.authentication).forEach(value => {
+            security.push({ [value.id]: [] });
+          });
+        }
         const operation: OperationObject = {
           summary: fullPath,
           description: `**Host**: http://${endpoint.host}`,

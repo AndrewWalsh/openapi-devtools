@@ -5,5 +5,6 @@ export { default as upsert } from "./upsert";
 export { default as findPathnamesInRouter } from "./find-pathnames-in-router";
 export { default as pruneRouter } from "./prune-router";
 export { default as persistOptions } from "./persist-options";
+export { default as determineAuthFromHAR } from "./authentication";
 export * from "./merge";
 export * from "./helpers";

@@ -5,7 +5,7 @@ import {
   parseJSON,
 } from "../../utils/helpers";
 import { JSONType, Leaf } from "../../utils/types";
-import { parseAuthHeader } from "../../utils/httpauthentication";
+import determineAuthFromHAR from "./authentication";
 import { filterIgnoreHeaders } from "../../utils/headers";
 import type { Options } from "../RequestStore";
 
@@ -17,7 +17,7 @@ type Params = {
 
 function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   const { enableMoreInfo } = options;
-  const authentication = parseAuthHeader(harRequest.request.headers);
+  const authentication = determineAuthFromHAR(harRequest);
   harRequest.request.headers = filterIgnoreHeaders(harRequest.request.headers);
   harRequest.response.headers = filterIgnoreHeaders(
     harRequest.response.headers

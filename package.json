@@ -52,8 +52,5 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.11",
     "vitest": "^0.34.6"
-  },
-  "overrides": {
-    "@apidevtools/json-schema-ref-parser": "^11.1.0"
   }
 }

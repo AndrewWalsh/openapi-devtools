@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OpenAPI DevTools",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "devtools_page": "index.html",
   "permissions": [],
   "icons": {

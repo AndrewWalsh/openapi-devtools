@@ -39,7 +39,7 @@ export default function upsert({
   const router = store[host];
   const matchedRoute = router.lookup(pathname);
   const nextLeaf = matchedRoute
-    ? mergeLeaves(insertLeaf, matchedRoute.data)
+    ? mergeLeaves(matchedRoute.data, insertLeaf)
     : insertLeaf;
   const parameterisedPath = matchedRoute?.data.pathname || pathname;
   nextLeaf.pathname = parameterisedPath;

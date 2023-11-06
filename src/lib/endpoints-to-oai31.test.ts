@@ -7,7 +7,7 @@ import bearer from "./__fixtures__/bearer";
 import basic from "./__fixtures__/basic";
 import digest from "./__fixtures__/digest";
 import { cloneDeep } from "lodash";
-import { AuthType } from "../utils/httpauthentication";
+import { AuthType } from "../utils/types";
 import { defaultOptions } from "./store-helpers/persist-options";
 
 const createRequestStoreWithDefaults = () => {
