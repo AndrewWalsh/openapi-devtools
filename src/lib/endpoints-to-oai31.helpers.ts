@@ -16,16 +16,26 @@ import { Authentication, AuthType } from "../utils/types";
 
 export const createSecuritySchemeTypes = (auth?: Authentication): SecuritySchemeObject | undefined => {
   if (!auth) return;
-  const isBearer = auth.id === AuthType.BEARER;
-  const isBasic = auth.id === AuthType.BASIC;
-  const isDigest = auth.id === AuthType.DIGEST;
+  const isBearer = auth.authType === AuthType.HTTP_HEADER_BEARER;
+  const isBasic = auth.authType === AuthType.HTTP_HEADER_BASIC;
+  const isDigest = auth.authType === AuthType.HTTP_HEADER_DIGEST;
   if (isBearer || isBasic || isDigest) {
-    const securitySchemeObject: SecuritySchemeObject = {
+    const httpAuth: SecuritySchemeObject = {
       type: auth.type,
       in: auth.in,
       scheme: auth.scheme,
     };
-    return securitySchemeObject;
+    return httpAuth;
+  }
+  const isAPIKeyHeader = auth.authType.startsWith(AuthType.APIKEY_HEADER_);
+  const isAPIKeyCookie = auth.authType.startsWith(AuthType.APIKEY_COOKIE_);
+  if (isAPIKeyHeader || isAPIKeyCookie) {
+    const apiKeyHeader: SecuritySchemeObject = {
+      type: auth.type,
+      in: auth.in,
+      name: auth.name,
+    };
+    return apiKeyHeader;
   }
 }
 
@@ -136,3 +146,9 @@ export const createQueryParameterTypes = (
   });
 };
 
+// Format THIS_TXT_STR to this text str
+export const formatAuthType = (str: string) => {
+  return str
+    .replace(/_/g, " ")
+    .toLowerCase();
+};

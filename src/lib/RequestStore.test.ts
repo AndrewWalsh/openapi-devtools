@@ -178,6 +178,7 @@ it("parameterisation works after export and import", () => {
   store.insert(req, { foo: 1 });
   store.parameterise(2, "/1/2/a", host);
   const exported = store.export();
+  store.clear();
   store.import(exported);
   store.insert(req, { foo: 1 });
   const expected = {

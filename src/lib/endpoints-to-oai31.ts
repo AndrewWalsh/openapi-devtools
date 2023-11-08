@@ -1,4 +1,4 @@
-import { Endpoint, AuthType } from "../utils/types";
+import { Endpoint, AuthTypeString } from "../utils/types";
 import {
   OpenApiBuilder,
   PathItemObject,
@@ -14,6 +14,7 @@ import {
   createRequestTypes,
   createResponseTypes,
   createSecuritySchemeTypes,
+  formatAuthType,
 } from "./endpoints-to-oai31.helpers";
 import { Options } from "./RequestStore";
 import { defaultOptions } from "./store-helpers/persist-options";
@@ -23,7 +24,7 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
   const { enableMoreInfo } = options;
   const builder = createBuilderAndDocRoot(endpoints);
   const uniqueHosts = new Set<string>();
-  const uniqueAuth = new Map<AuthType, SecuritySchemeObject>();
+  const uniqueAuth = new Map<AuthTypeString, SecuritySchemeObject>();
 
   for (const endpoint of endpoints) {
     const mostRecentRequest = enableMoreInfo ? endpoint.data.mostRecentRequest : null;
@@ -39,7 +40,7 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
           value
         );
         if (securitySchema) {
-          uniqueAuth.set(value.id, securitySchema);
+          uniqueAuth.set(formatAuthType(value.authType), securitySchema);
         }
       });
     }
@@ -60,7 +61,7 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
         const security: SecurityRequirementObject[] = [];
         if (!isEmpty(endpoint.data.authentication)) {
           Object.values(endpoint.data.authentication).forEach(value => {
-            security.push({ [value.id]: [] });
+            security.push({ [formatAuthType(value.authType)]: [] });
           });
         }
         const operation: OperationObject = {

@@ -24,19 +24,16 @@ export interface DigestAuthHeader extends HTTPAuth {
   in: "header";
 }
 
-export type HTTPAuthHeaders =
+export type HTTP =
   | DigestAuthHeader
   | BasicAuthHeader
-  | BearerAuthHeader
-  | undefined;
+  | BearerAuthHeader;
 
-export const parseHTTPAuthHeader = (
-  header: chrome.devtools.network.Request["request"]["headers"][0]
-): HTTPAuthHeaders => {
-  const authType = getAuthType(header.value);
+export const parseHTTPAuthHeader = (value: string): HTTP | undefined => {
+  const authType = getAuthType(value);
   if (authType === "basic") {
     const basicAuth: BasicAuthHeader = {
-      id: AuthType.BASIC,
+      authType: AuthType.HTTP_HEADER_BASIC,
       type: "http",
       in: "header",
       scheme: "Basic",
@@ -45,7 +42,7 @@ export const parseHTTPAuthHeader = (
     return basicAuth;
   } else if (authType === "bearer") {
     const bearerAuth: BearerAuthHeader = {
-      id: AuthType.BEARER,
+      authType: AuthType.HTTP_HEADER_BEARER,
       type: "http",
       in: "header",
       scheme: "Bearer",
@@ -54,7 +51,7 @@ export const parseHTTPAuthHeader = (
     return bearerAuth;
   } else if (authType === "digest") {
     const digestAuth: DigestAuthHeader = {
-      id: AuthType.DIGEST,
+      authType: AuthType.HTTP_HEADER_DIGEST,
       type: "http",
       in: "header",
       scheme: "Digest",

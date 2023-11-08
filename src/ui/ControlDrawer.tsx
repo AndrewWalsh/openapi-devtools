@@ -86,7 +86,7 @@ const ControlDrawer: FC<Props> = ({ isOpen, onClose }) => {
               Set Path Parameters
             </Heading>
             <Tooltip
-              label="Click on dynamic parts of URLs to make them parameters"
+              label="Click on a part in a pathname to make it a path parameter. I.e. in /posts/1, /posts/2, click 1 or 2 to create a single endpoint /posts/:param1. This is a one way operation."
               placement="left"
             >
               <InfoOutlineIcon />

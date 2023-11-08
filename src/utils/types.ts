@@ -10,16 +10,22 @@ export type JSONType =
   | { [key: string]: JSONType }
   | Array<JSONType>;
 
+// Unique identifier for each type of authentication, aligned to oai31
 export enum AuthType {
-  BEARER = 'Bearer',
-  BASIC = 'Basic',
-  DIGEST = 'Digest',
+  HTTP_HEADER_BEARER = 'Bearer',
+  HTTP_HEADER_BASIC = 'Basic',
+  HTTP_HEADER_DIGEST = 'Digest',
+  APIKEY_HEADER_ = 'APIKEY_HEADER_',
+  APIKEY_COOKIE_ = 'APIKEY_COOKIE_',
 }
+
+// Can be dynamic e.g. APIKEY_HEADER_ + name
+export type AuthTypeString = AuthType | string;
 
 // Modelled on a Security Scheme Object https://spec.openapis.org/oas/v3.1.0#security-scheme-object
 export interface Authentication {
   // So there is a straightforward way of identifying the type
-  id: AuthType;
+  authType: AuthTypeString;
   // One of: 'apiKey' | 'http' | 'oauth2' | 'openIdConnect'
   type: SecuritySchemeType;
   // Could potentially generate some form of description from token values
@@ -34,10 +40,9 @@ export interface Authentication {
 
 // A Leaf stores data about an endpoint
 export type Leaf = {
-  // Based on the Security Scheme Object https://spec.openapis.org/oas/latest.html#security-scheme-object
   // Name is based on authType, which should be unique per authentication variant
   authentication?: {
-    [name: string]: Authentication;
+    [name: AuthTypeString]: Authentication;
   };
   // Sample of the most recent request
   mostRecentRequest?: unknown;

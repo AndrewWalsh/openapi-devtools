@@ -4,9 +4,14 @@ import { FixedSizeList as List } from "react-window";
 import { Input } from "@chakra-ui/react";
 import { Endpoint, PartType } from "../utils/types";
 import classes from "./controlDynamic.module.css";
-import { Wrap, WrapItem } from "@chakra-ui/react";
+import { Wrap, WrapItem, Tooltip } from "@chakra-ui/react";
 import Fuse from "fuse.js";
 import AutoSizer from "react-virtualized-auto-sizer";
+import truncateMiddle from "truncate-middle";
+
+const TEAL = "#319795";
+const BLUE = "#3182CE";
+const WHITE = "#EDF2F7";
 
 const getClassnameFromPartType = (type: PartType): string => {
   if (type === PartType.Static) {
@@ -49,7 +54,7 @@ const ControlDynamic = () => {
             >
               {({ index, data, style }) => {
                 const endpoint = data[index];
-                const backgroundColor = index % 2 === 0 ? "#EDF2F7" : undefined;
+                const backgroundColor = index % 2 === 0 ? WHITE : undefined;
                 const outerKey = endpoint.host + endpoint.pathname;
                 return (
                   <div style={style} className={classes.autosizerchild}>
@@ -59,29 +64,31 @@ const ControlDynamic = () => {
                       key={outerKey}
                       spacing={0}
                     >
-                      {endpoint.parts.map(({ part, type }, parameterisIdx) => {
+                      {endpoint.parts.map(({ part, type }, parameterIsIdx) => {
                         const onClick =
                           type === PartType.Dynamic
                             ? () => {}
                             : () => {
                                 parameterise(
-                                  parameterisIdx,
+                                  parameterIsIdx,
                                   endpoint.pathname,
                                   endpoint.host
                                 );
                               };
-                        const color =
-                          type === PartType.Dynamic ? "#319795" : "#3182CE";
+                        const color = type === PartType.Dynamic ? TEAL : BLUE;
+                        const key = parameterIsIdx + part;
                         return (
-                          <WrapItem
-                            color={color}
-                            fontSize="md"
-                            className={getClassnameFromPartType(type)}
-                            onClick={onClick}
-                            key={outerKey + part}
-                          >
-                            {`/${part}`}
-                          </WrapItem>
+                          <Tooltip key={key} label={part}>
+                            <WrapItem
+                              color={color}
+                              fontSize="md"
+                              className={getClassnameFromPartType(type)}
+                              onClick={onClick}
+                              key={outerKey + part}
+                            >
+                              {`/${truncateMiddle(part, 7, 3, "...")}`}
+                            </WrapItem>
+                          </Tooltip>
                         );
                       })}
                     </Wrap>

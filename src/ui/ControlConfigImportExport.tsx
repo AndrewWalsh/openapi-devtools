@@ -48,7 +48,7 @@ function ControlConfigImport() {
         isClosable: true,
       });
     }
-    onClose();
+    onCloseModal();
     return result;
   };
 

@@ -1,6 +1,6 @@
 import { isEmpty } from "lodash";
 import { Leaf } from "../../utils/types";
-import { parseHTTPAuthHeader } from "./authentication-http";
+import { parseAuthHeaders } from "./authentication-headers";
 
 export const getAuthType = (auth: string) => {
   const split = auth.split(" ");
@@ -8,17 +8,16 @@ export const getAuthType = (auth: string) => {
   return split[0].toLowerCase();
 };
 
-const AUTHORIZATION = "authorization";
-
-type DetermineAuthFromHAR = (harRequest: chrome.devtools.network.Request) => Leaf['authentication'] | undefined;
+type DetermineAuthFromHAR = (
+  harRequest: chrome.devtools.network.Request
+) => Leaf["authentication"] | undefined;
 const determineAuthFromHAR: DetermineAuthFromHAR = (harRequest) => {
-  const finalAuth: Leaf['authentication'] = {};
-  const foundAuthHeader = harRequest.request.headers.find(
-    (head) => head.name.toLowerCase() === AUTHORIZATION
-  );
-  const authHeaders = foundAuthHeader ? parseHTTPAuthHeader(foundAuthHeader) : undefined;
-  if (!isEmpty(authHeaders)) finalAuth[authHeaders.id] = authHeaders;
-  if (isEmpty(finalAuth)) return undefined;
+  const finalAuth: Leaf["authentication"] = {};
+  const authItems = parseAuthHeaders(harRequest.request.headers);
+  authItems.forEach((auth) => {
+    finalAuth[auth.authType] = auth;
+  });
+  if (isEmpty(finalAuth)) return;
   return finalAuth;
 };
 

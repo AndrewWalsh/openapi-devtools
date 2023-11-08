@@ -1,0 +1,6 @@
+/** See https://chakra-ui.com/docs/styled-system/theme */
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

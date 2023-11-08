@@ -55,7 +55,7 @@ export default class RequestStore {
     return stringify({
       leafMap: this.leafMap,
       disabledHosts: Array.from(this.disabledHosts),
-    });
+    }).trim();
   };
 
   public clear(): void {
