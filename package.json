@@ -8,7 +8,7 @@
     "test": "vitest",
     "dev": "vite",
     "build": "rimraf dist && tsc && vite build && npm run zip",
-    "zip": "rimraf resources/dist.zip && zip -rj resources/dist.zip dist/*",
+    "zip": "rimraf resources/dist.zip && zip -r resources/dist.zip dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix"
   },
   "dependencies": {
