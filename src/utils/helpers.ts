@@ -31,7 +31,7 @@ const isValidJSONString = (content: string): boolean => {
 };
 
 const validStatuses = new Set(["GET", "POST", "PUT", "DELETE", "PATCH"]);
-const validResourceTypes = new Set(["xhr", "fetch"]);
+const validResourceTypes = new Set(["xhr", "fetch", "document"]);
 const isValidStatus = (status: string) => validStatuses.has(status);
 export const isValidRequest = async (
   harRequest: chrome.devtools.network.Request
@@ -44,7 +44,9 @@ export const isValidRequest = async (
   if (didNotReachServer) return false;
   const content = await getContent(harRequest);
   const isNotJSON = harRequest.response.content.mimeType !== "application/json" && !isValidJSONString(content);
-  if (isNotJSON) return false;
+  const isNotXWWWFormUrlEncoded = harRequest.request.postData?.mimeType !== "application/x-www-form-urlencoded";
+  const isNotValidMime = isNotJSON && isNotXWWWFormUrlEncoded;
+  if (isNotValidMime) return false;
   const isNotValidStatus = !isValidStatus(harRequest.request.method);
   if (isNotValidStatus) return false;
   if (!isValidURL(harRequest.request.url)) return false;

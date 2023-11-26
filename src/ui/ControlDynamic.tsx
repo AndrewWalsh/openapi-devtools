@@ -86,7 +86,7 @@ const ControlDynamic = () => {
                               onClick={onClick}
                               key={outerKey + part}
                             >
-                              {`/${truncateMiddle(part, 7, 3, "...")}`}
+                              {`/${truncateMiddle(part, 12, 5, "...")}`}
                             </WrapItem>
                           </Tooltip>
                         );

@@ -211,3 +211,21 @@ it("parameterisation works after export and import", () => {
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
 });
+
+it("parameterisation works after export and import", () => {
+  const store = new RequestStore();
+  const req = createSimpleRequest(`${base}/1/2/a`);
+  store.insert(req, { foo: 1 });
+  store.parameterise(2, "/1/2/a", host);
+  const exported = store.export();
+  store.clear();
+  store.import(exported);
+  store.insert(req, { foo: 1 });
+  const expected = {
+    [host]: {
+      '/1/2/:param2': expect.any(Object),
+    }
+  };
+  // @ts-expect-error accessing private property
+  expect(store.leafMap).toEqual(expected);
+});

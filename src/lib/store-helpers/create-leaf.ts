@@ -9,11 +9,22 @@ import determineAuthFromHAR from "./authentication";
 import { filterIgnoreHeaders } from "../../utils/headers";
 import type { Options } from "../RequestStore";
 import type { Entry } from "har-format";
+import qs from 'fast-querystring';
+
+const APPLICATION_JSON = "application/json";
+const APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
 
 export type Params = {
   harRequest: Entry;
   responseBody: JSONType;
   options: Options;
+};
+
+const parseRequestBody = (harRequest: Entry): JSONType => {
+  const { mimeType, text } = harRequest.request.postData || {};
+  if (mimeType === APPLICATION_JSON) return parseJSON(text);
+  else if (mimeType === APPLICATION_X_WWW_FORM_URLENCODED && text) return qs.parse(text) as JSONType;
+  return null;
 };
 
 function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
@@ -27,7 +38,7 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   const statusCode = harRequest.response.status.toString();
   const requestMime = harRequest.request.postData?.mimeType;
   const responseMime = harRequest.response.content.mimeType;
-  const requestBody = parseJSON(harRequest.request.postData?.text);
+  const requestBody = parseRequestBody(harRequest);
   const requestHeaders = entriesToJSONType(harRequest.request.headers);
   const responseHeaders = entriesToJSONType(harRequest.response.headers);
   const queryParameters = entriesToJSONType(harRequest.request.queryString);

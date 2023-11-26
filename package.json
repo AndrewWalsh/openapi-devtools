@@ -19,6 +19,7 @@
     "cookie": "^0.6.0",
     "copy-to-clipboard": "^3.3.3",
     "decode-uri-component": "^0.4.1",
+    "fast-querystring": "^1.1.2",
     "framer-motion": "^10.16.4",
     "fuse.js": "^6.6.2",
     "genson-js": "^0.0.8",
