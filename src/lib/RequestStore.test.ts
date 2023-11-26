@@ -17,11 +17,11 @@ const host = "test.com";
 const base = `https://${host}`;
 const POST = "POST";
 
-const getResBodyTypes = (store: RequestStore, host: string, path: string, propName = 'foo') => {
+const getResBodyJSONTypes = (store: RequestStore, host: string, path: string, propName = 'foo') => {
   const match = store.get()[host].lookup(path);
   if (!match) throw new Error("Could not match path");
   const properties =
-    match.data.methods[POST][200].responseBody?.properties?.[propName].type;
+    match.data.methods[POST][200].response['application/json'].body?.properties?.[propName].type;
   return properties;
 };
 
@@ -35,7 +35,7 @@ it("parameterises and merges paths", () => {
   store.parameterise(2, "/1/2/a", host);
   store.insert(req3, { foo: null });
   store.parameterise(1, "/1/2/:param2", host);
-  const properties = getResBodyTypes(store, host, "/1/zzz/asbds");
+  const properties = getResBodyJSONTypes(store, host, "/1/zzz/asbds");
   expect(properties).toContain("string");
   expect(properties).toContain("integer");
   expect(properties).toContain("null");
@@ -46,7 +46,7 @@ it("inserts data and can retrieve it", () => {
   const store = new RequestStore();
   const req = createSimpleRequest(`${base}/1/2/a`);
   store.insert(req, { foo: 1 });
-  const properties = getResBodyTypes(store, host, "/1/2/a");
+  const properties = getResBodyJSONTypes(store, host, "/1/2/a");
   expect(properties).toBe("integer");
 });
 
@@ -77,9 +77,9 @@ it("sets leafMap correctly after multiple add and parameterise operations", () =
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyTypes(store, host, "/1/x/x")).toEqual(["null", "integer", "string"]);
-  expect(getResBodyTypes(store, host, "/dynamicPath/2/x")).toEqual(["integer", "string"]);
-  expect(getResBodyTypes(store, host, "/staticPath/2/3/4/5")).toBe('string');
+  expect(getResBodyJSONTypes(store, host, "/1/x/x")).toEqual(["null", "integer", "string"]);
+  expect(getResBodyJSONTypes(store, host, "/dynamicPath/2/x")).toEqual(["integer", "string"]);
+  expect(getResBodyJSONTypes(store, host, "/staticPath/2/3/4/5")).toBe('string');
 });
 
 it("sets leafMap correctly after many parameterise operations", () => {
@@ -104,9 +104,9 @@ it("sets leafMap correctly after many parameterise operations", () => {
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "string"]);
-  expect(getResBodyTypes(store, host, "/1/2/b")).toBe("boolean");
-  expect(getResBodyTypes(store, host, "/1/x/y/ANY/b")).toBe('integer');
+  expect(getResBodyJSONTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "string"]);
+  expect(getResBodyJSONTypes(store, host, "/1/2/b")).toBe("boolean");
+  expect(getResBodyJSONTypes(store, host, "/1/x/y/ANY/b")).toBe('integer');
 });
 
 it("collapses into a single route when paramaterised", () => {
@@ -126,7 +126,7 @@ it("collapses into a single route when paramaterised", () => {
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "integer", "string"]);
+  expect(getResBodyJSONTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "integer", "string"]);
 });
 
 it("can parameterise paths that are subsets of another path", () => {
@@ -144,19 +144,22 @@ it("can parameterise paths that are subsets of another path", () => {
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyTypes(store, host, "/1/2/a")).toBe("string");
-  expect(getResBodyTypes(store, host, "/1/ANY")).toBe("integer");
+  expect(getResBodyJSONTypes(store, host, "/1/2/a")).toBe("string");
+  expect(getResBodyJSONTypes(store, host, "/1/ANY")).toBe("integer");
 });
 
 it("can parameterise paths that exist along the same segment", () => {
   const store = new RequestStore();
   const req1 = createSimpleRequest(`${base}/1/2/a`);
   const req2 = createSimpleRequest(`${base}/1/2`);
-  store.insert(createSimpleRequest(`${base}/1`), { foo: null });
-  store.insert(createSimpleRequest(`${base}/1/2/3/4`), { foo: null });
+  const req3 = createSimpleRequest(`${base}/1`);
+  const req4 = createSimpleRequest(`${base}/1/2/3/4`);
   store.insert(req1, { foo: "bar" });
   store.insert(req2, { foo: 1 });
+  store.insert(req3, { foo: null });
+  store.insert(req4, { foo: null });
   store.parameterise(1, "/1/2/a", host);
+  // Bug happens below. When /1/2 is parameterised, router.remove removes /1/2/3/4
   store.parameterise(1, "/1/2", host);
   const expected = {
     [host]: {
@@ -168,8 +171,27 @@ it("can parameterise paths that exist along the same segment", () => {
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyTypes(store, host, "/1/ANY/a")).toBe("string");
-  expect(getResBodyTypes(store, host, "/1/ANY")).toBe("integer");
+  expect(getResBodyJSONTypes(store, host, "/1/ANY/a")).toBe("string");
+  expect(getResBodyJSONTypes(store, host, "/1/ANY")).toBe("integer");
+});
+
+it("parameterising a path catches future requests to the same path", () => {
+  const store = new RequestStore();
+  const req1 = createSimpleRequest(`${base}/1/2/a`);
+  const req2 = createSimpleRequest(`${base}/1/2/b`);
+  store.insert(req1, { foo: "bar" });
+  store.insert(req2, { foo: "bar" });
+  store.parameterise(1, "/1/2/a", host);
+  store.insert(req1, { foo: 1 });
+  store.insert(req2, { foo: 1 });
+  const expected = {
+    [host]: {
+      '/1/:param1/a': expect.any(Object),
+      '/1/2/b': expect.any(Object),
+    }
+  };
+  // @ts-expect-error accessing private property
+  expect(store.leafMap).toEqual(expected);
 });
 
 it("parameterisation works after export and import", () => {

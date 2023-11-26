@@ -1,3 +1,5 @@
+import type { Entry } from "har-format";
+
 // Copied from har-to-openapi https://github.com/jonluca/har-to-openapi
 const ignoreTheseHeaders = [
   ":authority",
@@ -207,8 +209,8 @@ const ignoreTheseHeaders = [
 ] as const;
 const headersToIgnore = new Set<string>(ignoreTheseHeaders);
 
-export const filterIgnoreHeaders = (headers: chrome.devtools.network.Request['request']['headers']) => {
-  return headers.filter(({ name}) => {
+export const filterIgnoreHeaders = (headers: Entry["request"]["headers"]) => {
+  return headers.filter(({ name }) => {
     return !headersToIgnore.has(name.toLowerCase());
   });
 };
@@ -238,4 +240,3 @@ export const authHeaders = new Set<string>(defaultAuthHeaders);
 export const isAuthHeader = (header: string) => {
   return authHeaders.has(header.toLowerCase());
 };
-

@@ -1,5 +1,6 @@
-const basic: chrome.devtools.network.Request = {
-  getContent() {},
+import type { Entry } from 'har-format';
+
+const basic: Entry = {
   _priority: "High",
   _resourceType: "fetch",
   cache: {},

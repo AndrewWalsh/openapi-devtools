@@ -5,9 +5,10 @@ import { JSONType, Leaf, RouterMap } from "../../utils/types";
 import createLeaf from "./create-leaf";
 import { mergeLeaves } from "./merge";
 import type { Options } from "../RequestStore";
+import type { Entry } from 'har-format';
 
 type Params = {
-  harRequest: chrome.devtools.network.Request;
+  harRequest: Entry;
   responseBody: JSONType;
   store: RouterMap;
   options: Options;

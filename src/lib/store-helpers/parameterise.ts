@@ -1,10 +1,7 @@
 import { unset } from "lodash";
 import { pathToArray } from "../../utils/helpers";
 import { Leaf, RouterMap } from "../../utils/types";
-import { mergeLeaves } from "./merge";
-import { getNextPath } from "./helpers";
-import findPathnamesInRouter from "./find-pathnames-in-router";
-import { pruneRouter } from ".";
+import { remove, pruneRouter, findPathnamesInRouter, mergeLeaves, getNextPath } from ".";
 
 type Params = {
   store: RouterMap;
@@ -32,9 +29,11 @@ export default function parameterise({
   const matchedRoute = router.lookup(path);
   if (!matchedRoute) return null;
   const nextPath = getNextPath(index, path, matchedRoute);
-  for (const found of findPathnamesInRouter(router.ctx, nextPath)) {
+  const foundPathnames = findPathnamesInRouter(router.ctx, nextPath);
+  for (const found of foundPathnames) {
     matchedLeaves.push(found.leaf);
     removedPaths.push(found.pathname);
+    remove(router.ctx, found.pathname);
     pruneRouter(router.ctx.rootNode, pathToArray(found.pathname));
   }
   const mergedLeaf = matchedLeaves.reduce(mergeLeaves);

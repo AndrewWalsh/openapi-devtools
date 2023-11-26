@@ -1,5 +1,6 @@
-const post: chrome.devtools.network.Request = {
-  getContent() {},
+import type { Entry } from 'har-format';
+
+const postJson: Entry = {
   cache: {},
   _resourceType: "xhr",
   request: {
@@ -137,4 +138,4 @@ const post: chrome.devtools.network.Request = {
 
 export const postHost = 'www.example.com';
 
-export default post;
+export default postJson;

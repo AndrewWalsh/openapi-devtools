@@ -12,11 +12,11 @@ export type JSONType =
 
 // Unique identifier for each type of authentication, aligned to oai31
 export enum AuthType {
-  HTTP_HEADER_BEARER = 'Bearer',
-  HTTP_HEADER_BASIC = 'Basic',
-  HTTP_HEADER_DIGEST = 'Digest',
-  APIKEY_HEADER_ = 'APIKEY_HEADER_',
-  APIKEY_COOKIE_ = 'APIKEY_COOKIE_',
+  HTTP_HEADER_BEARER = "Bearer",
+  HTTP_HEADER_BASIC = "Basic",
+  HTTP_HEADER_DIGEST = "Digest",
+  APIKEY_HEADER_ = "APIKEY_HEADER_",
+  APIKEY_COOKIE_ = "APIKEY_COOKIE_",
 }
 
 // Can be dynamic e.g. APIKEY_HEADER_ + name
@@ -44,19 +44,29 @@ export type Leaf = {
   authentication?: {
     [name: AuthTypeString]: Authentication;
   };
-  // Sample of the most recent request
-  mostRecentRequest?: unknown;
-  // Sample of the most recent response
-  mostRecentResponse?: unknown;
   // The current pathname of this endpoint, which may be static or parameterised
   pathname: string;
   // Methods such as GET, POST and schema values for requests
   methods: {
     [method: string]: {
       [statusCode: string]: {
-        requestBody?: Schema;
+        // Requests may not contain a body
+        request?: {
+          // mediaType is a a mime type such as application/json
+          [mediaType: string]: {
+            body?: Schema;
+            // Sample of the most recent request
+            mostRecent?: unknown;
+          };
+        };
         requestHeaders?: Schema;
-        responseBody?: Schema;
+        response: {
+          [mediaType: string]: {
+            body?: Schema;
+            // Sample of the most recent response
+            mostRecent?: unknown;
+          };
+        };
         responseHeaders?: Schema;
         queryParameters?: Schema;
       };

@@ -1,12 +1,12 @@
 import { it, expect } from "vitest";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
-import post, { postHost } from "./__fixtures__/post";
+import postJson, { postHost } from "./__fixtures__/post-application-json";
 import { createLeaf } from "./store-helpers";
 import { LeafMap } from "../utils/types";
 import { defaultOptions } from "./store-helpers/persist-options";
 
 const leaf = createLeaf({
-  harRequest: post,
+  harRequest: postJson,
   responseBody: { foo: "bar" },
   options: defaultOptions,
 });

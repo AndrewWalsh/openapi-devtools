@@ -1,3 +1,4 @@
+import type { Entry } from 'har-format';
 import { Authentication, AuthType } from "../../utils/types";
 import { isAuthHeader } from "../../utils/headers";
 import { parseHTTPAuthHeader, HTTP } from "./authentication-http";
@@ -50,7 +51,7 @@ type OpenAPIAuth = APIKey | HTTP;
  * Extract all auth info from request headers
  */
 export const parseAuthHeaders = (
-  headers: chrome.devtools.network.Request["request"]["headers"]
+  headers: Entry["request"]["headers"]
 ): Array<OpenAPIAuth> => {
   const visited = new Set<string>();
   let results: Array<OpenAPIAuth> = [];

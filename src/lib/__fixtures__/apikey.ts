@@ -1,7 +1,8 @@
+import type { Entry } from 'har-format';
+
 // Has header x-api-key
 // Has cookie foo
-const apikey: chrome.devtools.network.Request = {
-  getContent() {},
+const apikey: Entry = {
   _priority: "High",
   _resourceType: "fetch",
   cache: {},

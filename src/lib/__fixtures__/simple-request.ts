@@ -1,12 +1,12 @@
 import { cloneDeep } from "lodash";
+import type { Entry } from 'har-format';
 
 const simpleBody = { test: 'test' };
 const simpleURLHost = "www.example.com";
 const simpleURLBase = `https://${simpleURLHost}/`;
 const simpleURLParts: Array<string> = ["posts", "1", "new"];
 
-const simpleRequest: chrome.devtools.network.Request = {
-  getContent() {},
+const simpleRequest: Entry = {
   cache: {},
   _resourceType: "xhr",
   request: {

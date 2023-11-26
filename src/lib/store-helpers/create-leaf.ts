@@ -8,9 +8,10 @@ import { JSONType, Leaf } from "../../utils/types";
 import determineAuthFromHAR from "./authentication";
 import { filterIgnoreHeaders } from "../../utils/headers";
 import type { Options } from "../RequestStore";
+import type { Entry } from "har-format";
 
-type Params = {
-  harRequest: chrome.devtools.network.Request;
+export type Params = {
+  harRequest: Entry;
   responseBody: JSONType;
   options: Options;
 };
@@ -24,6 +25,8 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   );
   const method = harRequest.request.method;
   const statusCode = harRequest.response.status.toString();
+  const requestMime = harRequest.request.postData?.mimeType;
+  const responseMime = harRequest.response.content.mimeType;
   const requestBody = parseJSON(harRequest.request.postData?.text);
   const requestHeaders = entriesToJSONType(harRequest.request.headers);
   const responseHeaders = entriesToJSONType(harRequest.response.headers);
@@ -31,15 +34,25 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   const pathname = decodeUriComponent(new URL(harRequest.request.url).pathname);
   const leafPart: Leaf = {
     ...(authentication && { authentication }),
-    ...(enableMoreInfo && { mostRecentRequest: requestBody }),
-    ...(enableMoreInfo && { mostRecentResponse: responseBody }),
     pathname,
     methods: {
       [method]: {
         [statusCode]: {
-          requestBody: createSchemaElseUndefined(requestBody),
+          ...(requestMime && {
+            request: {
+              [requestMime]: {
+                body: createSchemaElseUndefined(requestBody),
+                ...(enableMoreInfo && { mostRecent: requestBody }),
+              },
+            },
+          }),
           requestHeaders: createSchemaElseUndefined(requestHeaders),
-          responseBody: createSchemaElseUndefined(responseBody),
+          response: {
+            [responseMime]: {
+              body: createSchemaElseUndefined(responseBody),
+              ...(enableMoreInfo && { mostRecent: responseBody }),
+            },
+          },
           responseHeaders: createSchemaElseUndefined(responseHeaders),
           queryParameters: createSchemaElseUndefined(queryParameters),
         },

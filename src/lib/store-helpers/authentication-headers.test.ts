@@ -1,10 +1,11 @@
 import { it, expect } from "vitest";
+import type { Entry } from 'har-format';
 import { defaultAuthHeaders } from "../../utils/headers";
 import { parseAuthHeaders } from "./authentication-headers";
 import { AuthType } from "../../utils/types";
 
 const setupHeaders = () => {
-  type H = chrome.devtools.network.Request["request"]["headers"];
+  type H = Entry["request"]["headers"];
   let headers: H = defaultAuthHeaders.map((name) => ({ name, value: "123" }));
 
   // Duplicate headers should resolve to a single auth header, case insensitive

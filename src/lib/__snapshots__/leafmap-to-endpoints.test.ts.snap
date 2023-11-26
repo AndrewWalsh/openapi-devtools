@@ -22,16 +22,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "requestBody": {
-              "properties": {
-                "test": {
-                  "type": "string",
+            "request": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "test": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "test",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "test",
-              ],
-              "type": "object",
             },
             "requestHeaders": {
               "properties": {
@@ -44,16 +48,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseBody": {
-              "properties": {
-                "foo": {
-                  "type": "string",
+            "response": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "foo": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "foo",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "foo",
-              ],
-              "type": "object",
             },
             "responseHeaders": undefined,
           },
@@ -98,16 +106,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "requestBody": {
-              "properties": {
-                "test": {
-                  "type": "string",
+            "request": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "test": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "test",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "test",
-              ],
-              "type": "object",
             },
             "requestHeaders": {
               "properties": {
@@ -120,16 +132,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseBody": {
-              "properties": {
-                "foo": {
-                  "type": "string",
+            "response": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "foo": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "foo",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "foo",
-              ],
-              "type": "object",
             },
             "responseHeaders": undefined,
           },
@@ -174,16 +190,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "requestBody": {
-              "properties": {
-                "test": {
-                  "type": "string",
+            "request": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "test": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "test",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "test",
-              ],
-              "type": "object",
             },
             "requestHeaders": {
               "properties": {
@@ -196,16 +216,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseBody": {
-              "properties": {
-                "foo": {
-                  "type": "string",
+            "response": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "foo": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "foo",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "foo",
-              ],
-              "type": "object",
             },
             "responseHeaders": undefined,
           },
@@ -254,16 +278,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "requestBody": {
-              "properties": {
-                "test": {
-                  "type": "string",
+            "request": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "test": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "test",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "test",
-              ],
-              "type": "object",
             },
             "requestHeaders": {
               "properties": {
@@ -276,16 +304,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseBody": {
-              "properties": {
-                "foo": {
-                  "type": "string",
+            "response": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "foo": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "foo",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "foo",
-              ],
-              "type": "object",
             },
             "responseHeaders": undefined,
           },
@@ -334,16 +366,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "requestBody": {
-              "properties": {
-                "test": {
-                  "type": "string",
+            "request": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "test": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "test",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "test",
-              ],
-              "type": "object",
             },
             "requestHeaders": {
               "properties": {
@@ -356,16 +392,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseBody": {
-              "properties": {
-                "foo": {
-                  "type": "string",
+            "response": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "foo": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "foo",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "foo",
-              ],
-              "type": "object",
             },
             "responseHeaders": undefined,
           },
@@ -414,16 +454,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "requestBody": {
-              "properties": {
-                "test": {
-                  "type": "string",
+            "request": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "test": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "test",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "test",
-              ],
-              "type": "object",
             },
             "requestHeaders": {
               "properties": {
@@ -436,16 +480,20 @@ exports[`flattens data into endpoints 1`] = `
               ],
               "type": "object",
             },
-            "responseBody": {
-              "properties": {
-                "foo": {
-                  "type": "string",
+            "response": {
+              "application/json": {
+                "body": {
+                  "properties": {
+                    "foo": {
+                      "type": "string",
+                    },
+                  },
+                  "required": [
+                    "foo",
+                  ],
+                  "type": "object",
                 },
               },
-              "required": [
-                "foo",
-              ],
-              "type": "object",
             },
             "responseHeaders": undefined,
           },

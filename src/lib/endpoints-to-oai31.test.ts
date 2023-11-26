@@ -2,7 +2,7 @@ import { it, expect } from "vitest";
 import { Validator } from "@seriousme/openapi-schema-validator";
 import RequestStore, { Options } from "./RequestStore";
 import endpointsToOAI31 from "./endpoints-to-oai31";
-import post from "./__fixtures__/post";
+import postJson from "./__fixtures__/post-application-json";
 import bearer from "./__fixtures__/bearer";
 import basic from "./__fixtures__/basic";
 import digest from "./__fixtures__/digest";
@@ -14,9 +14,9 @@ import { formatAuthType } from './endpoints-to-oai31.helpers';
 
 const createRequestStoreWithDefaults = () => {
   const store = new RequestStore();
-  const req1 = cloneDeep(post);
+  const req1 = cloneDeep(postJson);
   req1.request.url = "https://example.com/api/v1/1a";
-  const req2 = cloneDeep(post);
+  const req2 = cloneDeep(postJson);
   req2.request.url = "https://example.com/api/v1/2 . ";
   store.insert(req1, { test: "string" });
   store.insert(req2, { test: "string" });
@@ -35,7 +35,7 @@ it("produces valid openapi 3.1 specifications", () => {
 it("sets most recent request when enabled", () => {
   const options: Options = { enableMoreInfo: true };
   const store = new RequestStore(options);
-  store.insert(post, { test: "string" });
+  store.insert(postJson, { test: "string" });
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, options);
   const result =
@@ -49,7 +49,7 @@ it("sets most recent request when enabled", () => {
 it("sets most recent response when enabled", () => {
   const options: Options = { enableMoreInfo: true };
   const store = new RequestStore(options);
-  store.insert(post, { test: "string" });
+  store.insert(postJson, { test: "string" });
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, options);
   const result =

@@ -1,6 +1,7 @@
 import { isEmpty } from "lodash";
 import { Leaf } from "../../utils/types";
 import { parseAuthHeaders } from "./authentication-headers";
+import type { Entry } from 'har-format';
 
 export const getAuthType = (auth: string) => {
   const split = auth.split(" ");
@@ -9,7 +10,7 @@ export const getAuthType = (auth: string) => {
 };
 
 type DetermineAuthFromHAR = (
-  harRequest: chrome.devtools.network.Request
+  harRequest: Entry
 ) => Leaf["authentication"] | undefined;
 const determineAuthFromHAR: DetermineAuthFromHAR = (harRequest) => {
   const finalAuth: Leaf["authentication"] = {};

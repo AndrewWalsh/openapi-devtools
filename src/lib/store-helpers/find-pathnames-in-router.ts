@@ -12,7 +12,6 @@ const formatPathname = (parts: Array<string>) => `/${parts.join("/").slice(1)}`;
 /**
  * Find matching pathnames for a given path
  * Walk the tree. Return string[][], each element of which is a path
- * E.g. [["api", "v1", "users"], ["api", "v1", "posts"]]
  */
 const recurse = (
   node: RadixNode<RouteData>,
@@ -25,44 +24,67 @@ const recurse = (
   const part = parts[0];
   const matchAny = isParameter(part);
 
-  if (matchAny) {
-    // If this part is a wildcard, match any
-    // If it's also the last part, include leaf children
-    // Otherwise, recurse on all children
-    if (isLast) {
-      for (const [lastPart, child] of node.children.entries()) {
-        if (child.data) {
-          const value = {
-            pathname: formatPathname([...walked, lastPart]),
-            leaf: child.data.data as Leaf,
-          };
-          pathnames.push(value);
-        }
+  if (isLast) {
+    for (const [lastPart, child] of node.children.entries()) {
+      if (child.data) {
+        const value = {
+          pathname: formatPathname([...walked, lastPart]),
+          leaf: child.data.data as Leaf,
+        };
+        pathnames.push(value);
       }
-    } else {
-      for (const [lastPart, child] of node.children.entries()) {
-        pathnames.push(
-          ...recurse(child, parts.slice(1), [...walked, lastPart])
-        );
-      }
+    }
+  } else if (matchAny) {
+    for (const [lastPart, child] of node.children.entries()) {
+      pathnames.push(
+        ...recurse(child, parts.slice(1), [...walked, lastPart])
+      );
     }
   } else if (node.children.has(part)) {
-    // If this part is static, match it
-    // If it's also the last part, include leaf child
-    // Otherwise, recurse on child
     const child = node.children.get(part)!;
-    if (isLast) {
-      const value = {
-        pathname: formatPathname([...walked, part]),
-        leaf: child.data!.data as Leaf,
-      };
-      pathnames.push(value);
-    } else {
-      if (child) {
-        pathnames.push(...recurse(child, parts.slice(1), [...walked, part]));
-      }
+    if (child) {
+      pathnames.push(...recurse(child, parts.slice(1), [...walked, part]));
     }
   }
+
+  // if (matchAny) {
+  //   // If this part is a wildcard, match any
+  //   // If it's also the last part, include leaf children
+  //   // Otherwise, recurse on all children
+  //   if (isLast) {
+  //     for (const [lastPart, child] of node.children.entries()) {
+  //       if (child.data) {
+  //         const value = {
+  //           pathname: formatPathname([...walked, lastPart]),
+  //           leaf: child.data.data as Leaf,
+  //         };
+  //         pathnames.push(value);
+  //       }
+  //     }
+  //   } else {
+  //     for (const [lastPart, child] of node.children.entries()) {
+  //       pathnames.push(
+  //         ...recurse(child, parts.slice(1), [...walked, lastPart])
+  //       );
+  //     }
+  //   }
+  // } else if (node.children.has(part)) {
+  //   // If this part is static, match it
+  //   // If it's also the last part, include leaf child
+  //   // Otherwise, recurse on child
+  //   const child = node.children.get(part)!;
+  //   if (isLast) {
+  //     const value = {
+  //       pathname: formatPathname([...walked, part]),
+  //       leaf: child.data!.data as Leaf,
+  //     };
+  //     pathnames.push(value);
+  //   } else {
+  //     if (child) {
+  //       pathnames.push(...recurse(child, parts.slice(1), [...walked, part]));
+  //     }
+  //   }
+  // }
 
   return pathnames;
 };

@@ -1,8 +1,9 @@
 import { it, expect } from "vitest";
+import type { Entry } from 'har-format';
 import { parseHTTPAuthHeader } from "./authentication-http";
 
 it("identifies basic auth", () => {
-  const header: chrome.devtools.network.Request["request"]["headers"][0] = {
+  const header: Entry["request"]["headers"][0] = {
     name: "Authorization",
     value: "Basic 1234",
   };
@@ -17,7 +18,7 @@ it("identifies basic auth", () => {
 });
 
 it("identifies bearer auth", () => {
-  const header: chrome.devtools.network.Request["request"]["headers"][0] = {
+  const header: Entry["request"]["headers"][0] = {
     name: "Authorization",
     value: "Bearer 1234",
   };
@@ -32,7 +33,7 @@ it("identifies bearer auth", () => {
 });
 
 it("identifies digest auth", () => {
-  const header: chrome.devtools.network.Request["request"]["headers"][0] = {
+  const header: Entry["request"]["headers"][0] = {
     name: "Authorization",
     value: "Digest 1234",
   };

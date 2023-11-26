@@ -1,5 +1,6 @@
-const bearer: chrome.devtools.network.Request = {
-  getContent() {},
+import type { Entry } from 'har-format';
+
+const bearer: Entry = {
   cache: {},
   _resourceType: "xhr",
   connection: "194622",

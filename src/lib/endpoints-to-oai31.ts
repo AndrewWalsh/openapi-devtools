@@ -21,14 +21,11 @@ import { defaultOptions } from "./store-helpers/persist-options";
 import { isEmpty } from "lodash";
 
 const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = defaultOptions): OpenApiBuilder => {
-  const { enableMoreInfo } = options;
   const builder = createBuilderAndDocRoot(endpoints);
   const uniqueHosts = new Set<string>();
   const uniqueAuth = new Map<AuthTypeString, SecuritySchemeObject>();
 
   for (const endpoint of endpoints) {
-    const mostRecentRequest = enableMoreInfo ? endpoint.data.mostRecentRequest : null;
-    const mostRecentResponse = enableMoreInfo ? endpoint.data.mostRecentResponse : null;
     const fullPath = `/${endpoint.parts.map((p) => p.part).join("/")}`;
     const pathParameterObjects = createPathParameterTypes(endpoint);
     uniqueHosts.add(endpoint.host);
@@ -51,12 +48,12 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
         const queryParameterObjects = createQueryParameterTypes(
           endpoint.data.methods[method][statusCode].queryParameters
         );
-        const requestBody = createRequestTypes(schema.requestBody, mostRecentRequest);
+        const requestBody = createRequestTypes(schema.request, options);
         const responses = createResponseTypes(
-          schema.responseBody,
+          schema.response,
           schema.responseHeaders,
           statusCode,
-          mostRecentResponse,
+          options,
         );
         const security: SecurityRequirementObject[] = [];
         if (!isEmpty(endpoint.data.authentication)) {
@@ -77,7 +74,7 @@ const endpointsToOAI31 = (endpoints: Array<Endpoint>, options: Options = default
         if (allParameterObjects.length) {
           operation.parameters = allParameterObjects;
         }
-        if (shouldIncludeRequestBody(method) && schema.requestBody) {
+        if (requestBody && shouldIncludeRequestBody(method)) {
           operation.requestBody = requestBody;
         }
         // The method (e.g. get) and the operation on it

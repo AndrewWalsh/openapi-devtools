@@ -9,6 +9,7 @@ import {
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
 import stringify from "json-stable-stringify";
+import type { Entry } from 'har-format';
 
 export type Options = {
   // Includes additional data such as response samples
@@ -84,7 +85,7 @@ export default class RequestStore {
   }
 
   public insert(
-    harRequest: chrome.devtools.network.Request,
+    harRequest: Entry,
     responseBody: JSONType
   ) {
     const result = upsert({

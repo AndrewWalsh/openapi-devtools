@@ -12,7 +12,8 @@ import {
   ParameterObject,
   SecuritySchemeObject,
 } from "openapi3-ts/oas31";
-import { Authentication, AuthType } from "../utils/types";
+import { Authentication, AuthType, Leaf } from "../utils/types";
+import { Options } from "./RequestStore";
 
 export const createSecuritySchemeTypes = (auth?: Authentication): SecuritySchemeObject | undefined => {
   if (!auth) return;
@@ -39,37 +40,42 @@ export const createSecuritySchemeTypes = (auth?: Authentication): SecurityScheme
   }
 }
 
-export const shouldIncludeRequestBody = (method: string) => {
+export const  shouldIncludeRequestBody = (method: string) => {
   return !new Set(["get", "delete", "head"]).has(method.toLowerCase());
 };
 
-export const createRequestTypes = (body?: Schema, mostRecentRequest?: unknown) => {
-  const mediaTypeObject: MediaTypeObject = {
-    schema: body,
-    ...(!!mostRecentRequest && { example: mostRecentRequest }),
-  };
-  const contentObject: ContentObject = {
-    "application/json": mediaTypeObject,
-  };
+type RequestType = Leaf["methods"]["get"]["200"]["request"];
+export const createRequestTypes = (requestType: RequestType, options: Options) => {
+  if (!requestType) return;
+  const contentObject: ContentObject = {};
+  Object.entries(requestType).forEach(([mediaType, data]) => {
+    const mediaTypeObject: MediaTypeObject = {
+      schema: data.body,
+      ...(!!options.enableMoreInfo && { example: data.mostRecent }),
+    };
+    contentObject[mediaType] = mediaTypeObject;
+  });
   const requestBodyObject: RequestBodyObject = {
     content: contentObject,
   };
   return requestBodyObject;
 };
 
+type ResponseType = Leaf["methods"]["get"]["200"]["response"];
 export const createResponseTypes = (
-  body: Schema | undefined,
+  responseType: ResponseType,
   headers: Schema | undefined,
   statusCode: string,
-  mostRecentResponse?: unknown
+  options: Options,
 ) => {
-  const mediaTypeObject: MediaTypeObject = {
-    schema: body,
-    ...(!!mostRecentResponse && { example: mostRecentResponse }),
-  };
-  const contentObject: ContentObject = {
-    "application/json": mediaTypeObject,
-  };
+  const contentObject: ContentObject = {};
+  Object.entries(responseType).forEach(([mediaType, data]) => {
+    const mediaTypeObject: MediaTypeObject = {
+      schema: data.body,
+      ...(!!options.enableMoreInfo && { example: data.mostRecent }),
+    };
+    contentObject[mediaType] = mediaTypeObject;
+  });
   const headersObject: HeadersObject = {};
 
   if (headers && headers.properties) {
