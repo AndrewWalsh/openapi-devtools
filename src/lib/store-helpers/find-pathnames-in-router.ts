@@ -31,16 +31,12 @@ const recurse = (
       }
     }
   } else if (matchAny) {
-    for (const [lastPart, child] of node.children.entries()) {
-      pathnames.push(
-        ...recurse(child, parts.slice(1), [...walked, lastPart])
-      );
+    for (const [part, child] of node.children.entries()) {
+      pathnames.push(...recurse(child, parts.slice(1), [...walked, part]));
     }
   } else if (node.children.has(part)) {
     const child = node.children.get(part)!;
-    if (child) {
-      pathnames.push(...recurse(child, parts.slice(1), [...walked, part]));
-    }
+    pathnames.push(...recurse(child, parts.slice(1), [...walked, part]));
   }
 
   return pathnames;
