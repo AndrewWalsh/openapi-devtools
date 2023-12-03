@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import classes from "./control.module.css";
-import { Status } from "../utils/types";
+import { Status } from "@andrew_walsh/openapi-spec-generator";
 import { StartBtn, StopBtn, SettingsBtn, ClearBtn } from "./ControlButtons";
 import ControlDrawer from "./ControlDrawer";
 

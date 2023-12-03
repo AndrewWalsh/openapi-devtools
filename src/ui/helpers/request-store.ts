@@ -1,4 +1,4 @@
-import RequestStore from "../../lib/RequestStore";
+import RequestStore from "@andrew_walsh/openapi-spec-generator";
 
 const requestStore = new RequestStore();
 

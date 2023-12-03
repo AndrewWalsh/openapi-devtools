@@ -1,4 +1,4 @@
-import { Endpoint } from "../../utils/types";
+import type { Endpoint } from "@andrew_walsh/openapi-spec-generator";
 
 const compareEndpoints = (e1: Endpoint, e2: Endpoint) => {
   const re = /:param\d+/g;

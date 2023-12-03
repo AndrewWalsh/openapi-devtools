@@ -1,7 +1,5 @@
 import { createContext } from "react";
-import RequestStore from "../lib/RequestStore";
-import { Endpoint, EndpointsByHost } from "../utils/types";
-import { defaultOptions } from "../lib/store-helpers/persist-options";
+import RequestStore, { defaultOptions, Endpoint, EndpointsByHost } from "@andrew_walsh/openapi-spec-generator";
 
 type ContextType = {
   endpoints: Endpoint[];
@@ -27,7 +25,7 @@ const defaultContextValue: ContextType = {
   setDisabledHosts: () => {},
   parameterise: () => {},
   import: () => false,
-  export: () => '',
+  export: () => "",
   options: () => defaultOptions,
 };
 

@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 import Context from "./context";
 import { FixedSizeList as List } from "react-window";
 import { Input } from "@chakra-ui/react";
-import { Endpoint, PartType } from "../utils/types";
+import { Endpoint, PartType } from "@andrew_walsh/openapi-spec-generator";
 import classes from "./controlDynamic.module.css";
 import { Wrap, WrapItem, Tooltip } from "@chakra-ui/react";
 import Fuse from "fuse.js";

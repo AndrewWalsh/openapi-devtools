@@ -1,6 +1,5 @@
 import { Schema, createSchema } from "genson-js";
-import { JSONType } from "./types";
-import { DEFAULT_PARAM_NAME } from "./constants";
+import { JSONType, DEFAULT_PARAM_NAME } from "@andrew_walsh/openapi-spec-generator";
 
 const isGraphQLURI = (url: string): boolean =>
   url.toLowerCase().endsWith("graphql");
