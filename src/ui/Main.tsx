@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { OpenAPIObject } from "openapi3-ts/oas31";
-import { RedocStandalone } from "redoc";
+import { ApiReference as VueComponent } from "@scalar/api-reference";
+import { applyVueInReact } from "veaury";
 import RequestStore, {
   endpointsToOAI31,
   Endpoint,
@@ -17,6 +18,8 @@ import classes from "./main.module.css";
 import { sortEndpoints } from "./helpers/endpoints-by-host";
 import { isEmpty } from "lodash";
 import decodeUriComponent from "decode-uri-component";
+
+const ApiReference = applyVueInReact(VueComponent);
 
 function Main() {
   const [spec, setSpec] = useState<OpenAPIObject | null>(null);
@@ -156,19 +159,9 @@ function Main() {
     >
       <div className={classes.wrapper}>
         <Control start={start} stop={stop} clear={clear} status={status} />
-        <RedocStandalone
-          spec={spec || {}}
-          options={{
-            hideHostname: true,
-            sortEnumValuesAlphabetically: true,
-            sortOperationsAlphabetically: true,
-            sortPropsAlphabetically: true,
-            hideLoading: true,
-            nativeScrollbars: true,
-            downloadFileName: "openapi-devtools-spec.json",
-            expandDefaultServerVariables: false,
-            expandSingleSchemaField: false,
-          }}
+        {/** @ts-expect-error veaury */}
+        <ApiReference
+          configuration={{ isEditable: false, spec: { content: spec } }}
         />
       </div>
     </Context.Provider>
