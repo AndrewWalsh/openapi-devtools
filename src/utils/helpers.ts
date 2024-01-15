@@ -43,8 +43,8 @@ export const isValidRequest = async (
   const didNotReachServer = !harRequest.serverIPAddress;
   if (didNotReachServer) return false;
   const content = await getContent(harRequest);
-  const isNotJSON = harRequest.response.content.mimeType !== "application/json" && !isValidJSONString(content);
-  const isNotXWWWFormUrlEncoded = harRequest.request.postData?.mimeType !== "application/x-www-form-urlencoded";
+  const isNotJSON = !harRequest.response.content.mimeType.startsWith("application/json") && !isValidJSONString(content);
+  const isNotXWWWFormUrlEncoded = !harRequest.request.postData?.mimeType.startsWith("application/x-www-form-urlencoded");
   const isNotValidMime = isNotJSON && isNotXWWWFormUrlEncoded;
   if (isNotValidMime) return false;
   const isNotValidStatus = !isValidStatus(harRequest.request.method);

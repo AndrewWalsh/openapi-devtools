@@ -1,0 +1,277 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`creates a leaf when mime = application/json for req and res 1`] = `
+{
+  "methods": {
+    "POST": {
+      "200": {
+        "queryParameters": {
+          "properties": {
+            "alt": {
+              "type": "string",
+            },
+            "key": {
+              "type": "string",
+            },
+          },
+          "required": [
+            "alt",
+            "key",
+          ],
+          "type": "object",
+        },
+        "request": {
+          "application/json": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "requestHeaders": {
+          "properties": {
+            "anonymousid": {
+              "type": "string",
+            },
+          },
+          "required": [
+            "anonymousid",
+          ],
+          "type": "object",
+        },
+        "response": {
+          "application/json": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "integer",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "responseHeaders": undefined,
+      },
+    },
+  },
+  "pathname": "/v1/track",
+}
+`;
+
+exports[`creates a leaf when mime = application/json;something for req and res 1`] = `
+{
+  "methods": {
+    "POST": {
+      "200": {
+        "queryParameters": {
+          "properties": {
+            "alt": {
+              "type": "string",
+            },
+            "key": {
+              "type": "string",
+            },
+          },
+          "required": [
+            "alt",
+            "key",
+          ],
+          "type": "object",
+        },
+        "request": {
+          "application/json;something": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "requestHeaders": {
+          "properties": {
+            "anonymousid": {
+              "type": "string",
+            },
+          },
+          "required": [
+            "anonymousid",
+          ],
+          "type": "object",
+        },
+        "response": {
+          "application/json": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "integer",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "responseHeaders": undefined,
+      },
+    },
+  },
+  "pathname": "/v1/track",
+}
+`;
+
+exports[`creates a leaf when request mime = application/x-www-form-urlencoded 1`] = `
+{
+  "methods": {
+    "POST": {
+      "200": {
+        "queryParameters": undefined,
+        "request": {
+          "application/x-www-form-urlencoded": {
+            "body": {
+              "properties": {
+                "comments": {
+                  "type": "string",
+                },
+                "custemail": {
+                  "type": "string",
+                },
+                "custname": {
+                  "type": "string",
+                },
+                "custtel": {
+                  "type": "string",
+                },
+                "delivery": {
+                  "type": "string",
+                },
+                "size": {
+                  "type": "string",
+                },
+                "topping": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "custname",
+                "custtel",
+                "custemail",
+                "size",
+                "topping",
+                "delivery",
+                "comments",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "requestHeaders": undefined,
+        "response": {
+          "application/json": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "integer",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "responseHeaders": undefined,
+      },
+    },
+  },
+  "pathname": "/post",
+}
+`;
+
+exports[`creates a leaf when request mime starts with application/x-www-form-urlencoded;charset=UTF-8 1`] = `
+{
+  "methods": {
+    "POST": {
+      "200": {
+        "queryParameters": undefined,
+        "request": {
+          "application/x-www-form-urlencoded;charset=UTF-8": {
+            "body": {
+              "properties": {
+                "comments": {
+                  "type": "string",
+                },
+                "custemail": {
+                  "type": "string",
+                },
+                "custname": {
+                  "type": "string",
+                },
+                "custtel": {
+                  "type": "string",
+                },
+                "delivery": {
+                  "type": "string",
+                },
+                "size": {
+                  "type": "string",
+                },
+                "topping": {
+                  "type": "string",
+                },
+              },
+              "required": [
+                "custname",
+                "custtel",
+                "custemail",
+                "size",
+                "topping",
+                "delivery",
+                "comments",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "requestHeaders": undefined,
+        "response": {
+          "application/json": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "integer",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+          },
+        },
+        "responseHeaders": undefined,
+      },
+    },
+  },
+  "pathname": "/post",
+}
+`;

@@ -22,8 +22,8 @@ export type Params = {
 
 const parseRequestBody = (harRequest: Entry): JSONType => {
   const { mimeType, text } = harRequest.request.postData || {};
-  if (mimeType === APPLICATION_JSON) return parseJSON(text);
-  else if (mimeType === APPLICATION_X_WWW_FORM_URLENCODED && text) return qs.parse(text) as JSONType;
+  if (mimeType?.startsWith(APPLICATION_JSON)) return parseJSON(text);
+  else if (mimeType?.startsWith(APPLICATION_X_WWW_FORM_URLENCODED) && text) return qs.parse(text) as JSONType;
   return null;
 };
 
