@@ -1,15 +1,16 @@
 import decodeUriComponent from "decode-uri-component";
+import qs from "fast-querystring";
+import type { Entry } from "har-format";
+
+import { filterIgnoreHeaders } from "../../utils/headers.js";
 import {
   createSchemaElseUndefined,
   entriesToJSONType,
   parseJSON,
-} from "../../utils/helpers";
-import { JSONType, Leaf } from "../../utils/types";
-import determineAuthFromHAR from "./authentication";
-import { filterIgnoreHeaders } from "../../utils/headers";
-import type { Options } from "../RequestStore";
-import type { Entry } from "har-format";
-import qs from 'fast-querystring';
+} from "../../utils/helpers.js";
+import type { Options } from "../RequestStore.js";
+import { JSONType, Leaf } from "../../utils/types.js";
+import determineAuthFromHAR from "./authentication.js";
 
 const APPLICATION_JSON = "application/json";
 const APPLICATION_X_WWW_FORM_URLENCODED = "application/x-www-form-urlencoded";
@@ -23,7 +24,8 @@ export type Params = {
 const parseRequestBody = (harRequest: Entry): JSONType => {
   const { mimeType, text } = harRequest.request.postData || {};
   if (mimeType?.startsWith(APPLICATION_JSON)) return parseJSON(text);
-  else if (mimeType?.startsWith(APPLICATION_X_WWW_FORM_URLENCODED) && text) return qs.parse(text) as JSONType;
+  else if (mimeType?.startsWith(APPLICATION_X_WWW_FORM_URLENCODED) && text)
+    return qs.parse(text) as JSONType;
   return null;
 };
 
@@ -32,7 +34,7 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   const authentication = determineAuthFromHAR(harRequest);
   harRequest.request.headers = filterIgnoreHeaders(harRequest.request.headers);
   harRequest.response.headers = filterIgnoreHeaders(
-    harRequest.response.headers
+    harRequest.response.headers,
   );
   const method = harRequest.request.method;
   const statusCode = harRequest.response.status.toString();
@@ -48,25 +50,25 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
     pathname,
     methods: {
       [method]: {
-        [statusCode]: {
-          ...(requestMime && {
-            request: {
-              [requestMime]: {
-                body: createSchemaElseUndefined(requestBody),
-                ...(enableMoreInfo && { mostRecent: requestBody }),
-              },
+        ...(requestMime && {
+          request: {
+            [requestMime]: {
+              body: createSchemaElseUndefined(requestBody),
+              ...(enableMoreInfo && { mostRecent: requestBody }),
             },
-          }),
-          requestHeaders: createSchemaElseUndefined(requestHeaders),
-          response: {
+          },
+        }),
+        requestHeaders: createSchemaElseUndefined(requestHeaders),
+        response: {
+          [statusCode]: {
             [responseMime]: {
               body: createSchemaElseUndefined(responseBody),
               ...(enableMoreInfo && { mostRecent: responseBody }),
             },
           },
-          responseHeaders: createSchemaElseUndefined(responseHeaders),
-          queryParameters: createSchemaElseUndefined(queryParameters),
         },
+        responseHeaders: createSchemaElseUndefined(responseHeaders),
+        queryParameters: createSchemaElseUndefined(queryParameters),
       },
     },
   };

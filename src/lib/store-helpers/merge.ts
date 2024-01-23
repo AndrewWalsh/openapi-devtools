@@ -1,10 +1,10 @@
-import { Schema, mergeSchemas } from "genson-js";
+import { mergeSchemas, Schema } from "genson-js";
+
 import type { Leaf } from "../../utils/types";
 
-type Data = Leaf["methods"]["get"]["200"];
-type Req = Leaf["methods"]["get"]["200"]["request"];
-type Res = Leaf["methods"]["get"]["200"]["response"];
-type Body = Leaf["methods"]["get"]["200"]["response"]['mediaType'];
+type Data = Leaf["methods"]["get"];
+type Req = NonNullable<Leaf["methods"]["get"]["request"]>;
+type Res = Leaf["methods"]["get"]["response"];
 
 const mergeAuthentication = (dest: Leaf, src: Leaf): void => {
   if (!src.authentication) return;
@@ -14,57 +14,94 @@ const mergeAuthentication = (dest: Leaf, src: Leaf): void => {
   });
 };
 
-const mergeReqRes = (
-  reqOrRes: "request" | "response",
-  dest: Data,
-  src: Req | Res
-) => {
-  type Entries = Array<[string, Body]>;
-  (Object.entries(src!) as Entries).forEach(([mediaType, srcData]) => {
+const mergeRequest = (dest: Data, src: Req = {}) => {
+  Object.entries(src).forEach(([mediaType, srcData]) => {
+    // Nothing in dest or src to merge
     if (!srcData || !srcData.body) return;
-    if (!dest[reqOrRes]![mediaType]) {
-      dest[reqOrRes]![mediaType] = srcData;
+    // Nothing in dest to merge, but src has data
+    if (dest["request"]?.[mediaType]) {
+      dest["request"][mediaType] = srcData;
     } else {
-      dest[reqOrRes]![mediaType].body = mergeSchemas([
-        dest[reqOrRes]![mediaType].body!,
+      // Both src and dest have data
+      dest["request"]![mediaType]!.body = mergeSchemas([
+        dest["request"]![mediaType]!.body!,
         srcData.body,
       ]);
-      dest[reqOrRes]![mediaType].mostRecent = srcData.mostRecent;
+      dest["request"]![mediaType]!.mostRecent = srcData.mostRecent;
     }
+  });
+};
+
+const mergeResponse = (dest: Data, src: Res = {}) => {
+  Object.entries(src).forEach(([statusCode, srcMediaTypeObj]) => {
+    // statusCode in src does not exist in dest
+    if (!dest["response"]?.[statusCode]) {
+      dest["response"][statusCode] = srcMediaTypeObj;
+      return;
+    }
+    // statusCode exists in both dest and src
+    Object.entries(srcMediaTypeObj).forEach(([mediaType, mediaTypeData]) => {
+      const srcData = srcMediaTypeObj[mediaType]!;
+      if (!dest["response"]?.[statusCode]?.[mediaType]) {
+        // dest does not contain mediaType, set from src
+        dest["response"][statusCode]![mediaType] = srcData;
+        return;
+      } else {
+        // merge schemas
+        dest["response"][statusCode]![mediaType]!.body = mergeSchemas([
+          dest["response"]![statusCode]![mediaType]!.body!,
+          srcData.body || {},
+        ]);
+        dest["response"]![statusCode]![mediaType]!.mostRecent = mediaTypeData.mostRecent;
+      }
+    });
   });
 };
 
 export const mergeLeaves = (dest: Leaf, src: Leaf): Leaf => {
   mergeAuthentication(dest, src);
-  for (const [method, statusCodeObj] of Object.entries(src.methods)) {
+  for (const [method, methodObj] of Object.entries(src.methods)) {
+    // Method doesn't exist in dest, set src and continue to next method
     if (!dest.methods[method]) {
-      dest.methods[method] = statusCodeObj;
+      dest.methods[method] = methodObj;
       continue;
     }
-    for (const [statusCode, schemaObj] of Object.entries(statusCodeObj)) {
-      const destSchema = dest.methods[method][statusCode];
-      if (!destSchema) {
-        dest.methods[method][statusCode] = schemaObj;
-        continue;
-      }
-      type DestSchemaEntries = Array<
-        [keyof typeof destSchema, Schema | Req | Res]
-      >;
-      for (const [key, schema] of Object.entries(
-        schemaObj
-      ) as DestSchemaEntries) {
-        if (key === "request") {
-          if (!destSchema.request) destSchema.request = {};
-          mergeReqRes("request", destSchema, schema as Req);
-        } else if (key === "response") {
-          mergeReqRes("response", destSchema, schema as Res);
-        } else if (destSchema[key]) {
-          destSchema[key] = mergeSchemas([destSchema[key]!, schema as Schema]);
-        } else {
-          destSchema[key] = schema;
-        }
-      }
+    const srcSchema = src.methods[method]!;
+    const destSchema = dest.methods[method]!;
+    // Merge request
+    if (destSchema.request || srcSchema.request) {
+      mergeRequest(destSchema, srcSchema.request);
     }
+
+    // Merge query params
+    if (destSchema.queryParameters || srcSchema.queryParameters) {
+      const schemas = [
+        destSchema.queryParameters,
+        srcSchema.queryParameters,
+      ].filter(Boolean) as Schema[];
+      destSchema.queryParameters = mergeSchemas(schemas);
+    }
+
+    // Merge request headers
+    if (destSchema.requestHeaders || srcSchema.requestHeaders) {
+      const schemas = [
+        destSchema.requestHeaders,
+        srcSchema.requestHeaders,
+      ].filter(Boolean) as Schema[];
+      destSchema.requestHeaders = mergeSchemas(schemas);
+    }
+
+    // Merge response headers
+    if (destSchema.responseHeaders || srcSchema.responseHeaders) {
+      const schemas = [
+        destSchema.responseHeaders,
+        srcSchema.responseHeaders,
+      ].filter(Boolean) as Schema[];
+      destSchema.responseHeaders = mergeSchemas(schemas);
+    }
+
+    // Merge responses
+    mergeResponse(destSchema, methodObj.response);
   }
   return dest;
 };

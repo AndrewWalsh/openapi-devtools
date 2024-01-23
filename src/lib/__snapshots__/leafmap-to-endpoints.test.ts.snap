@@ -6,49 +6,49 @@ exports[`flattens data into endpoints 1`] = `
     "data": {
       "methods": {
         "POST": {
-          "200": {
-            "queryParameters": {
-              "properties": {
-                "alt": {
-                  "type": "string",
-                },
-                "key": {
-                  "type": "string",
-                },
+          "queryParameters": {
+            "properties": {
+              "alt": {
+                "type": "string",
               },
-              "required": [
-                "alt",
-                "key",
-              ],
-              "type": "object",
+              "key": {
+                "type": "string",
+              },
             },
-            "request": {
-              "application/json": {
-                "body": {
-                  "properties": {
-                    "test": {
-                      "type": "string",
-                    },
+            "required": [
+              "alt",
+              "key",
+            ],
+            "type": "object",
+          },
+          "request": {
+            "application/json": {
+              "body": {
+                "properties": {
+                  "test": {
+                    "type": "string",
                   },
-                  "required": [
-                    "test",
-                  ],
-                  "type": "object",
                 },
+                "required": [
+                  "test",
+                ],
+                "type": "object",
               },
             },
-            "requestHeaders": {
-              "properties": {
-                "anonymousid": {
-                  "type": "string",
-                },
+          },
+          "requestHeaders": {
+            "properties": {
+              "anonymousid": {
+                "type": "string",
               },
-              "required": [
-                "anonymousid",
-              ],
-              "type": "object",
             },
-            "response": {
+            "required": [
+              "anonymousid",
+            ],
+            "type": "object",
+          },
+          "response": {
+            "200": {
               "application/json": {
                 "body": {
                   "properties": {
@@ -63,8 +63,8 @@ exports[`flattens data into endpoints 1`] = `
                 },
               },
             },
-            "responseHeaders": undefined,
           },
+          "responseHeaders": undefined,
         },
       },
       "pathname": "/v1/track",
@@ -90,49 +90,49 @@ exports[`flattens data into endpoints 1`] = `
     "data": {
       "methods": {
         "POST": {
-          "200": {
-            "queryParameters": {
-              "properties": {
-                "alt": {
-                  "type": "string",
-                },
-                "key": {
-                  "type": "string",
-                },
+          "queryParameters": {
+            "properties": {
+              "alt": {
+                "type": "string",
               },
-              "required": [
-                "alt",
-                "key",
-              ],
-              "type": "object",
+              "key": {
+                "type": "string",
+              },
             },
-            "request": {
-              "application/json": {
-                "body": {
-                  "properties": {
-                    "test": {
-                      "type": "string",
-                    },
+            "required": [
+              "alt",
+              "key",
+            ],
+            "type": "object",
+          },
+          "request": {
+            "application/json": {
+              "body": {
+                "properties": {
+                  "test": {
+                    "type": "string",
                   },
-                  "required": [
-                    "test",
-                  ],
-                  "type": "object",
                 },
+                "required": [
+                  "test",
+                ],
+                "type": "object",
               },
             },
-            "requestHeaders": {
-              "properties": {
-                "anonymousid": {
-                  "type": "string",
-                },
+          },
+          "requestHeaders": {
+            "properties": {
+              "anonymousid": {
+                "type": "string",
               },
-              "required": [
-                "anonymousid",
-              ],
-              "type": "object",
             },
-            "response": {
+            "required": [
+              "anonymousid",
+            ],
+            "type": "object",
+          },
+          "response": {
+            "200": {
               "application/json": {
                 "body": {
                   "properties": {
@@ -147,8 +147,8 @@ exports[`flattens data into endpoints 1`] = `
                 },
               },
             },
-            "responseHeaders": undefined,
           },
+          "responseHeaders": undefined,
         },
       },
       "pathname": "/v1/track",
@@ -174,49 +174,49 @@ exports[`flattens data into endpoints 1`] = `
     "data": {
       "methods": {
         "POST": {
-          "200": {
-            "queryParameters": {
-              "properties": {
-                "alt": {
-                  "type": "string",
-                },
-                "key": {
-                  "type": "string",
-                },
+          "queryParameters": {
+            "properties": {
+              "alt": {
+                "type": "string",
               },
-              "required": [
-                "alt",
-                "key",
-              ],
-              "type": "object",
+              "key": {
+                "type": "string",
+              },
             },
-            "request": {
-              "application/json": {
-                "body": {
-                  "properties": {
-                    "test": {
-                      "type": "string",
-                    },
+            "required": [
+              "alt",
+              "key",
+            ],
+            "type": "object",
+          },
+          "request": {
+            "application/json": {
+              "body": {
+                "properties": {
+                  "test": {
+                    "type": "string",
                   },
-                  "required": [
-                    "test",
-                  ],
-                  "type": "object",
                 },
+                "required": [
+                  "test",
+                ],
+                "type": "object",
               },
             },
-            "requestHeaders": {
-              "properties": {
-                "anonymousid": {
-                  "type": "string",
-                },
+          },
+          "requestHeaders": {
+            "properties": {
+              "anonymousid": {
+                "type": "string",
               },
-              "required": [
-                "anonymousid",
-              ],
-              "type": "object",
             },
-            "response": {
+            "required": [
+              "anonymousid",
+            ],
+            "type": "object",
+          },
+          "response": {
+            "200": {
               "application/json": {
                 "body": {
                   "properties": {
@@ -231,8 +231,8 @@ exports[`flattens data into endpoints 1`] = `
                 },
               },
             },
-            "responseHeaders": undefined,
           },
+          "responseHeaders": undefined,
         },
       },
       "pathname": "/v1/track",
@@ -262,49 +262,49 @@ exports[`flattens data into endpoints 1`] = `
     "data": {
       "methods": {
         "POST": {
-          "200": {
-            "queryParameters": {
-              "properties": {
-                "alt": {
-                  "type": "string",
-                },
-                "key": {
-                  "type": "string",
-                },
+          "queryParameters": {
+            "properties": {
+              "alt": {
+                "type": "string",
               },
-              "required": [
-                "alt",
-                "key",
-              ],
-              "type": "object",
+              "key": {
+                "type": "string",
+              },
             },
-            "request": {
-              "application/json": {
-                "body": {
-                  "properties": {
-                    "test": {
-                      "type": "string",
-                    },
+            "required": [
+              "alt",
+              "key",
+            ],
+            "type": "object",
+          },
+          "request": {
+            "application/json": {
+              "body": {
+                "properties": {
+                  "test": {
+                    "type": "string",
                   },
-                  "required": [
-                    "test",
-                  ],
-                  "type": "object",
                 },
+                "required": [
+                  "test",
+                ],
+                "type": "object",
               },
             },
-            "requestHeaders": {
-              "properties": {
-                "anonymousid": {
-                  "type": "string",
-                },
+          },
+          "requestHeaders": {
+            "properties": {
+              "anonymousid": {
+                "type": "string",
               },
-              "required": [
-                "anonymousid",
-              ],
-              "type": "object",
             },
-            "response": {
+            "required": [
+              "anonymousid",
+            ],
+            "type": "object",
+          },
+          "response": {
+            "200": {
               "application/json": {
                 "body": {
                   "properties": {
@@ -319,8 +319,8 @@ exports[`flattens data into endpoints 1`] = `
                 },
               },
             },
-            "responseHeaders": undefined,
           },
+          "responseHeaders": undefined,
         },
       },
       "pathname": "/v1/track",
@@ -350,49 +350,49 @@ exports[`flattens data into endpoints 1`] = `
     "data": {
       "methods": {
         "POST": {
-          "200": {
-            "queryParameters": {
-              "properties": {
-                "alt": {
-                  "type": "string",
-                },
-                "key": {
-                  "type": "string",
-                },
+          "queryParameters": {
+            "properties": {
+              "alt": {
+                "type": "string",
               },
-              "required": [
-                "alt",
-                "key",
-              ],
-              "type": "object",
+              "key": {
+                "type": "string",
+              },
             },
-            "request": {
-              "application/json": {
-                "body": {
-                  "properties": {
-                    "test": {
-                      "type": "string",
-                    },
+            "required": [
+              "alt",
+              "key",
+            ],
+            "type": "object",
+          },
+          "request": {
+            "application/json": {
+              "body": {
+                "properties": {
+                  "test": {
+                    "type": "string",
                   },
-                  "required": [
-                    "test",
-                  ],
-                  "type": "object",
                 },
+                "required": [
+                  "test",
+                ],
+                "type": "object",
               },
             },
-            "requestHeaders": {
-              "properties": {
-                "anonymousid": {
-                  "type": "string",
-                },
+          },
+          "requestHeaders": {
+            "properties": {
+              "anonymousid": {
+                "type": "string",
               },
-              "required": [
-                "anonymousid",
-              ],
-              "type": "object",
             },
-            "response": {
+            "required": [
+              "anonymousid",
+            ],
+            "type": "object",
+          },
+          "response": {
+            "200": {
               "application/json": {
                 "body": {
                   "properties": {
@@ -407,8 +407,8 @@ exports[`flattens data into endpoints 1`] = `
                 },
               },
             },
-            "responseHeaders": undefined,
           },
+          "responseHeaders": undefined,
         },
       },
       "pathname": "/v1/track",
@@ -438,49 +438,49 @@ exports[`flattens data into endpoints 1`] = `
     "data": {
       "methods": {
         "POST": {
-          "200": {
-            "queryParameters": {
-              "properties": {
-                "alt": {
-                  "type": "string",
-                },
-                "key": {
-                  "type": "string",
-                },
+          "queryParameters": {
+            "properties": {
+              "alt": {
+                "type": "string",
               },
-              "required": [
-                "alt",
-                "key",
-              ],
-              "type": "object",
+              "key": {
+                "type": "string",
+              },
             },
-            "request": {
-              "application/json": {
-                "body": {
-                  "properties": {
-                    "test": {
-                      "type": "string",
-                    },
+            "required": [
+              "alt",
+              "key",
+            ],
+            "type": "object",
+          },
+          "request": {
+            "application/json": {
+              "body": {
+                "properties": {
+                  "test": {
+                    "type": "string",
                   },
-                  "required": [
-                    "test",
-                  ],
-                  "type": "object",
                 },
+                "required": [
+                  "test",
+                ],
+                "type": "object",
               },
             },
-            "requestHeaders": {
-              "properties": {
-                "anonymousid": {
-                  "type": "string",
-                },
+          },
+          "requestHeaders": {
+            "properties": {
+              "anonymousid": {
+                "type": "string",
               },
-              "required": [
-                "anonymousid",
-              ],
-              "type": "object",
             },
-            "response": {
+            "required": [
+              "anonymousid",
+            ],
+            "type": "object",
+          },
+          "response": {
+            "200": {
               "application/json": {
                 "body": {
                   "properties": {
@@ -495,8 +495,8 @@ exports[`flattens data into endpoints 1`] = `
                 },
               },
             },
-            "responseHeaders": undefined,
           },
+          "responseHeaders": undefined,
         },
       },
       "pathname": "/v1/track",

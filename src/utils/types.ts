@@ -49,27 +49,27 @@ export type Leaf = {
   // Methods such as GET, POST and schema values for requests
   methods: {
     [method: string]: {
-      [statusCode: string]: {
-        // Requests may not contain a body
-        request?: {
-          // mediaType is a a mime type such as application/json
-          [mediaType: string]: {
-            body?: Schema;
-            // Sample of the most recent request
-            mostRecent?: unknown;
-          };
+      // Requests may not contain a body
+      request?: {
+        // mediaType is a a mime type such as application/json
+        [mediaType: string]: {
+          body?: Schema;
+          // Sample of the most recent request
+          mostRecent?: unknown;
         };
-        requestHeaders?: Schema;
-        response: {
+      };
+      requestHeaders?: Schema;
+      response: {
+        [statusCode: string]: {
           [mediaType: string]: {
             body?: Schema;
             // Sample of the most recent response
             mostRecent?: unknown;
           };
         };
-        responseHeaders?: Schema;
-        queryParameters?: Schema;
       };
+      responseHeaders?: Schema;
+      queryParameters?: Schema;
     };
   };
 };

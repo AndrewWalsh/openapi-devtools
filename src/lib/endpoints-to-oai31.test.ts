@@ -1,16 +1,17 @@
-import { it, expect } from "vitest";
 import { Validator } from "@seriousme/openapi-schema-validator";
-import RequestStore, { Options } from "./RequestStore";
-import endpointsToOAI31 from "./endpoints-to-oai31";
-import postJson from "./__fixtures__/post-application-json";
-import bearer from "./__fixtures__/bearer";
-import basic from "./__fixtures__/basic";
-import digest from "./__fixtures__/digest";
-import apikey from "./__fixtures__/apikey";
 import { cloneDeep } from "lodash";
-import { AuthType } from "../utils/types";
-import { defaultOptions } from "./store-helpers/persist-options";
-import { formatAuthType } from './endpoints-to-oai31.helpers';
+import { expect, it } from "vitest";
+
+import apikey from "./__fixtures__/apikey.js";
+import basic from "./__fixtures__/basic.js";
+import bearer from "./__fixtures__/bearer.js";
+import digest from "./__fixtures__/digest.js";
+import postJson from "./__fixtures__/post-application-json.js";
+import { formatAuthType } from "./endpoints-to-oai31.helpers.js";
+import endpointsToOAI31 from "./endpoints-to-oai31.js";
+import RequestStore, { Options } from "./RequestStore.js";
+import { defaultOptions } from "./store-helpers/persist-options.js";
+import { AuthType } from "../utils/types.js";
 
 const createRequestStoreWithDefaults = () => {
   const store = new RequestStore();
@@ -23,13 +24,27 @@ const createRequestStoreWithDefaults = () => {
   return store;
 };
 
-// test leafMapToEndpoints via the public store method that uses it
 it("produces valid openapi 3.1 specifications", () => {
   const validator = new Validator({ strict: true });
   const store = createRequestStoreWithDefaults();
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(validator.validate(oai31.getSpec())).resolves.toEqual({ valid: true });
+});
+
+it("handles multiple status codes in responses", () => {
+  const options: Options = { enableMoreInfo: true };
+  const store = new RequestStore(options);
+  const req1 = cloneDeep(postJson);
+  const req2 = cloneDeep(postJson);
+  req2.response.status = 304;
+  store.insert(req1, { test: "string" });
+  store.insert(req2, { test: "string" });
+  const endpoints = store.endpoints();
+  const oai31 = endpointsToOAI31(endpoints, options);
+  const result = oai31.rootDoc.paths?.["/v1/track"].post?.responses;
+  expect(result?.["200"]).toBeTruthy();
+  expect(result?.["304"]).toBeTruthy();
 });
 
 it("sets most recent request when enabled", () => {
@@ -42,7 +57,7 @@ it("sets most recent request when enabled", () => {
     // @ts-expect-error ignored
     oai31.rootDoc.paths?.["/v1/track"].post?.requestBody?.content[
       "application/json"
-    ].example;
+    ].example as unknown;
   expect(result).toEqual({ test: "integer" });
 });
 
@@ -65,7 +80,7 @@ it("sets bearer auth security schema when available", () => {
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
-    [formatAuthType(AuthType.APIKEY_HEADER_ + 'AUTHORIZATION')]: {
+    [formatAuthType(AuthType.APIKEY_HEADER_ + "AUTHORIZATION")]: {
       in: "header",
       name: "AUTHORIZATION",
       type: "apiKey",
@@ -84,7 +99,7 @@ it("sets basic auth security schema when available", () => {
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
-    [formatAuthType(AuthType.APIKEY_HEADER_ + 'AUTHORIZATION')]: {
+    [formatAuthType(AuthType.APIKEY_HEADER_ + "AUTHORIZATION")]: {
       in: "header",
       name: "AUTHORIZATION",
       type: "apiKey",
@@ -103,7 +118,7 @@ it("sets digest auth security schema when available", () => {
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
-    [formatAuthType(AuthType.APIKEY_HEADER_ + 'AUTHORIZATION')]: {
+    [formatAuthType(AuthType.APIKEY_HEADER_ + "AUTHORIZATION")]: {
       in: "header",
       name: "AUTHORIZATION",
       type: "apiKey",

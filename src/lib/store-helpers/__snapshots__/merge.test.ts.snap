@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`merges leaves 1`] = `
+{
+  "methods": {
+    "POST": {
+      "queryParameters": {
+        "properties": {
+          "alt": {
+            "type": "string",
+          },
+          "key": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "alt",
+          "key",
+        ],
+        "type": "object",
+      },
+      "request": {
+        "application/json": {
+          "body": {
+            "properties": {
+              "test": {
+                "type": "boolean",
+              },
+            },
+            "required": [
+              "test",
+            ],
+            "type": "object",
+          },
+        },
+      },
+      "requestHeaders": {
+        "properties": {
+          "anonymousid": {
+            "type": "string",
+          },
+        },
+        "required": [
+          "anonymousid",
+        ],
+        "type": "object",
+      },
+      "response": {
+        "200": {
+          "application/json": {
+            "body": {
+              "properties": {
+                "test": {
+                  "type": "integer",
+                },
+              },
+              "required": [
+                "test",
+              ],
+              "type": "object",
+            },
+            "mostRecent": undefined,
+          },
+        },
+      },
+      "responseHeaders": undefined,
+    },
+  },
+  "pathname": "/v1/track",
+}
+`;

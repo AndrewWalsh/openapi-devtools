@@ -26,7 +26,7 @@ const ControlDynamic = () => {
   const filteredEndpoints: Endpoint[] = useMemo(() => {
     if (!search) return endpoints;
     const fuseOptions = {
-      keys: ["fullPath"],
+      keys: ["pathname"],
     };
     const fuse = new Fuse(endpoints, fuseOptions);
     const result = fuse.search(search).map((r) => r.item);

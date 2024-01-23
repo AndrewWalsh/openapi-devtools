@@ -1,9 +1,10 @@
-import { it, expect, vi } from "vitest";
-import { createSimpleRequest } from "./__fixtures__/simple-request";
-import RequestStore from "./RequestStore";
-import { defaultOptions } from "./store-helpers/persist-options";
+import { expect, it, vi } from "vitest";
 
-vi.mock('./store-helpers/persist-options', async () => {
+import { createSimpleRequest } from "./__fixtures__/simple-request.js";
+import RequestStore from "./RequestStore.js";
+import { defaultOptions } from "./store-helpers/persist-options.js";
+
+vi.mock("./store-helpers/persist-options", async () => {
   const actual = await vi.importActual("./store-helpers/persist-options");
   return {
     // @ts-expect-error ignored
@@ -17,11 +18,17 @@ const host = "test.com";
 const base = `https://${host}`;
 const POST = "POST";
 
-const getResBodyJSONTypes = (store: RequestStore, host: string, path: string, propName = 'foo') => {
-  const match = store.get()[host].lookup(path);
+const getResBodyJSONTypes = (
+  store: RequestStore,
+  host: string,
+  path: string,
+  propName = "foo",
+) => {
+  const match = store.get()[host]?.lookup(path);
   if (!match) throw new Error("Could not match path");
   const properties =
-    match.data.methods[POST][200].response['application/json'].body?.properties?.[propName].type;
+    match.data.methods[POST]?.response?.[200]?.["application/json"]?.body
+      ?.properties?.[propName]?.type || undefined;
   return properties;
 };
 
@@ -70,16 +77,25 @@ it("sets leafMap correctly after multiple add and parameterise operations", () =
   store.parameterise(1, "/dynamicPath/2/:param2", host);
   const expected = {
     [host]: {
-      '/1/:param1/:param2': expect.any(Object),
-      '/dynamicPath/:param1/:param2': expect.any(Object),
-      '/staticPath/2/3/4/5': expect.any(Object),
-    }
+      "/1/:param1/:param2": expect.any(Object),
+      "/dynamicPath/:param1/:param2": expect.any(Object),
+      "/staticPath/2/3/4/5": expect.any(Object),
+    },
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyJSONTypes(store, host, "/1/x/x")).toEqual(["null", "integer", "string"]);
-  expect(getResBodyJSONTypes(store, host, "/dynamicPath/2/x")).toEqual(["integer", "string"]);
-  expect(getResBodyJSONTypes(store, host, "/staticPath/2/3/4/5")).toBe('string');
+  expect(getResBodyJSONTypes(store, host, "/1/x/x")).toEqual([
+    "null",
+    "integer",
+    "string",
+  ]);
+  expect(getResBodyJSONTypes(store, host, "/dynamicPath/2/x")).toEqual([
+    "integer",
+    "string",
+  ]);
+  expect(getResBodyJSONTypes(store, host, "/staticPath/2/3/4/5")).toBe(
+    "string",
+  );
 });
 
 it("sets leafMap correctly after many parameterise operations", () => {
@@ -97,16 +113,19 @@ it("sets leafMap correctly after many parameterise operations", () => {
   store.parameterise(3, "/1/2/3/4/:param4", host);
   const expected = {
     [host]: {
-      '/1/2/3/:param3/:param4': expect.any(Object),
-      '/1/2/b': expect.any(Object),
-      '/1/x/y/:param3/b': expect.any(Object),
-    }
+      "/1/2/3/:param3/:param4": expect.any(Object),
+      "/1/2/b": expect.any(Object),
+      "/1/x/y/:param3/b": expect.any(Object),
+    },
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyJSONTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "string"]);
+  expect(getResBodyJSONTypes(store, host, "/1/2/3/ANY/ANY")).toEqual([
+    "null",
+    "string",
+  ]);
   expect(getResBodyJSONTypes(store, host, "/1/2/b")).toBe("boolean");
-  expect(getResBodyJSONTypes(store, host, "/1/x/y/ANY/b")).toBe('integer');
+  expect(getResBodyJSONTypes(store, host, "/1/x/y/ANY/b")).toBe("integer");
 });
 
 it("collapses into a single route when paramaterised", () => {
@@ -121,12 +140,16 @@ it("collapses into a single route when paramaterised", () => {
   store.parameterise(4, "/1/2/3/:param3/a", host);
   const expected = {
     [host]: {
-      '/1/2/3/:param3/:param4': expect.any(Object),
-    }
+      "/1/2/3/:param3/:param4": expect.any(Object),
+    },
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
-  expect(getResBodyJSONTypes(store, host, "/1/2/3/ANY/ANY")).toEqual(["null", "integer", "string"]);
+  expect(getResBodyJSONTypes(store, host, "/1/2/3/ANY/ANY")).toEqual([
+    "null",
+    "integer",
+    "string",
+  ]);
 });
 
 it("can parameterise paths that are subsets of another path", () => {
@@ -138,9 +161,9 @@ it("can parameterise paths that are subsets of another path", () => {
   store.parameterise(1, "/1/2", host);
   const expected = {
     [host]: {
-      '/1/2/a': expect.any(Object),
-      '/1/:param1': expect.any(Object),
-    }
+      "/1/2/a": expect.any(Object),
+      "/1/:param1": expect.any(Object),
+    },
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
@@ -163,11 +186,11 @@ it("can parameterise paths that exist along the same segment", () => {
   store.parameterise(1, "/1/2", host);
   const expected = {
     [host]: {
-      '/1': expect.any(Object),
-      '/1/2/3/4': expect.any(Object),
-      '/1/:param1/a': expect.any(Object),
-      '/1/:param1': expect.any(Object),
-    }
+      "/1": expect.any(Object),
+      "/1/2/3/4": expect.any(Object),
+      "/1/:param1/a": expect.any(Object),
+      "/1/:param1": expect.any(Object),
+    },
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
@@ -186,9 +209,9 @@ it("parameterising a path catches future requests to the same path", () => {
   store.insert(req2, { foo: 1 });
   const expected = {
     [host]: {
-      '/1/:param1/a': expect.any(Object),
-      '/1/2/b': expect.any(Object),
-    }
+      "/1/:param1/a": expect.any(Object),
+      "/1/2/b": expect.any(Object),
+    },
   };
   // @ts-expect-error accessing private property
   expect(store.leafMap).toEqual(expected);
@@ -197,17 +220,24 @@ it("parameterising a path catches future requests to the same path", () => {
 it("parameterisation works after export and import", () => {
   const store = new RequestStore();
   const req = createSimpleRequest(`${base}/1/2/a`);
+  const options = { enableMoreInfo: true };
+  store.options(options);
   store.insert(req, { foo: 1 });
   store.parameterise(2, "/1/2/a", host);
   const exported = store.export();
   store.clear();
   store.import(exported);
   store.insert(req, { foo: 1 });
-  const expected = {
+  const expectedLeafMap = {
     [host]: {
-      '/1/2/:param2': expect.any(Object),
-    }
+      "/1/2/:param2": expect.any(Object),
+    },
+  };
+  const expectedOptions = {
+    enableMoreInfo: true,
   };
   // @ts-expect-error accessing private property
-  expect(store.leafMap).toEqual(expected);
+  expect(store.leafMap).toEqual(expectedLeafMap);
+  // @ts-expect-error accessing private property
+  expect(store.storeOptions).toEqual(expectedOptions);
 });
