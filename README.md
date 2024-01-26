@@ -3,6 +3,14 @@
 [![MIT License][license-shield]][license-url]
 [![Download in the Chrome Web Store][chrome-shield]][chrome-url]
 
+> **I'd appreciate your feedback.**
+>
+> I'm looking to collect feedback and improve the tool.
+> 
+> Have a suggestion? Please provide it below, 100% anonymously. There are 3 short questions that should take a couple of minutes.
+>
+> https://forms.gle/fA2EtvamUrsRxXKYA
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
