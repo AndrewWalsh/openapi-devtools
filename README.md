@@ -3,14 +3,6 @@
 [![MIT License][license-shield]][license-url]
 [![Download in the Chrome Web Store][chrome-shield]][chrome-url]
 
-> **I'd appreciate your feedback.**
->
-> I'm looking to collect feedback and improve the tool.
-> 
-> Have a suggestion? Please provide it below, 100% anonymously. There are 3 short questions that should take a couple of minutes.
->
-> https://forms.gle/fA2EtvamUrsRxXKYA
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -23,11 +15,12 @@
     Effortlessly discover API behaviour with a Chrome extension that automatically generates OpenAPI specifications in real time for any app or website.
     <br />
     <br />
+    <a href="https://awalsh.io/posts/openapi-devtools/">Read More</a>
+    ·
     <a href="https://github.com/AndrewWalsh/openapi-devtools/issues">Report Bug</a>
     ·
-    <a href="https://github.com/AndrewWalsh/openapi-devtools/issues">Request Feature</a>
-    ·
-    <a href="https://awalsh.io/posts/openapi-devtools/">Read More</a>
+    <a href="https://forms.gle/fA2EtvamUrsRxXKYA">Give Feedback</a>
+  </p>
   </p>
 </div>
 
