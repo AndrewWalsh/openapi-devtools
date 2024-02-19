@@ -12,7 +12,7 @@
 
 
   <p align="center" style="max-width: 600px;">
-    Effortlessly discover API behaviour with a Chrome extension that automatically generates OpenAPI specifications in real time for any app or website.
+    Effortlessly discover API behaviour with a Chrome/Firefox extension that automatically generates OpenAPI specifications in real time for any app or website.
     <br />
     <br />
     <a href="https://awalsh.io/posts/openapi-devtools/">Read More</a>
@@ -30,7 +30,7 @@
     <img width="80%" src="resources/demo.gif">
 </p>
 
-OpenAPI DevTools is a Chrome extension that generates OpenAPI specifications in real time from network requests. Once installed it adds a new tab to Chrome DevTools called `OpenAPI`. While the tool is open it automatically converts network requests into a specification.
+OpenAPI DevTools is a Chrome/Firefox extension that generates OpenAPI specifications in real time from network requests. Once installed it adds a new tab to Chrome DevTools called `OpenAPI`. While the tool is open it automatically converts network requests into a specification.
 
 *Features*:
 - Instantly generate an OpenAPI 3.1 specification for any website or application just by using it
@@ -79,10 +79,10 @@ An [OpenAPI](https://www.openapis.org/) specification is a description of what a
 To develop the project:
 - `npm install`
 - `npm run build`
-- Navigate to `chrome://extensions`
+- Navigate to `chrome://extensions` for Chromium based browser or `about:addons` for Firefox
 - In the top right enable the `Developer mode` toggle
 - In the top left click `Load unpacked` and select the `dist` directory
-- You should now see the tool in Chrome DevTools. You can interact it with like a regular page, including inspection of the React app
+- You should now see the tool in DevTools. You can interact it with like a regular page, including inspection of the React app
 - [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) is suggested to update the tool after running `npm run build` and updating the `dist` directory 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

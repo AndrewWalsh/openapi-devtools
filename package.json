@@ -7,7 +7,8 @@
   "scripts": {
     "test": "vitest",
     "dev": "vite",
-    "build": "rimraf dist && tsc && vite build && npm run zip",
+    "run": "rimraf dist && tsc && vite build && web-ext run -s dist",
+    "build": "rimraf dist && tsc && vite build && web-ext build -s dist",
     "zip": "rimraf resources/dist.zip && zip -r resources/dist.zip dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix"
   },
@@ -57,6 +58,7 @@
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
     "vite": "^4.4.11",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "web-ext": "^7.11.0"
   }
 }
