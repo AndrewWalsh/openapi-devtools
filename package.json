@@ -7,8 +7,9 @@
   "scripts": {
     "test": "vitest",
     "dev": "vite",
-    "build": "rimraf dist && tsc && vite build && npm run zip",
-    "zip": "rimraf resources/dist.zip && zip -r resources/dist.zip dist",
+    "run": "tsc && vite build && web-ext run -s dist",
+    "build": "tsc && vite build && web-ext build -s dist",
+    "zip": "web-ext build -s dist --overwrite-dest",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix"
   },
   "dependencies": {
@@ -54,9 +55,9 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
     "vite": "^4.4.11",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "web-ext": "^7.11.0"
   }
 }
