@@ -6,10 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "dev": "vite",
-    "run": "tsc && vite build && web-ext run -s dist",
-    "build": "tsc && vite build && web-ext build -s dist",
-    "zip": "web-ext build -s dist --overwrite-dest",
+    "dev": "tsc && vite build && web-ext run -s dist",
+    "build": "tsc && vite build && web-ext build --overwrite-dest -s dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix"
   },
   "dependencies": {

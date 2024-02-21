@@ -2,6 +2,7 @@
 
 [![MIT License][license-shield]][license-url]
 [![Download in the Chrome Web Store][chrome-shield]][chrome-url]
+[![Download in the Firefox Add-on Store][firefox-shield]][firefox-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -12,7 +13,7 @@
 
 
   <p align="center" style="max-width: 600px;">
-    Effortlessly discover API behaviour with a Chrome/Firefox extension that automatically generates OpenAPI specifications in real time for any app or website.
+    Effortlessly discover API behaviour with a browser extension that automatically generates OpenAPI specifications in real time for any app or website.
     <br />
     <br />
     <a href="https://awalsh.io/posts/openapi-devtools/">Read More</a>
@@ -30,7 +31,7 @@
     <img width="80%" src="resources/demo.gif">
 </p>
 
-OpenAPI DevTools is a Chrome/Firefox extension that generates OpenAPI specifications in real time from network requests. Once installed it adds a new tab to Chrome DevTools called `OpenAPI`. While the tool is open it automatically converts network requests into a specification.
+OpenAPI DevTools is a browser extension that generates OpenAPI specifications in real time from network requests. Once installed it adds a new tab to DevTools called `OpenAPI`. While the tool is open it automatically converts network requests into a specification.
 
 *Features*:
 - Instantly generate an OpenAPI 3.1 specification for any website or application just by using it
@@ -47,7 +48,9 @@ OpenAPI DevTools is a Chrome/Firefox extension that generates OpenAPI specificat
     <img width="80%" src="resources/demo-img.png">
 </p>
 
-[Download the extension in the Chrome Web Store](https://chrome.google.com/webstore/detail/openapi-devtools/jelghndoknklgabjgaeppjhommkkmdii).
+[Download the extension in the Chrome Web Store][chrome-url].
+
+[Download the extension in the Firefox Add-on Store][firefox-url].
 
 Otherwise, to install manually:
   - [Download and extract the dist.zip file in the latest release](https://github.com/AndrewWalsh/openapi-devtools/releases/latest/download/dist.zip)
@@ -55,6 +58,7 @@ Otherwise, to install manually:
   - In the top right enable the `Developer mode` toggle
   - In the top left click `Load unpacked` and select the extracted `dist` directory
   - Open a new tab and then select `OpenAPI` in the developer tools (open with `cmd+i` or `ctrl+i`)
+  - Firefox is more challenging. Please use the add-on store.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -78,12 +82,7 @@ An [OpenAPI](https://www.openapis.org/) specification is a description of what a
 
 To develop the project:
 - `npm install`
-- `npm run build`
-- Navigate to `chrome://extensions` for Chromium based browser or `about:addons` for Firefox
-- In the top right enable the `Developer mode` toggle
-- In the top left click `Load unpacked` and select the `dist` directory
-- You should now see the tool in DevTools. You can interact it with like a regular page, including inspection of the React app
-- [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) is suggested to update the tool after running `npm run build` and updating the `dist` directory 
+- `npm run dev`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,3 +92,5 @@ To develop the project:
 [license-shield]: https://img.shields.io/github/license/AndrewWalsh/openapi-devtools.svg?style=for-the-badge
 [chrome-url]: https://chrome.google.com/webstore/detail/openapi-devtools/jelghndoknklgabjgaeppjhommkkmdii
 [chrome-shield]: https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white
+[firefox-url]: https://addons.mozilla.org/en-US/firefox/addon/openapi-devtools/
+[firefox-shield]: https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white
