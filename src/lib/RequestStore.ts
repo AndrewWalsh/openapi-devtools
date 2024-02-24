@@ -5,6 +5,7 @@ import {
   upsert,
   persistOptions,
   leafMapToRouterMap,
+  fastPathParameterIndices,
 } from "./store-helpers";
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
@@ -103,12 +104,21 @@ export default class RequestStore {
       leaf: insertedLeaf,
       path: insertedPath,
     });
+    let pathname = insertedPath;
+    for (const idx of fastPathParameterIndices(pathname)) {
+      const newPathname = this.parameterise(idx, pathname, insertedHost);
+      if (newPathname) pathname = newPathname;
+    }
     return true;
   }
 
-  public parameterise(index: number, path: string, host: string): void {
+  public parameterise(
+    index: number,
+    path: string,
+    host: string
+  ): string | null {
     const result = parameterise({ store: this.store, index, path, host });
-    if (!result) return;
+    if (!result) return null;
     const { removedPaths, insertedPath, insertedLeaf } = result;
     const unsetLeafMap = (path: string) => unset(this.leafMap[host], path);
     removedPaths.concat([path]).forEach(unsetLeafMap);
@@ -118,6 +128,7 @@ export default class RequestStore {
       leaf: insertedLeaf,
       path: insertedPath,
     });
+    return insertedPath;
   }
 
   public setDisabledHosts(disabledHosts: Set<string>): void {

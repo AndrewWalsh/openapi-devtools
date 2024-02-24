@@ -9,3 +9,4 @@ export { default as determineAuthFromHAR } from "./authentication";
 export { default as remove } from "./remove";
 export * from "./merge";
 export * from "./helpers";
+export * from "./automatic-parameterisation";
