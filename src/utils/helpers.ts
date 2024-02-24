@@ -1,6 +1,7 @@
 import { Schema, createSchema } from "genson-js";
 import { JSONType } from "./types";
 import { DEFAULT_PARAM_NAME } from "./constants";
+import { Entry } from "har-format";
 
 const isGraphQLURI = (url: string): boolean =>
   url.toLowerCase().endsWith("graphql");
@@ -14,37 +15,33 @@ const isValidURL = (url: string): boolean => {
     return false;
   }
 };
-const getContent = (entry: chrome.devtools.network.Request): Promise<string> => {
-    return new Promise((resolve) => {
-        entry.getContent((content) => {
-            resolve(content || '');
-        });
-    });
-};
+
 const isValidJSONString = (content: string): boolean => {
-    try {
-        JSON.parse(content);
-        return true;
-    } catch (e) {
-        return false;
-    }
+  try {
+    JSON.parse(content);
+    return true;
+  } catch (e) {
+    return false;
+  }
 };
 
 const validStatuses = new Set(["GET", "POST", "PUT", "DELETE", "PATCH"]);
 const validResourceTypes = new Set(["xhr", "fetch", "document"]);
 const isValidStatus = (status: string) => validStatuses.has(status);
-export const isValidRequest = async (
-  harRequest: chrome.devtools.network.Request
-): Promise<boolean> => {
+export const isValidRequest = (harRequest: Entry, content: string): boolean => {
   const isNotAJAXRequest =
     !!harRequest._resourceType &&
     !validResourceTypes.has(harRequest._resourceType);
   if (isNotAJAXRequest) return false;
   const didNotReachServer = !harRequest.serverIPAddress;
   if (didNotReachServer) return false;
-  const content = await getContent(harRequest);
-  const isNotJSON = !harRequest.response.content.mimeType.startsWith("application/json") && !isValidJSONString(content);
-  const isNotXWWWFormUrlEncoded = !harRequest.request.postData?.mimeType.startsWith("application/x-www-form-urlencoded");
+  const isNotJSON =
+    !harRequest.response.content.mimeType.startsWith("application/json") &&
+    !isValidJSONString(content);
+  const isNotXWWWFormUrlEncoded =
+    !harRequest.request.postData?.mimeType.startsWith(
+      "application/x-www-form-urlencoded"
+    );
   const isNotValidMime = isNotJSON && isNotXWWWFormUrlEncoded;
   if (isNotValidMime) return false;
   const isNotValidStatus = !isValidStatus(harRequest.request.method);

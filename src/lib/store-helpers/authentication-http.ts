@@ -24,10 +24,7 @@ export interface DigestAuthHeader extends HTTPAuth {
   in: "header";
 }
 
-export type HTTP =
-  | DigestAuthHeader
-  | BasicAuthHeader
-  | BearerAuthHeader;
+export type HTTP = DigestAuthHeader | BasicAuthHeader | BearerAuthHeader;
 
 export const parseHTTPAuthHeader = (value: string): HTTP | undefined => {
   const authType = getAuthType(value);
