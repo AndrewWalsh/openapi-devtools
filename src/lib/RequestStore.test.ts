@@ -17,12 +17,21 @@ vi.mock("./store-helpers/persist-options", async () => {
 const host = "test.com";
 const base = `https://${host}`;
 const POST = "POST";
+const testKey = "test";
+const testStrObj = { [testKey]: "string" };
+const contentStrTest = JSON.stringify(testStrObj);
+const testIntObj = { [testKey]: 1 };
+const contentIntTest = JSON.stringify(testIntObj);
+const testNullObj = { [testKey]: null };
+const contentNullTest = JSON.stringify(testNullObj);
+const testBoolObj = { [testKey]: true };
+const contentBoolTest = JSON.stringify(testBoolObj);
 
 const getResBodyJSONTypes = (
   store: RequestStore,
   host: string,
   path: string,
-  propName = "foo",
+  propName = testKey
 ) => {
   const match = store.get()[host]?.lookup(path);
   if (!match) throw new Error("Could not match path");
@@ -37,10 +46,10 @@ it("parameterises and merges paths", () => {
   const req1 = createSimpleRequest(`${base}/1/2/a`);
   const req2 = createSimpleRequest(`${base}/1/2/b`);
   const req3 = createSimpleRequest(`${base}/1/2/c`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: 1 });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentIntTest);
   store.parameterise(2, "/1/2/a", host);
-  store.insert(req3, { foo: null });
+  store.insert(req3, contentNullTest);
   store.parameterise(1, "/1/2/:param2", host);
   const properties = getResBodyJSONTypes(store, host, "/1/zzz/asbds");
   expect(properties).toContain("string");
@@ -52,7 +61,7 @@ it("parameterises and merges paths", () => {
 it("inserts data and can retrieve it", () => {
   const store = new RequestStore();
   const req = createSimpleRequest(`${base}/1/2/a`);
-  store.insert(req, { foo: 1 });
+  store.insert(req, contentIntTest);
   const properties = getResBodyJSONTypes(store, host, "/1/2/a");
   expect(properties).toBe("integer");
 });
@@ -65,14 +74,14 @@ it("sets leafMap correctly after multiple add and parameterise operations", () =
   const req4 = createSimpleRequest(`${base}/1/2/c`);
   const req5 = createSimpleRequest(`${base}/dynamicPath/2/a`);
   const req6 = createSimpleRequest(`${base}/dynamicPath/2/b`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: "bar" });
-  store.insert(req3, { foo: 1 });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentStrTest);
+  store.insert(req3, contentIntTest);
   store.parameterise(2, "/1/2/a", host);
-  store.insert(req4, { foo: null });
+  store.insert(req4, contentNullTest);
   store.parameterise(1, "/1/2/:param2", host);
-  store.insert(req5, { foo: "bar" });
-  store.insert(req6, { foo: 1 });
+  store.insert(req5, contentStrTest);
+  store.insert(req6, contentIntTest);
   store.parameterise(2, "/dynamicPath/2/b", host);
   store.parameterise(1, "/dynamicPath/2/:param2", host);
   const expected = {
@@ -94,7 +103,7 @@ it("sets leafMap correctly after multiple add and parameterise operations", () =
     "string",
   ]);
   expect(getResBodyJSONTypes(store, host, "/staticPath/2/3/4/5")).toBe(
-    "string",
+    "string"
   );
 });
 
@@ -104,10 +113,10 @@ it("sets leafMap correctly after many parameterise operations", () => {
   const req2 = createSimpleRequest(`${base}/1/2/3/z/b`);
   const req3 = createSimpleRequest(`${base}/1/x/y/z/b`);
   const req4 = createSimpleRequest(`${base}/1/2/b`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: null });
-  store.insert(req3, { foo: 1 });
-  store.insert(req4, { foo: true });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentNullTest);
+  store.insert(req3, contentIntTest);
+  store.insert(req4, contentBoolTest);
   store.parameterise(4, "/1/2/3/4/a", host);
   store.parameterise(3, "/1/x/y/z/b", host);
   store.parameterise(3, "/1/2/3/4/:param4", host);
@@ -133,9 +142,9 @@ it("collapses into a single route when paramaterised", () => {
   const req1 = createSimpleRequest(`${base}/1/2/3/4/a`);
   const req2 = createSimpleRequest(`${base}/1/2/3/4/b`);
   const req3 = createSimpleRequest(`${base}/1/2/3/4/c`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: null });
-  store.insert(req3, { foo: 1 });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentNullTest);
+  store.insert(req3, contentIntTest);
   store.parameterise(3, "/1/2/3/4/a", host);
   store.parameterise(4, "/1/2/3/:param3/a", host);
   const expected = {
@@ -156,8 +165,8 @@ it("can parameterise paths that are subsets of another path", () => {
   const store = new RequestStore();
   const req1 = createSimpleRequest(`${base}/1/2/a`);
   const req2 = createSimpleRequest(`${base}/1/2`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: 1 });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentIntTest);
   store.parameterise(1, "/1/2", host);
   const expected = {
     [host]: {
@@ -177,10 +186,10 @@ it("can parameterise paths that exist along the same segment", () => {
   const req2 = createSimpleRequest(`${base}/1/2`);
   const req3 = createSimpleRequest(`${base}/1`);
   const req4 = createSimpleRequest(`${base}/1/2/3/4`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: 1 });
-  store.insert(req3, { foo: null });
-  store.insert(req4, { foo: null });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentIntTest);
+  store.insert(req3, contentNullTest);
+  store.insert(req4, contentNullTest);
   store.parameterise(1, "/1/2/a", host);
   // Bug happens below. When /1/2 is parameterised, router.remove removes /1/2/3/4
   store.parameterise(1, "/1/2", host);
@@ -202,11 +211,11 @@ it("parameterising a path catches future requests to the same path", () => {
   const store = new RequestStore();
   const req1 = createSimpleRequest(`${base}/1/2/a`);
   const req2 = createSimpleRequest(`${base}/1/2/b`);
-  store.insert(req1, { foo: "bar" });
-  store.insert(req2, { foo: "bar" });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentStrTest);
   store.parameterise(1, "/1/2/a", host);
-  store.insert(req1, { foo: 1 });
-  store.insert(req2, { foo: 1 });
+  store.insert(req1, contentIntTest);
+  store.insert(req2, contentIntTest);
   const expected = {
     [host]: {
       "/1/:param1/a": expect.any(Object),
@@ -222,12 +231,12 @@ it("parameterisation works after export and import", () => {
   const req = createSimpleRequest(`${base}/1/2/a`);
   const options = { enableMoreInfo: true };
   store.options(options);
-  store.insert(req, { foo: 1 });
+  store.insert(req, contentIntTest);
   store.parameterise(2, "/1/2/a", host);
   const exported = store.export();
   store.clear();
   store.import(exported);
-  store.insert(req, { foo: 1 });
+  store.insert(req, contentIntTest);
   const expectedLeafMap = {
     [host]: {
       "/1/2/:param2": expect.any(Object),

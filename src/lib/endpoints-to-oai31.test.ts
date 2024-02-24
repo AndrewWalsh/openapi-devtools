@@ -13,14 +13,17 @@ import RequestStore, { Options } from "./RequestStore.js";
 import { defaultOptions } from "./store-helpers/persist-options.js";
 import { AuthType } from "../utils/types.js";
 
+const testStrObj = { test: "string" };
+const contentStrTest = JSON.stringify(testStrObj);
+
 const createRequestStoreWithDefaults = () => {
   const store = new RequestStore();
   const req1 = cloneDeep(postJson);
   req1.request.url = "https://example.com/api/v1/1a";
   const req2 = cloneDeep(postJson);
   req2.request.url = "https://example.com/api/v1/2 . ";
-  store.insert(req1, { test: "string" });
-  store.insert(req2, { test: "string" });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentStrTest);
   return store;
 };
 
@@ -38,8 +41,8 @@ it("handles multiple status codes in responses", () => {
   const req1 = cloneDeep(postJson);
   const req2 = cloneDeep(postJson);
   req2.response.status = 304;
-  store.insert(req1, { test: "string" });
-  store.insert(req2, { test: "string" });
+  store.insert(req1, contentStrTest);
+  store.insert(req2, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, options);
   const result = oai31.rootDoc.paths?.["/v1/track"].post?.responses;
@@ -50,7 +53,7 @@ it("handles multiple status codes in responses", () => {
 it("sets most recent request when enabled", () => {
   const options: Options = { enableMoreInfo: true };
   const store = new RequestStore(options);
-  store.insert(postJson, { test: "string" });
+  store.insert(postJson, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, options);
   const result =
@@ -64,19 +67,19 @@ it("sets most recent request when enabled", () => {
 it("sets most recent response when enabled", () => {
   const options: Options = { enableMoreInfo: true };
   const store = new RequestStore(options);
-  store.insert(postJson, { test: "string" });
+  store.insert(postJson, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, options);
   const result =
     oai31.rootDoc.paths?.["/v1/track"].post?.responses["200"].content[
       "application/json"
     ].example;
-  expect(result).toEqual({ test: "string" });
+  expect(result).toEqual(testStrObj);
 });
 
 it("sets bearer auth security schema when available", () => {
   const store = new RequestStore();
-  store.insert(bearer, { test: "string" });
+  store.insert(bearer, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
@@ -95,7 +98,7 @@ it("sets bearer auth security schema when available", () => {
 
 it("sets basic auth security schema when available", () => {
   const store = new RequestStore();
-  store.insert(basic, { test: "string" });
+  store.insert(basic, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
@@ -114,7 +117,7 @@ it("sets basic auth security schema when available", () => {
 
 it("sets digest auth security schema when available", () => {
   const store = new RequestStore();
-  store.insert(digest, { test: "string" });
+  store.insert(digest, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
@@ -133,7 +136,7 @@ it("sets digest auth security schema when available", () => {
 
 it("sets api keys from headers", () => {
   const store = new RequestStore();
-  store.insert(apikey, { test: "string" });
+  store.insert(apikey, contentStrTest);
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({

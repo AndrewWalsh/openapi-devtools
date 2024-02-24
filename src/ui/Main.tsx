@@ -3,8 +3,8 @@ import { OpenAPIObject } from "openapi3-ts/oas31";
 import { RedocStandalone } from "redoc";
 import type RequestStore from "../lib/RequestStore";
 import requestStore from "./helpers/request-store";
-import { isValidRequest, parseJSON, safelyGetURLHost } from "../utils/helpers";
-import { EndpointsByHost, Endpoint, JSONType, Status } from "../utils/types";
+import { safelyGetURLHost } from "../utils/helpers";
+import { EndpointsByHost, Endpoint, Status } from "../utils/types";
 import Context from "./context";
 import Control from "./Control";
 import Start from "./Start";
@@ -12,7 +12,6 @@ import classes from "./main.module.css";
 import endpointsToOAI31 from "../lib/endpoints-to-oai31";
 import { sortEndpoints } from './helpers/endpoints-by-host';
 import { isEmpty } from "lodash";
-import decodeUriComponent from "decode-uri-component";
 
 function Main() {
   const [spec, setSpec] = useState<OpenAPIObject | null>(null);
@@ -28,13 +27,12 @@ function Main() {
   const requestFinishedHandler = useCallback(
     (harRequest: chrome.devtools.network.Request) => {
       async function getCurrentTab() {
-        if (!await isValidRequest(harRequest)) return;
         try {
           harRequest.getContent((content) => {
             try {
-              harRequest.request.url = decodeUriComponent(harRequest.request.url);
-              const responseBody: JSONType = parseJSON(content);
-              requestStore.insert(harRequest, responseBody);
+              const contentStr = content || '';
+              const wasInserted = requestStore.insert(harRequest, contentStr);
+              if (!wasInserted) return;
               setSpecEndpoints();
               const host = safelyGetURLHost(harRequest.request.url);
               if (host && !allHosts.has(host)) {
@@ -66,7 +64,6 @@ function Main() {
     const nextEndpoints = requestStore.endpoints();
     setSpec(endpointsToOAI31(nextEndpoints, requestStore.options()).getSpec());
     setEndpoints(sortEndpoints(nextEndpoints));
-    // setEndpointsByHost(getEndpointsByHost(nextEndpoints));
   }, []);
 
   useEffect(() => {
@@ -162,7 +159,7 @@ function Main() {
             downloadFileName: 'openapi-devtools-spec.json',
             expandDefaultServerVariables: false,
             expandSingleSchemaField: false,
-            
+
           }}
         />
       </div>

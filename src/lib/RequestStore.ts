@@ -9,7 +9,9 @@ import {
 import { omit, unset } from "lodash";
 import leafMapToEndpoints from "./leafmap-to-endpoints";
 import stringify from "json-stable-stringify";
-import type { Entry } from 'har-format';
+import type { Entry } from "har-format";
+import decodeUriComponent from "decode-uri-component";
+import { isValidRequest, parseJSON } from "../utils/helpers";
 
 export type Options = {
   // Includes additional data such as response samples
@@ -27,8 +29,8 @@ export default class RequestStore {
   private storeOptions: Options;
 
   constructor(storeOptions = persistOptions.get()) {
-    this.leafMap = {}; // persist.get() || {};
-    this.store = {}; // leafMapToRouterMap(this.leafMap);
+    this.leafMap = {};
+    this.store = {};
     this.disabledHosts = new Set();
     this.storeOptions = storeOptions;
   }
@@ -63,7 +65,6 @@ export default class RequestStore {
     this.store = {};
     this.leafMap = {};
     this.disabledHosts = new Set();
-    // persist.clear();
   }
 
   public endpoints(): Array<Endpoint> {
@@ -84,17 +85,17 @@ export default class RequestStore {
     return Object.keys(this.store);
   }
 
-  public insert(
-    harRequest: Entry,
-    responseBody: JSONType
-  ) {
+  public insert(harRequest: Entry, content: string): boolean {
+    if (!isValidRequest(harRequest, content)) return false;
+    harRequest.request.url = decodeUriComponent(harRequest.request.url);
+    const responseBody: JSONType = parseJSON(content);
     const result = upsert({
       harRequest,
       responseBody,
       store: this.store,
       options: this.storeOptions,
     });
-    if (!result) return;
+    if (!result) return false;
     const { insertedPath, insertedLeaf, insertedHost } = result;
     insertLeafMap({
       leafMap: this.leafMap,
@@ -102,7 +103,7 @@ export default class RequestStore {
       leaf: insertedLeaf,
       path: insertedPath,
     });
-    // persist.set(this.leafMap);
+    return true;
   }
 
   public parameterise(index: number, path: string, host: string): void {
@@ -117,7 +118,6 @@ export default class RequestStore {
       leaf: insertedLeaf,
       path: insertedPath,
     });
-    // persist.set(this.leafMap);
   }
 
   public setDisabledHosts(disabledHosts: Set<string>): void {
