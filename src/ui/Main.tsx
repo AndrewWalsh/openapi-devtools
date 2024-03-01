@@ -102,6 +102,7 @@ function Main() {
     (index, path, host) => {
       requestStore.parameterise(index, path, host);
       setSpecEndpoints();
+      return null;
     },
     []
   );

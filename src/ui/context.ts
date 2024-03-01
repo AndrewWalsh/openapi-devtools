@@ -25,9 +25,9 @@ const defaultContextValue: ContextType = {
   setAllHosts: () => {},
   disabledHosts: new Set(),
   setDisabledHosts: () => {},
-  parameterise: () => {},
+  parameterise: () => null,
   import: () => false,
-  export: () => '',
+  export: () => "",
   options: () => defaultOptions,
 };
 

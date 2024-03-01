@@ -250,3 +250,21 @@ it("parameterisation works after export and import", () => {
   // @ts-expect-error accessing private property
   expect(store.storeOptions).toEqual(expectedOptions);
 });
+
+it("automatically parameterises pathnames containing known path parameters such as UUIDs", () => {
+  const store = new RequestStore();
+  const req = createSimpleRequest(`${base}/1/2/a`);
+  const uuid = "7be85ff3-2785-45d4-81d0-b8b58f80dfdc";
+  const host = "http://test.com";
+  const pathname = `/v1/${uuid}/sites/${uuid}`;
+  const url = `${host}${pathname}`;
+  req.request.url = url;
+  store.insert(req, contentIntTest);
+  // The path parameters are the UUIDs in this example
+  const splitUrl = pathname.split("/").slice(1);
+  splitUrl[1] = ":param1";
+  splitUrl[3] = ":param3";
+  const expectUrl = `/${splitUrl.join("/")}`;
+  // @ts-expect-error accessing private property
+  expect(store.leafMap["test.com"]).toHaveProperty(expectUrl);
+});
