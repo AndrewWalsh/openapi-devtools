@@ -140,17 +140,17 @@ it("sets api keys from headers", () => {
   const endpoints = store.endpoints();
   const oai31 = endpointsToOAI31(endpoints, defaultOptions);
   expect(oai31.rootDoc.components?.securitySchemes).toEqual({
-    [formatAuthType(AuthType.APIKEY_COOKIE_ + "SESSIONID")]: {
+    [`${AuthType.APIKEY_COOKIE_.toLowerCase()}sessionid`]: {
       in: "cookie",
       name: "sessionid",
       type: "apiKey",
     },
-    [formatAuthType(AuthType.APIKEY_HEADER_ + "COOKIE")]: {
+    [`${AuthType.APIKEY_HEADER_.toLowerCase()}cookie`]: {
       in: "header",
       name: "COOKIE",
       type: "apiKey",
     },
-    [formatAuthType(AuthType.APIKEY_HEADER_ + "X-API-KEY")]: {
+    [`${AuthType.APIKEY_HEADER_.toLowerCase()}x-api-key`]: {
       in: "header",
       name: "X-API-KEY",
       type: "apiKey",

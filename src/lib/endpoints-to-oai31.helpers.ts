@@ -169,5 +169,5 @@ export const createQueryParameterTypes = (
 
 // Format THIS_TXT_STR to this text str
 export const formatAuthType = (str: string) => {
-  return str.replace(/_/g, " ").toLowerCase();
+  return str.toLowerCase();
 };
