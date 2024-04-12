@@ -9,7 +9,7 @@ import {
   parseJSON,
 } from "../../utils/helpers.js";
 import type { Options } from "../RequestStore.js";
-import { JSONType, Leaf } from "../../utils/types.js";
+import { Example, JSONType, Leaf } from "../../utils/types.js";
 import determineAuthFromHAR from "./authentication.js";
 
 const APPLICATION_JSON = "application/json";
@@ -45,6 +45,12 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   const responseHeaders = entriesToJSONType(harRequest.response.headers);
   const queryParameters = entriesToJSONType(harRequest.request.queryString);
   const pathname = decodeUriComponent(new URL(harRequest.request.url).pathname);
+  const this_example : Example= {
+    path: pathname,
+    query_params: queryParameters,
+    request: requestBody,
+    response: responseBody,
+  }
   const leafPart: Leaf = {
     ...(authentication && { authentication }),
     pathname,
@@ -69,6 +75,7 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
         },
         responseHeaders: createSchemaElseUndefined(responseHeaders),
         queryParameters: createSchemaElseUndefined(queryParameters),
+        examples: [this_example],
       },
     },
   };

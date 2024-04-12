@@ -50,11 +50,12 @@ const endpointsToOAI31 = (
       const queryParameterObjects = createQueryParameterTypes(
         endpointMethod.queryParameters,
       );
-      const requestBody = createRequestTypes(endpointMethod.request, options);
+      const requestBody = createRequestTypes(endpointMethod.request, options, endpointMethod.examples);
       const responses = createResponseTypes(
         endpointMethod.response,
         endpointMethod.responseHeaders,
         options,
+        endpointMethod.examples,
       );
       const security: SecurityRequirementObject[] = [];
       if (!isEmpty(endpoint.data.authentication)) {
@@ -88,7 +89,7 @@ const endpointsToOAI31 = (
       const specPath = rootDoc.paths?.[path];
       if (specPath) {
         specPath[methodLower as "get"] = operation;
-      } else {
+      } else {`1`
         rootDoc.paths[path] = pathItemObject;
       }
     }
@@ -108,3 +109,4 @@ const endpointsToOAI31 = (
 };
 
 export default endpointsToOAI31;
+

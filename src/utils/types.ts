@@ -38,6 +38,13 @@ export interface Authentication {
   scheme?: "Basic" | "Bearer" | "Digest";
 }
 
+export type Example = {
+  path: string;
+  query_params: JSONType;
+  request: JSONType;
+  response: JSONType;
+};
+
 // A Leaf stores data about an endpoint
 export type Leaf = {
   // Name is based on authType, which should be unique per authentication variant
@@ -70,6 +77,7 @@ export type Leaf = {
       };
       responseHeaders?: Schema;
       queryParameters?: Schema;
+      examples?: Example[];
     };
   };
 };

@@ -13,7 +13,8 @@ import {
 } from "openapi3-ts/oas31";
 
 import { Options } from "./RequestStore.js";
-import { Authentication, AuthType, Endpoint, Leaf, PartType } from "../utils/types.js";
+import { Authentication, AuthType, Endpoint, Example, Leaf, PartType } from "../utils/types.js";
+import { Example } from "redoc";
 
 export const createSecuritySchemeTypes = (
   auth?: Authentication,
@@ -50,6 +51,7 @@ type RequestType = Leaf["methods"]["get"]["request"];
 export const createRequestTypes = (
   requestType: RequestType,
   options: Options,
+  examples?: Example[],
 ) => {
   if (!requestType) return;
   const contentObject: ContentObject = {};
@@ -63,6 +65,22 @@ export const createRequestTypes = (
   const requestBodyObject: RequestBodyObject = {
     content: contentObject,
   };
+  Object.entries(requestType).forEach(([mediaType, data]) => {
+    const mediaTypeObject: MediaTypeObject = {
+      schema: data.body,
+      ...(!!options.enableMoreInfo && { example: data.mostRecent }),
+      examples: {
+        ...examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
+          acc[example.path] = {
+            value: example.response,
+          };
+          return acc;
+        }, {}),
+      },
+    };
+    contentObject[mediaType] = mediaTypeObject;
+  });
+
   return requestBodyObject;
 };
 
@@ -71,6 +89,7 @@ export const createResponseTypes = (
   responseType: ResponseType,
   headers: Schema | undefined,
   options: Options,
+  examples?: Example[],
 ) => {
   // Create response headers
   const headersObject: HeadersObject = {};
@@ -95,6 +114,14 @@ export const createResponseTypes = (
       const mediaTypeObject: MediaTypeObject = {
         schema: data.body,
         ...(!!options.enableMoreInfo && { example: data.mostRecent }),
+        examples: {
+          ...examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
+            acc[example.path] = {
+              value: example.response,
+            };
+            return acc;
+          }, {}),
+        },
       };
       contentObject[mediaType] = mediaTypeObject;
       const responseObject: ResponseObject = {
@@ -140,19 +167,42 @@ export const createPathParameterTypes = (
   const dynamicParts = endpoint.parts.filter(
     ({ type }) => type === PartType.Dynamic,
   );
-  const parameters: ParameterObject[] = dynamicParts.map(({ part: name }) => ({
-    name,
-    in: "path",
-    required: true,
-    schema: {
-      type: "string",
-    },
-  }));
+
+  // Combine examples from all methods of the endpoints object.
+  const examples: Example[] | undefined = Object.values(endpoint.data.methods).reduce((acc: Example[], method) => {
+    if (method.examples) {
+      acc.push(...method.examples);
+    }
+    return acc;
+  }, []);
+
+  const parameters: ParameterObject[] = dynamicParts.map(({ part: name }) => {
+    const parameterExamples = examples?.reduce((acc: { [key: string]: { value: unknown } }, example) => {
+      const dynamicPartIndex = endpoint.parts.findIndex(
+        (part) => part.type === PartType.Dynamic && part.part === name
+      );
+      if (dynamicPartIndex !== -1) {
+        const parameterValue = example.path.split("/")[dynamicPartIndex];
+        acc[example.path] = { value: parameterValue };
+      }
+      return acc;
+    }, {});
+
+    return {
+      name,
+      in: "path",
+      required: true,
+      schema: { type: "string" },
+      examples: parameterExamples,
+    };
+  });
+
   return parameters;
 };
 
 export const createQueryParameterTypes = (
   queryParameters: Schema | undefined,
+  examples?: Example[],
 ): Array<ParameterObject> => {
   if (!queryParameters?.properties) return [];
   const namesAndSchemas = Object.entries(queryParameters.properties);
@@ -162,6 +212,13 @@ export const createQueryParameterTypes = (
       in: "query",
       required: false,
       schema,
+      examples: {
+        ...examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
+          acc[example.path] = {
+            value: (example.query_params as { [key: string]: unknown })?.[name],          };
+          return acc;
+        }, {}),
+      },
     };
     return parameterObject;
   });

@@ -100,6 +100,8 @@ export const mergeLeaves = (dest: Leaf, src: Leaf): Leaf => {
       destSchema.responseHeaders = mergeSchemas(schemas);
     }
 
+    destSchema.examples = [...(destSchema.examples || []), ...(srcSchema.examples || [])];
+
     // Merge responses
     mergeResponse(destSchema, methodObj.response);
   }
