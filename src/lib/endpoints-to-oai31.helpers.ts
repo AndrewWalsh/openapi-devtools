@@ -14,7 +14,6 @@ import {
 
 import { Options } from "./RequestStore.js";
 import { Authentication, AuthType, Endpoint, Example, Leaf, PartType } from "../utils/types.js";
-import { Example } from "redoc";
 
 export const createSecuritySchemeTypes = (
   auth?: Authentication,
