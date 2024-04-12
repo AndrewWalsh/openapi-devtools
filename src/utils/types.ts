@@ -39,6 +39,7 @@ export interface Authentication {
 }
 
 export type Example = {
+  id: string;
   path: string;
   query_params: JSONType;
   request: JSONType;

@@ -46,6 +46,7 @@ function createLeaf({ harRequest, responseBody, options }: Params): Leaf {
   const queryParameters = entriesToJSONType(harRequest.request.queryString);
   const pathname = decodeUriComponent(new URL(harRequest.request.url).pathname);
   const this_example : Example= {
+    id: harRequest.time.toString(),
     path: pathname,
     query_params: queryParameters,
     request: requestBody,

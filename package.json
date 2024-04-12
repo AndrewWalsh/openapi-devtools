@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "dev": "tsc && vite build && web-ext run -s dist",
+    "dev": "tsc && vite build && web-ext run -s dist  --target=chromium",
     "build": "tsc && vite build && web-ext build --overwrite-dest -s dist",
     "lint": "eslint --ext ts,tsx --fix ."
   },

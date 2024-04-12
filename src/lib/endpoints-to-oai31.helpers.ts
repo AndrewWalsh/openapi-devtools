@@ -70,8 +70,8 @@ export const createRequestTypes = (
       ...(!!options.enableMoreInfo && { example: data.mostRecent }),
       examples: {
         ...examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
-          acc[example.path] = {
-            value: example.response,
+          acc[example.id] = {
+            value: example.request,
           };
           return acc;
         }, {}),
@@ -107,20 +107,22 @@ export const createResponseTypes = (
 
   // Initialise responses object, set response objects from status codes
   const responsesObject: ResponsesObject = {};
+  const responseExamples = examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
+      acc[example.id] = {
+        value: example.response,
+      };
+      return acc;
+    }, {});
+  
+
+  console.log("response examples", responseExamples);
   Object.entries(responseType).forEach(([statusCode, mediaTypeObj]) => {
     Object.entries(mediaTypeObj).forEach(([mediaType, data]) => {
       const contentObject: ContentObject = {};
       const mediaTypeObject: MediaTypeObject = {
         schema: data.body,
         ...(!!options.enableMoreInfo && { example: data.mostRecent }),
-        examples: {
-          ...examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
-            acc[example.path] = {
-              value: example.response,
-            };
-            return acc;
-          }, {}),
-        },
+        examples: responseExamples
       };
       contentObject[mediaType] = mediaTypeObject;
       const responseObject: ResponseObject = {
@@ -181,8 +183,9 @@ export const createPathParameterTypes = (
         (part) => part.type === PartType.Dynamic && part.part === name
       );
       if (dynamicPartIndex !== -1) {
-        const parameterValue = example.path.split("/")[dynamicPartIndex];
-        acc[example.path] = { value: parameterValue };
+        // +1 is added as dynamic parts index removes first slash
+        const parameterValue = example.path.split("/")[dynamicPartIndex+1];
+        acc[example.id] = { value: parameterValue };
       }
       return acc;
     }, {});
@@ -213,7 +216,7 @@ export const createQueryParameterTypes = (
       schema,
       examples: {
         ...examples?.reduce((acc: { [key: string]: { value: unknown }}, example) => {
-          acc[example.path] = {
+          acc[example.id] = {
             value: (example.query_params as { [key: string]: unknown })?.[name],          };
           return acc;
         }, {}),
