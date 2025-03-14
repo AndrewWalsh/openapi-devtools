@@ -25,12 +25,6 @@
   </p>
 </div>
 
-# DEPRECATED, PLEASE SEE NEW REPO
-
-A new and final version of this project is available below. It is a complete rewrite with a much better UI and features such as identifying path parameters automatically.
-
-https://github.com/AndrewWalsh/demystify
-
 ## About The Project
 
 <p align="center" width="100%">
