@@ -4,6 +4,21 @@
 [![Download in the Chrome Web Store][chrome-shield]][chrome-url]
 [![Download in the Firefox Add-on Store][firefox-shield]][firefox-url]
 
+
+> [!IMPORTANT]  
+> A new and final version of this project is available below. It has been rewritten from scratch and significantly expands the feature set of OpenAPI DevTools.
+> 
+> New features:
+>   - Identifies path parameters automatically
+>   - Is available as a desktop app that uses a proxy (e.g. see mitm2swagger)
+>   - Has a website and command line tool that can generate OpenAPI specifications from HAR files (e.g. har-to-openapi)
+>   - Uses a published library that can generate API specifications for any API in middleware, DevOps integrations, or any environment
+>   - Can generate curl commands, client code, and send API requests via an API client that populates automatically
+>   - Is agnostic to API semantics and may translate into different versions of OpenAPI, or reverse engineer other HTTP-based standards such as GraphQL
+>   - Includes all original features, including the ability to import and export
+
+---> [Check out the new version of OpenAPI DevTools here](https://github.com/AndrewWalsh/demystify)
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
